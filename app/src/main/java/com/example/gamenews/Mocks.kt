@@ -1,5 +1,7 @@
 package com.example.gamenews
 
+import com.example.gamenews.model.News
+
 val listOfNews: List<News> = mutableListOf(
     News(
         title = "Gremlins: Secrets Of The Mogwai Trailer Hints At Gizmo’s Magical Origins",

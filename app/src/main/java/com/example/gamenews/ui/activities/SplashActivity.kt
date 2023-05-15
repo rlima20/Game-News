@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.ui.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -14,6 +14,7 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import com.example.gamenews.R
 import com.example.gamenews.ui.theme.GameNewsTheme
 
 @Suppress("DEPRECATION")
@@ -23,8 +24,10 @@ class SplashActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java).apply {}
+            val intent = Intent(this, MainActivity::class.java).apply {
+            }
             startActivity(intent)
+            finish()
         }, 2000)
 
         setContent {

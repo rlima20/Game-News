@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.model
 
 class News(
     val title: String,
