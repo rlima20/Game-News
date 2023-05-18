@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchBarComponent(
+internal fun SearchBarComponent(
     text: String = "",
     onValueChange: (String) -> Unit = {}
 ) {
@@ -27,7 +27,7 @@ fun SearchBarComponent(
 
     OutlinedTextField(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(top = 8.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth(),
         value = text,
         onValueChange = { onValueChange(it) },

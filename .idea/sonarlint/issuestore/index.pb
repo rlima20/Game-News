@@ -1,0 +1,17 @@
+
+u
+Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
+q
+Aapp/src/main/java/com/example/gamenews/network/GameNewsService.kt,a/7/a795ef465fd7ad9de81ab2dec8d62c87413a0582
+d
+4app/src/main/java/com/example/gamenews/model/News.kt,d/2/d2b1c986cb90bdac3bc871c1c2ebdc4b8d7af8ad
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
+v
+Fapp/src/main/java/com/example/gamenews/ui/activities/SplashActivity.kt,d/8/d890b88a0c47e2575c655ae59f03f22d41846ef7
+t
+Dapp/src/main/java/com/example/gamenews/ui/activities/MainActivity.kt,1/1/11856bb40d6961ce294b688de9aacc08b914b5f5
