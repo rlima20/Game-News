@@ -1,12 +1,13 @@
 package com.example.gamenews
 
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.example.gamenews.model.News
 
 val listOfNews: List<News> = mutableListOf(
     News(
         title = "Gremlins: Secrets Of The Mogwai Trailer Hints At Gizmo’s Magical Origins",
         date = "Sun, 14 May 2023 02:00:53 +0000",
-        description = "Long before Mr. Wing became the owner of the curiosity shop seen in Joe Dante’s first Gremlins film, he was...",
+        description = LoremIpsum(words = 50).values.first(),
         image = "https://www.kotaku.com.au/wp-content/uploads/sites/3/2023/05/12/08933e4a622ddb89d721158f62ce8060.png?quality=80=1280,720",
         link = "https://www.kotaku.com.au/2023/05/gremlins-secrets-of-the-mogwai-trailer-hints-at-gizmos-magical-origins/"
     ),
@@ -16,7 +17,8 @@ val listOfNews: List<News> = mutableListOf(
         date = "Sun, 14 May 2023 01:20:18 GMT",
         description = "A gamer online shares their grandma's impressive achievement of reaching " +
             "an absurd Nook Miles milestone in Animal Crossing: New Horizons.",
-        image = "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/05/animal-crossing-nook-miles-grandma.jpg",
+        image = "https://asdf/static0.gamerantimages" +
+            ".com/wordpress/wp-content/uploads/2023/05/animal-crossing-nook-miles-grandma.jpg",
         link = "https://gamerant.com/gamer-grandma-animal-crossing-new-horizons-milestone/"
     ),
     News(
