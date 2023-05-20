@@ -1,6 +1,7 @@
 package com.example.gamenews.ui.components
 
 import android.content.Context
+import android.graphics.Typeface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -32,14 +34,9 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.example.gamenews.R
+import com.example.gamenews.extensions.formatDateToDateNews
 import com.example.gamenews.listOfNews
 import com.example.gamenews.model.News
-
-enum class State {
-    Success,
-    Error,
-    Loading
-}
 
 @Composable
 internal fun NewsSection() {
@@ -58,7 +55,7 @@ internal fun NewsSection() {
 @Composable
 fun NewsItem(news: News) {
     Surface(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(bottom = 8.dp),
         shape = RoundedCornerShape(15.dp),
         elevation = 4.dp,
         color = MaterialTheme.colors.background
@@ -74,7 +71,8 @@ fun NewsItem(news: News) {
             )
 
             Column(
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(
                     text = news.title,
@@ -86,17 +84,23 @@ fun NewsItem(news: News) {
                 )
 
                 Text(
-                    text = news.date,
+                    text = news.date.formatDateToDateNews().toString(),
                     color = colorResource(id = R.color.title_color),
                     fontSize = 16.sp,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1
                 )
+            }
 
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 Text(
                     text = news.description,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(Typeface.SANS_SERIF)
                 )
 
                 Text(
