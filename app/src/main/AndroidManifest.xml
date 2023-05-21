@@ -26,7 +26,7 @@
         <activity
             android:name=".ui.activities.MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.GameNews" />
+            android:theme="@style/Theme.Design.NoActionBar" />
     </application>
 
 </manifest>

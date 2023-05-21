@@ -1,6 +1,5 @@
 package com.example.gamenews.ui.components
 
-import android.content.Context
 import android.graphics.Typeface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -19,27 +18,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import coil.size.Size
 import com.example.gamenews.R
 import com.example.gamenews.extensions.formatDateToDateNews
-import com.example.gamenews.listOfNews
 import com.example.gamenews.model.News
 
 @Composable
-internal fun NewsSection() {
+internal fun NewsSection(
+    listOfNews: List<News>,
+    onAsyncImageRequest: (imageUrl: String) -> ImageRequest
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
@@ -47,22 +45,30 @@ internal fun NewsSection() {
             .fillMaxSize()
     ) {
         items(listOfNews) { news ->
-            NewsItem(news = news)
+            NewsItem(
+                news = news,
+                imageRequest = onAsyncImageRequest(news.image)
+            )
         }
     }
 }
 
 @Composable
-fun NewsItem(news: News) {
+fun NewsItem(
+    news: News,
+    imageRequest: ImageRequest
+) {
     Surface(
-        modifier = Modifier.fillMaxSize().padding(bottom = 8.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 8.dp),
         shape = RoundedCornerShape(15.dp),
         elevation = 4.dp,
         color = MaterialTheme.colors.background
     ) {
         Column {
             Image(
-                painter = getAsyncImagePainter(news, LocalContext.current),
+                painter = getAsyncImagePainter(imageRequest),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -113,15 +119,12 @@ fun NewsItem(news: News) {
     }
 }
 
-// todo - Essa função vai para o viewmodel.
 @Composable
-private fun getAsyncImagePainter(news: News, context: Context): Painter {
+private fun getAsyncImagePainter(
+    imageRequest: ImageRequest
+): Painter {
     val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(context)
-            .data(news.image)
-            .size(Size.ORIGINAL)
-            .crossfade(true)
-            .build()
+        model = imageRequest
     )
 
     return if (painter.state is AsyncImagePainter.State.Success) {
@@ -131,8 +134,8 @@ private fun getAsyncImagePainter(news: News, context: Context): Painter {
     }
 }
 
-@Preview
+/*@Preview
 @Composable
 private fun Preview() {
-    NewsSection()
-}
+    NewsSection(listOfNews)
+}*/
