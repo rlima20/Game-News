@@ -36,7 +36,7 @@ import com.example.gamenews.model.News
 @Composable
 internal fun NewsSection(
     listOfNews: List<News>,
-    onAsyncImageRequest: (imageUrl: String) -> ImageRequest
+    onImageRequested: (imageUrl: String) -> ImageRequest
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -47,7 +47,7 @@ internal fun NewsSection(
         items(listOfNews) { news ->
             NewsItem(
                 news = news,
-                imageRequest = onAsyncImageRequest(news.image)
+                imageRequest = onImageRequested(news.image)
             )
         }
     }

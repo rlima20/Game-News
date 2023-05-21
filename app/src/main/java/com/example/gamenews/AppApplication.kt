@@ -1,25 +1,17 @@
 package com.example.gamenews
 
 import android.app.Application
+import com.example.gamenews.di.appModules
 import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import org.koin.core.context.startKoin
 
 class AppApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        var listOfModules = module {
-            single { newsViewModelDI }
+        startKoin {
+            androidContext(applicationContext)
+            modules(appModules)
         }
-
-        org.koin.core.context.startKoin {
-            androidContext(this@AppApplication)
-            modules(listOfModules)
-        }
-
-/*        startKoin {
-            androidContext(this@AppApplication)
-            modules(listOfModules)
-        }*/
     }
 }

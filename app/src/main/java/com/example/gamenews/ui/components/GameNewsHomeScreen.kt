@@ -30,7 +30,7 @@ internal fun GameNewsHomeScreen(newsComponentViewModel: NewsComponentViewModel) 
                 SearchBarComponent(text) { text = it }
                 NewsSection(
                     listOfNews = newsComponentViewModel.getListOfNews(),
-                    onAsyncImageRequest = {
+                    onImageRequested = {
                         newsComponentViewModel.getAsyncImage(
                             imageUrl = it,
                             context = context
