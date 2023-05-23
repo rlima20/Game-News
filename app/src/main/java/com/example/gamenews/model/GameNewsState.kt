@@ -1,6 +1,6 @@
 package com.example.gamenews.model
 
-class News(
+class GameNewsState(
     val title: String = "",
     val date: String = "",
     val description: String = "",

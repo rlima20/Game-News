@@ -31,11 +31,11 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.gamenews.R
 import com.example.gamenews.extensions.formatDateToDateNews
-import com.example.gamenews.model.News
+import com.example.gamenews.model.GameNewsState
 
 @Composable
 internal fun NewsSection(
-    listOfNews: List<News>,
+    listOfNews: List<GameNewsState>,
     onImageRequested: (imageUrl: String) -> ImageRequest
 ) {
     LazyColumn(
@@ -55,7 +55,7 @@ internal fun NewsSection(
 
 @Composable
 fun NewsItem(
-    news: News,
+    news: GameNewsState,
     imageRequest: ImageRequest
 ) {
     Surface(
@@ -133,9 +133,3 @@ private fun getAsyncImagePainter(
         painterResource(id = R.drawable.placeholder)
     }
 }
-
-/*@Preview
-@Composable
-private fun Preview() {
-    NewsSection(listOfNews)
-}*/
