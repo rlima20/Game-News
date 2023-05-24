@@ -16,21 +16,17 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.gamenews.R
-import com.example.gamenews.extensions.formatDateToDateNews
+import com.example.gamenews.extensions.getAsyncImagePainter
 import com.example.gamenews.model.GameNewsState
 
 @Composable
@@ -68,7 +64,7 @@ fun NewsItem(
     ) {
         Column {
             Image(
-                painter = getAsyncImagePainter(imageRequest),
+                painter = imageRequest.getAsyncImagePainter(),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
@@ -90,7 +86,7 @@ fun NewsItem(
                 )
 
                 Text(
-                    text = news.date.formatDateToDateNews().toString(),
+                    text = news.date,
                     color = colorResource(id = R.color.title_color),
                     fontSize = 16.sp,
                     fontStyle = FontStyle.Normal,
@@ -116,20 +112,5 @@ fun NewsItem(
                 )
             }
         }
-    }
-}
-
-@Composable
-private fun getAsyncImagePainter(
-    imageRequest: ImageRequest
-): Painter {
-    val painter = rememberAsyncImagePainter(
-        model = imageRequest
-    )
-
-    return if (painter.state is AsyncImagePainter.State.Success) {
-        painter
-    } else {
-        painterResource(id = R.drawable.placeholder)
     }
 }

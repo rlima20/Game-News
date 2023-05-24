@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.provider.local
 
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.example.gamenews.model.GameNewsState

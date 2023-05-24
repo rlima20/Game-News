@@ -20,7 +20,6 @@ import com.example.gamenews.viewmodel.GameNewsViewModel
 internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
 
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
-
     var text by remember { mutableStateOf("") }
     val context = LocalContext.current
 
@@ -33,9 +32,9 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
                 SearchBarComponent(text) { text = it }
                 NewsSection(
                     listOfNews = gameNewsUiState,
-                    onImageRequested = {
+                    onImageRequested = { imageUrl ->
                         gameNewsViewModel.getAsyncImage(
-                            imageUrl = it,
+                            imageUrl = imageUrl,
                             context = context
                         )
                     }

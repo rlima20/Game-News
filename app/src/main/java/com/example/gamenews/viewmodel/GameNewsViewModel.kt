@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.gamenews.extensions.formatDateToDateNews
+import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.repository.GameNewsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,7 +30,7 @@ class GameNewsViewModel(
     private suspend fun getListOfNews() {
         viewModelScope.launch {
             gameNewsRepository.getAllGameNews().collect { listOfGameState ->
-                _uiState.value = listOfGameState.toMutableList()
+                _uiState.value = toMap(listOfGameState).toMutableList()
             }
         }
     }
@@ -43,4 +45,26 @@ class GameNewsViewModel(
             .crossfade(true)
             .build()
     }
+
+    private fun toMap(listOfGameNewsDTO: List<GameNewsDTO>): List<GameNewsState> {
+        val listOfGameNewStates: MutableList<GameNewsState> = mutableListOf()
+
+        listOfGameNewsDTO.forEach {
+            listOfGameNewStates.add(
+                GameNewsState(
+                    title = it.title,
+                    date = formatDateToDateNews(it.date),
+                    description = it.description,
+                    image = it.image,
+                    link = it.link
+                )
+            )
+        }
+
+        return listOfGameNewStates
+    }
+}
+
+fun formatDateToDateNews(str: String): String {
+    return str.substring(startIndex = 0, endIndex = 16)
 }
