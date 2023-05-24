@@ -8,12 +8,12 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.gamenews.R
 import com.example.gamenews.ui.components.GameNewsHomeScreen
-import com.example.gamenews.viewmodel.NewsComponentViewModel
+import com.example.gamenews.viewmodel.GameNewsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    private val newsComponentViewModel: NewsComponentViewModel by viewModel()
+    private val gameNewsViewModel: GameNewsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +24,7 @@ class HomeFragment : Fragment() {
 
         binding.rootView.findViewById<ComposeView>(R.id.composeView).setContent {
             GameNewsHomeScreen(
-                newsComponentViewModel = newsComponentViewModel
+                gameNewsViewModel = gameNewsViewModel
             )
         }
         return binding.rootView
