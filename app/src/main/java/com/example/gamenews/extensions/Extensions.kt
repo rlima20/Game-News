@@ -7,6 +7,7 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.gamenews.R
+import com.example.gamenews.model.States
 
 /**
  * Format date to date news.
@@ -25,9 +26,20 @@ fun String.formatDateToDateNews() {
  * @return [Painter]
  */
 @Composable
-fun ImageRequest.getAsyncImagePainter(): Painter =
+fun ImageRequest.getAsyncImagePainter(
+    onStateChanged: (state: States) -> Unit = {}
+): Painter {
     if (rememberAsyncImagePainter(this).state is AsyncImagePainter.State.Success) {
+        onStateChanged(States.SUCCESS)
+    } else if (rememberAsyncImagePainter(this).state is AsyncImagePainter.State.Loading) {
+        onStateChanged(States.LOADING)
+    } else {
+        onStateChanged(States.ERROR)
+    }
+
+    return if (rememberAsyncImagePainter(this).state is AsyncImagePainter.State.Success) {
         rememberAsyncImagePainter(this)
     } else {
         painterResource(id = R.drawable.placeholder)
     }
+}

@@ -7,3 +7,9 @@ class GameNewsState(
     val image: String = "",
     val link: String = "",
 )
+
+enum class States {
+    SUCCESS,
+    LOADING,
+    ERROR,
+}
