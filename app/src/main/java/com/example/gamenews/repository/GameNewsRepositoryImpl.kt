@@ -11,10 +11,29 @@ class GameNewsRepositoryImpl(
     private val gameNewsService: GameNewsService
 ) : GameNewsRepository {
     override fun getAllGameNews(): Flow<List<GameNewsDTO>> = flow {
-        emit(gameNewsService.getAllGameNews())
+        with(gameNewsService.getAllGameNews()) {
+            if (this.isSuccessful) this.body()?.let { emit(it) } else emit(emptyList())
+        }
     }
 
     override fun getAllGameNewsLocal(): List<GameNewsState> {
         return listOfNews
     }
 }
+
+/**
+ * Esse código será usado para tratar requisições no futuro
+ */
+/*class GameNewsListObservables {
+
+    sealed class ViewState {
+        object InitialLoading : ViewState()
+        object Loading : ViewState()
+        data class Success(
+            val listOfGameNewsState: List<GameNewsDTO>
+        ) : ViewState()
+
+        data class Error(
+            val listOfGameNewsState: List<GameNewsDTO>
+        ) : ViewState()
+    }*/
