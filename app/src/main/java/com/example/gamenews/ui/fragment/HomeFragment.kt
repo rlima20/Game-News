@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.gamenews.R
-import com.example.gamenews.extensions.hasInternet
 import com.example.gamenews.ui.components.GameNewsHomeScreen
 import com.example.gamenews.viewmodel.GameNewsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,8 +24,7 @@ class HomeFragment : Fragment() {
 
         binding.rootView.findViewById<ComposeView>(R.id.composeView).setContent {
             GameNewsHomeScreen(
-                gameNewsViewModel = gameNewsViewModel,
-                this.hasInternet()
+                gameNewsViewModel = gameNewsViewModel
             )
         }
         return binding.rootView

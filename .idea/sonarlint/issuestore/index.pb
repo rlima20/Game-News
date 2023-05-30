@@ -25,11 +25,9 @@ i
 9app/src/main/java/com/example/gamenews/di/AppModulesDI.kt,2/b/2b7095d1650f11edf6b2878e6800e80aca6237f5
 v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
-o
-?app/src/main/java/com/example/gamenews/extensions/Extensions.kt,9/5/9578d0e9d0a7e35acc9b24cee42d3a83c89d9156
 y
 Iapp/src/main/java/com/example/gamenews/provider/remote/GameNewsService.kt,1/4/143f4ba1d227151a727d80506de7138d16f46761
 {
 Kapp/src/main/java/com/example/gamenews/repository/GameNewsRepositoryImpl.kt,2/8/2864eb3935c730f29fb8d335fb496ef0246c8f1f
-r
-Bapp/src/main/java/com/example/gamenews/ui/fragment/HomeFragment.kt,c/9/c9033f2523b8fbaa4fb0579dbfdd2797ec1b230b
+s
+Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761

@@ -18,21 +18,16 @@ class GameNewsViewModel(
     private val gameNewsRepository: GameNewsRepository
 ) : ViewModel() {
 
-    private val _hasInternetState = false
-    var hasInternetState: Boolean = _hasInternetState
-
     private val _uiState = MutableStateFlow(mutableListOf<GameNewsState>())
     val uiState: StateFlow<List<GameNewsState>> = _uiState.asStateFlow()
 
     init {
-        if (hasInternetState) {
-            viewModelScope.launch {
-                getListOfNews()
-            }
+        viewModelScope.launch {
+            getListOfNews()
         }
     }
 
-    suspend fun getListOfNews() {
+    private fun getListOfNews() {
         viewModelScope.launch {
             gameNewsRepository.getAllGameNews().collect { listOfGameState ->
                 _uiState.value = toMap(listOfGameState).toMutableList()

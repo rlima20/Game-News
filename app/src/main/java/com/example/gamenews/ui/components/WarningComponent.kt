@@ -1,5 +1,6 @@
 package com.example.gamenews.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +34,7 @@ fun WarningComponent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            modifier = Modifier.padding(start = 8.dp, end = 16.dp),
+            modifier = Modifier.padding(start = 24.dp, end = 24.dp),
             text = message,
             color = colorResource(id = R.color.title_color),
             fontSize = 16.sp,
