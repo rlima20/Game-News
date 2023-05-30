@@ -23,9 +23,7 @@ class HomeFragment : Fragment() {
         val binding = inflater.inflate(R.layout.fragment_home, container, false)
 
         binding.rootView.findViewById<ComposeView>(R.id.composeView).setContent {
-            GameNewsHomeScreen(
-                gameNewsViewModel = gameNewsViewModel
-            )
+            GameNewsHomeScreen(gameNewsViewModel = gameNewsViewModel)
         }
         return binding.rootView
     }

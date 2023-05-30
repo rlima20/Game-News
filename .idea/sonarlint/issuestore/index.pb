@@ -9,14 +9,10 @@ h
 8app/src/main/java/com/example/gamenews/AppApplication.kt,a/e/aee9ca3110bf2d47a667466cc40cfef1affca01b
 n
 >app/src/main/java/com/example/gamenews/provider/local/Mocks.kt,f/0/f0f104c2500cba557652a6ccf84d2c9a36e402d7
-z
-Japp/src/main/java/com/example/gamenews/ui/components/SearchBarComponent.kt,3/1/3168d682e6366ed0f4a9dc65ca770957704da97f
 t
 Dapp/src/main/java/com/example/gamenews/ui/activities/MainActivity.kt,1/1/11856bb40d6961ce294b688de9aacc08b914b5f5
 m
 =app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
-w
-Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
 l
 <app/src/main/java/com/example/gamenews/di/NetworkModuleDI.kt,5/8/5818deedc8a687a709e0b0ca167bf25767c54e0c
 P
@@ -27,7 +23,3 @@ v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
 y
 Iapp/src/main/java/com/example/gamenews/provider/remote/GameNewsService.kt,1/4/143f4ba1d227151a727d80506de7138d16f46761
-{
-Kapp/src/main/java/com/example/gamenews/repository/GameNewsRepositoryImpl.kt,2/8/2864eb3935c730f29fb8d335fb496ef0246c8f1f
-s
-Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
