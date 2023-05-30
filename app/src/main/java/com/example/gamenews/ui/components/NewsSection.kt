@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.semantics.Role
@@ -80,75 +81,87 @@ fun NewsItem(
         color = MaterialTheme.colors.background
     ) {
         Column {
-            when (state) {
-                States.SUCCESS -> {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(150.dp),
-                        painter = painter,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop
-                    )
-                }
-                States.LOADING -> {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(150.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator(
-                            color = MaterialTheme.colors.onSurface,
-                        )
-                    }
-                }
-                else -> {}
-            }
+            ImageSection(state, painter)
+            TextSection(news)
+        }
+    }
+}
 
-            Column(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
+@Composable
+private fun ImageSection(
+    state: States,
+    painter: Painter
+) {
+    when (state) {
+        States.SUCCESS -> {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp),
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+        }
+        States.LOADING -> {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(150.dp),
+                contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = news.title,
-                    color = colorResource(id = R.color.title_color),
-                    fontSize = 22.sp,
-                    fontStyle = FontStyle.Normal,
-                    fontWeight = FontWeight.Bold,
-                )
-
-                Text(
-                    text = news.date,
-                    color = colorResource(id = R.color.title_color),
-                    fontSize = 16.sp,
-                    fontStyle = FontStyle.Normal,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1
-                )
-            }
-
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = news.description,
-                    fontSize = 18.sp,
-                    fontFamily = FontFamily(Typeface.SANS_SERIF)
-                )
-                Text(
-                    modifier = Modifier.clickable(
-                        enabled = true,
-                        onClickLabel = news.link,
-                        role = Role.Button,
-                        onClick = {},
-                    ),
-                    text = news.link,
-                    textDecoration = TextDecoration.Underline,
-                    color = colorResource(id = R.color.purple_700)
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.onSurface,
                 )
             }
         }
+        else -> {}
+    }
+}
+
+@Composable
+private fun TextSection(news: GameNewsState) {
+    Column(
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        Text(
+            text = news.title,
+            color = colorResource(id = R.color.title_color),
+            fontSize = 22.sp,
+            fontStyle = FontStyle.Normal,
+            fontWeight = FontWeight.Bold,
+        )
+
+        Text(
+            text = news.date,
+            color = colorResource(id = R.color.title_color),
+            fontSize = 16.sp,
+            fontStyle = FontStyle.Normal,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1
+        )
+    }
+
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = news.description,
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Typeface.SANS_SERIF)
+        )
+        Text(
+            modifier = Modifier.clickable(
+                enabled = true,
+                onClickLabel = news.link,
+                role = Role.Button,
+                onClick = {},
+            ),
+            text = news.link,
+            textDecoration = TextDecoration.Underline,
+            color = colorResource(id = R.color.purple_700)
+        )
     }
 }

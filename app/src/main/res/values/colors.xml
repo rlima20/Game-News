@@ -10,4 +10,5 @@
     <color name="title_color">#4B4B4B</color>
     <color name="splash_activity_main_color">#003c51</color>
     <color name="description_color">#E3E3E3</color>
+    <color name="no_connection_background">#EDEDED</color>
 </resources>

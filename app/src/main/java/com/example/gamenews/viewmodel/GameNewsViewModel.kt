@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.gamenews.extensions.formatDateToDateNews
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.repository.GameNewsRepository
@@ -14,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+@Suppress("DEPRECATION")
 class GameNewsViewModel(
     private val gameNewsRepository: GameNewsRepository
 ) : ViewModel() {
@@ -27,7 +27,7 @@ class GameNewsViewModel(
         }
     }
 
-    private suspend fun getListOfNews() {
+    private fun getListOfNews() {
         viewModelScope.launch {
             gameNewsRepository.getAllGameNews().collect { listOfGameState ->
                 _uiState.value = toMap(listOfGameState).toMutableList()
