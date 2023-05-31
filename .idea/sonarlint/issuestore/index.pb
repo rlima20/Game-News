@@ -21,5 +21,11 @@ i
 9app/src/main/java/com/example/gamenews/di/AppModulesDI.kt,2/b/2b7095d1650f11edf6b2878e6800e80aca6237f5
 v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
-y
-Iapp/src/main/java/com/example/gamenews/provider/remote/GameNewsService.kt,1/4/143f4ba1d227151a727d80506de7138d16f46761
+o
+?app/src/main/java/com/example/gamenews/extensions/Extensions.kt,9/5/9578d0e9d0a7e35acc9b24cee42d3a83c89d9156
+x
+Happ/src/main/java/com/example/gamenews/ui/components/WarningComponent.kt,7/7/779885a428f780ea24ea0f6df2461599f952808a
+r
+Bapp/src/main/java/com/example/gamenews/ui/fragment/HomeFragment.kt,c/9/c9033f2523b8fbaa4fb0579dbfdd2797ec1b230b
+w
+Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8

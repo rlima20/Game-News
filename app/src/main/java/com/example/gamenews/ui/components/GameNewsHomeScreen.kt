@@ -36,7 +36,7 @@ internal fun GameNewsHomeScreen(
     ) {
         Row {
             Column {
-                validadeIfGameNewsStateIsNotEmpty(
+                ValidadeIfGameNewsStateIsNotEmpty(
                     gameNewsUiState,
                     searchBarText,
                     gameNewsViewModel,
@@ -48,7 +48,7 @@ internal fun GameNewsHomeScreen(
 }
 
 @Composable
-private fun validadeIfGameNewsStateIsNotEmpty(
+private fun ValidadeIfGameNewsStateIsNotEmpty(
     gameNewsUiState: List<GameNewsState>,
     searchBarText: String,
     gameNewsViewModel: GameNewsViewModel,
