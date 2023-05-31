@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.gamenews.LoadingState
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.repository.GameNewsRepository
@@ -18,19 +19,24 @@ class GameNewsViewModel(
     private val gameNewsRepository: GameNewsRepository
 ) : ViewModel() {
 
+    private val _loading = MutableStateFlow(LoadingState.FULL_LOADING)
+    val loading: StateFlow<LoadingState>
+        get() = _loading
+
     private val _uiState = MutableStateFlow(mutableListOf<GameNewsState>())
     val uiState: StateFlow<List<GameNewsState>> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            getListOfNews()
+            getListOfNews(LoadingState.FULL_LOADING)
         }
     }
 
-    private fun getListOfNews() {
+    private fun getListOfNews(state: LoadingState) {
         viewModelScope.launch {
             gameNewsRepository.getAllGameNews().collect { listOfGameState ->
                 _uiState.value = toMap(listOfGameState).toMutableList()
+                _loading.value = LoadingState.NOT_LOADING
             }
         }
     }

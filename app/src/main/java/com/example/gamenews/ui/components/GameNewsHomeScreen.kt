@@ -13,10 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.example.gamenews.LoadingState
 import com.example.gamenews.SearchBarComponent
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.viewmodel.GameNewsViewModel
@@ -26,6 +26,7 @@ internal fun GameNewsHomeScreen(
     gameNewsViewModel: GameNewsViewModel
 ) {
 
+    val loadingState by gameNewsViewModel.loading.collectAsState()
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val searchBarText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
@@ -37,6 +38,7 @@ internal fun GameNewsHomeScreen(
         Row {
             Column {
                 ValidadeIfGameNewsStateIsNotEmpty(
+                    loadingState,
                     gameNewsUiState,
                     searchBarText,
                     gameNewsViewModel,
@@ -49,24 +51,14 @@ internal fun GameNewsHomeScreen(
 
 @Composable
 private fun ValidadeIfGameNewsStateIsNotEmpty(
+    loadingState: LoadingState,
     gameNewsUiState: List<GameNewsState>,
     searchBarText: String,
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context
 ) {
     var searchBarText1 = searchBarText
-    if (gameNewsUiState.isNotEmpty()) {
-        SearchBarComponent(searchBarText1) { searchBarText1 = it }
-        NewsSection(
-            listOfNews = gameNewsUiState,
-            onImageRequested = { imageUrl ->
-                gameNewsViewModel.getAsyncImage(
-                    imageUrl = imageUrl,
-                    context = localContext
-                )
-            }
-        )
-    } else {
+    if (loadingState == LoadingState.FULL_LOADING) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -74,6 +66,19 @@ private fun ValidadeIfGameNewsStateIsNotEmpty(
         ) {
             CircularProgressIndicator(
                 color = MaterialTheme.colors.onSurface,
+            )
+        }
+    } else {
+        if (gameNewsUiState.isNotEmpty()) {
+            SearchBarComponent(searchBarText1) { searchBarText1 = it }
+            NewsSection(
+                listOfNews = gameNewsUiState,
+                onImageRequested = { imageUrl ->
+                    gameNewsViewModel.getAsyncImage(
+                        imageUrl = imageUrl,
+                        context = localContext
+                    )
+                }
             )
         }
     }
