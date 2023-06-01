@@ -20,20 +20,3 @@ class GameNewsRepositoryImpl(
         return listOfNews
     }
 }
-
-/**
- * Esse código será usado para tratar requisições no futuro
- */
-/*class GameNewsListObservables {
-
-    sealed class ViewState {
-        object InitialLoading : ViewState()
-        object Loading : ViewState()
-        data class Success(
-            val listOfGameNewsState: List<GameNewsDTO>
-        ) : ViewState()
-
-        data class Error(
-            val listOfGameNewsState: List<GameNewsDTO>
-        ) : ViewState()
-    }*/

@@ -8,7 +8,7 @@ import coil.size.Size
 import com.example.gamenews.LoadingState
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
-import com.example.gamenews.repository.GameNewsRepository
+import com.example.gamenews.usecases.GameNewsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
-    private val gameNewsRepository: GameNewsRepository
+    private val gameNewsUseCase: GameNewsUseCase
 ) : ViewModel() {
 
     private val _loading = MutableStateFlow(LoadingState.FULL_LOADING)
@@ -28,31 +28,24 @@ class GameNewsViewModel(
 
     init {
         viewModelScope.launch {
-            getListOfNews(LoadingState.FULL_LOADING)
+            fetchData(LoadingState.FULL_LOADING)
         }
     }
 
-    private fun getListOfNews(state: LoadingState) {
+    private suspend fun fetchData(state: LoadingState) {
+        _loading.value = state
         viewModelScope.launch {
-            gameNewsRepository.getAllGameNews().collect { listOfGameState ->
-                _uiState.value = toMap(listOfGameState).toMutableList()
+            gameNewsUseCase.invoke().collect { result ->
+                result.either(
+                    onSuccess = { updateGameNewsState(toMap(it)) },
+                    onFailure = {}
+                )
                 _loading.value = LoadingState.NOT_LOADING
             }
         }
     }
 
-    fun getAsyncImage(
-        context: Context,
-        imageUrl: String
-    ): ImageRequest {
-        return ImageRequest.Builder(context)
-            .data(imageUrl)
-            .size(Size.ORIGINAL)
-            .crossfade(true)
-            .build()
-    }
-
-    private fun toMap(listOfGameNewsDTO: List<GameNewsDTO>): List<GameNewsState> {
+    private fun toMap(listOfGameNewsDTO: List<GameNewsDTO>): MutableList<GameNewsState> {
         val listOfGameNewStates: MutableList<GameNewsState> = mutableListOf()
 
         listOfGameNewsDTO.forEach {
@@ -69,8 +62,23 @@ class GameNewsViewModel(
 
         return listOfGameNewStates
     }
-}
 
-fun formatDateToDateNews(str: String): String {
-    return str.substring(startIndex = 0, endIndex = 16)
+    private fun updateGameNewsState(it: MutableList<GameNewsState>) {
+        _uiState.value = it
+    }
+
+    private fun formatDateToDateNews(str: String): String {
+        return str.substring(startIndex = 0, endIndex = 16)
+    }
+
+    fun getAsyncImage(
+        context: Context,
+        imageUrl: String
+    ): ImageRequest {
+        return ImageRequest.Builder(context)
+            .data(imageUrl)
+            .size(Size.ORIGINAL)
+            .crossfade(true)
+            .build()
+    }
 }
