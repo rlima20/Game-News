@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.gamenews.LoadingState
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
+import com.example.gamenews.model.States
 import com.example.gamenews.usecases.GameNewsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,28 +19,27 @@ class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase
 ) : ViewModel() {
 
-    private val _loading = MutableStateFlow(LoadingState.FULL_LOADING)
-    val loading: StateFlow<LoadingState>
-        get() = _loading
+    private val _requestState = MutableStateFlow(States.LOADING)
+    val requestState: StateFlow<States>
+        get() = _requestState
 
     private val _uiState = MutableStateFlow(mutableListOf<GameNewsState>())
     val uiState: StateFlow<List<GameNewsState>> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            fetchData(LoadingState.FULL_LOADING)
+            fetchData()
         }
     }
 
-    private suspend fun fetchData(state: LoadingState) {
-        _loading.value = state
+    private suspend fun fetchData() {
+        _requestState.value = States.LOADING
         viewModelScope.launch {
             gameNewsUseCase.invoke().collect { result ->
                 result.either(
                     onSuccess = { updateGameNewsState(toMap(it)) },
-                    onFailure = {}
+                    onFailure = { updateRequestErrorState() }
                 )
-                _loading.value = LoadingState.NOT_LOADING
             }
         }
     }
@@ -65,6 +64,11 @@ class GameNewsViewModel(
 
     private fun updateGameNewsState(it: MutableList<GameNewsState>) {
         _uiState.value = it
+        _requestState.value = States.SUCCESS
+    }
+
+    private fun updateRequestErrorState() {
+        _requestState.value = States.ERROR
     }
 
     private fun formatDateToDateNews(str: String): String {

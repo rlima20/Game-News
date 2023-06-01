@@ -17,13 +17,13 @@ o
 ?app/src/main/java/com/example/gamenews/extensions/Extensions.kt,9/5/9578d0e9d0a7e35acc9b24cee42d3a83c89d9156
 x
 Happ/src/main/java/com/example/gamenews/ui/components/WarningComponent.kt,7/7/779885a428f780ea24ea0f6df2461599f952808a
-p
-@app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
-c
-3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
 l
 <app/src/main/java/com/example/gamenews/di/NetworkModuleDI.kt,5/8/5818deedc8a687a709e0b0ca167bf25767c54e0c
 o
 ?app/src/main/java/com/example/gamenews/di/RepositoryModuleDI.kt,7/a/7a819c9af5d72621c7453269f4c01b7a558dfba0
 v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
+s
+Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
+r
+Bapp/src/main/java/com/example/gamenews/ui/fragment/HomeFragment.kt,c/9/c9033f2523b8fbaa4fb0579dbfdd2797ec1b230b
