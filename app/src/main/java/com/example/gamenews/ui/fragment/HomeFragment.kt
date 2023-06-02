@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.gamenews.R
 import com.example.gamenews.ui.components.GameNewsHomeScreen
 import com.example.gamenews.viewmodel.GameNewsViewModel
+import kotlinx.coroutines.CoroutineScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {

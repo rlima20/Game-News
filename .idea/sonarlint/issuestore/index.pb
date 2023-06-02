@@ -35,7 +35,11 @@ p
 @app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
 c
 3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
-r
-Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
-r
-Bapp/src/main/java/com/example/gamenews/ui/fragment/HomeFragment.kt,c/9/c9033f2523b8fbaa4fb0579dbfdd2797ec1b230b
+m
+=app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
+z
+Japp/src/main/java/com/example/gamenews/ui/components/SearchBarComponent.kt,3/1/3168d682e6366ed0f4a9dc65ca770957704da97f
+s
+Capp/src/main/java/com/example/gamenews/ui/components/TextSection.kt,1/a/1ab6288462ed913dd5b5145fdee0c8dc83bd096a
+w
+Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.gamenews.model.GameNewsDTO
+import com.example.gamenews.mappers.toMap
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
 import com.example.gamenews.usecases.GameNewsUseCase
@@ -32,7 +32,7 @@ class GameNewsViewModel(
         }
     }
 
-    private suspend fun fetchData() {
+    fun fetchData() {
         _requestState.value = States.LOADING
         viewModelScope.launch {
             gameNewsUseCase.invoke().collect { result ->
@@ -44,36 +44,13 @@ class GameNewsViewModel(
         }
     }
 
-    private fun toMap(listOfGameNewsDTO: List<GameNewsDTO>?): MutableList<GameNewsState>? {
-        val listOfGameNewStates: MutableList<GameNewsState>? = null
-
-        listOfGameNewsDTO?.let {
-            it.forEach { gameNewsDTO ->
-                listOfGameNewStates?.add(
-                    GameNewsState(
-                        title = gameNewsDTO.title,
-                        date = formatDateToDateNews(gameNewsDTO.date),
-                        description = gameNewsDTO.description,
-                        image = gameNewsDTO.image,
-                        link = gameNewsDTO.link
-                    )
-                )
-            }
-        }
-        return listOfGameNewStates
-    }
-
     private fun updateGameNewsState(it: MutableList<GameNewsState>?) {
         _uiState.value = it
-        _requestState.value = States.SUCCESS
+        _requestState.value = if (it != null) States.SUCCESS else States.ERROR
     }
 
     private fun updateRequestErrorState() {
         _requestState.value = States.ERROR
-    }
-
-    private fun formatDateToDateNews(str: String): String {
-        return str.substring(startIndex = 0, endIndex = 16)
     }
 
     fun getAsyncImage(
