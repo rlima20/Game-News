@@ -5,7 +5,7 @@ import com.example.gamenews.model.GameNewsState
 import kotlinx.coroutines.flow.Flow
 
 interface GameNewsRepository {
-    fun getAllGameNews(): Flow<List<GameNewsDTO>>
+    fun getAllGameNews(): Flow<List<GameNewsDTO>?>
 
     fun getAllGameNewsLocal(): List<GameNewsState>
 }

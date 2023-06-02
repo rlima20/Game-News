@@ -25,5 +25,17 @@ v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
 s
 Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
+t
+Dapp/src/main/java/com/example/gamenews/di/gameNewsUseCaseModuleDI.kt,1/7/17a4416568ec615697749b16a8ca3cfc3be07488
+i
+9app/src/main/java/com/example/gamenews/di/AppModulesDI.kt,2/b/2b7095d1650f11edf6b2878e6800e80aca6237f5
+t
+Dapp/src/main/java/com/example/gamenews/ui/components/ImageSection.kt,c/1/c15e962938c6f894b37ee903241c5e1eca63e912
+p
+@app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
+c
+3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
+r
+Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
 r
 Bapp/src/main/java/com/example/gamenews/ui/fragment/HomeFragment.kt,c/9/c9033f2523b8fbaa4fb0579dbfdd2797ec1b230b

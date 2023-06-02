@@ -17,7 +17,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.example.gamenews.SearchBarComponent
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.example.gamenews.R
 import com.example.gamenews.model.States
 import com.example.gamenews.viewmodel.GameNewsViewModel
 
@@ -37,17 +41,31 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
             Column {
                 when (requestState) {
                     States.SUCCESS -> {
-                        if (gameNewsUiState.isNotEmpty()) {
+                        if (gameNewsUiState?.isNotEmpty() == true) {
                             SearchBarComponent(searchBarText) { searchBarText = it }
-                            NewsSection(
-                                listOfNews = gameNewsUiState,
-                                onImageRequested = { imageUrl ->
-                                    gameNewsViewModel.getAsyncImage(
-                                        imageUrl = imageUrl,
-                                        context = localContext
-                                    )
-                                }
-                            )
+                            gameNewsUiState?.let {
+                                NewsSection(
+                                    listOfNews = it,
+                                    onImageRequested = { imageUrl ->
+                                        gameNewsViewModel.getAsyncImage(
+                                            imageUrl = imageUrl,
+                                            context = localContext
+                                        )
+                                    }
+                                )
+                            }
+                        } else {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    color = colorResource(id = R.color.black),
+                                    fontSize = 32.sp,
+                                    text = "error"
+                                )
+                            }
                         }
                     }
                     States.LOADING -> {
@@ -61,8 +79,27 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
                             )
                         }
                     }
-                    else -> {
-                        Text(text = "error")
+                    States.ERROR -> {
+                        if (gameNewsUiState?.isEmpty() == true) {
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    color = colorResource(id = R.color.black),
+                                    fontSize = 32.sp,
+                                    fontStyle = FontStyle.Normal,
+                                    fontWeight = FontWeight.Bold,
+                                    text = "Error"
+                                )
+                                Text(
+                                    color = colorResource(id = R.color.black),
+                                    fontSize = 18.sp,
+                                    text = "Oops, something went wrong. Please try again later"
+                                )
+                            }
+                        }
                     }
                 }
             }

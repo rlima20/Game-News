@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

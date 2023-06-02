@@ -23,8 +23,8 @@ class GameNewsViewModel(
     val requestState: StateFlow<States>
         get() = _requestState
 
-    private val _uiState = MutableStateFlow(mutableListOf<GameNewsState>())
-    val uiState: StateFlow<List<GameNewsState>> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
+    val uiState: StateFlow<List<GameNewsState>?> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -44,25 +44,26 @@ class GameNewsViewModel(
         }
     }
 
-    private fun toMap(listOfGameNewsDTO: List<GameNewsDTO>): MutableList<GameNewsState> {
-        val listOfGameNewStates: MutableList<GameNewsState> = mutableListOf()
+    private fun toMap(listOfGameNewsDTO: List<GameNewsDTO>?): MutableList<GameNewsState>? {
+        val listOfGameNewStates: MutableList<GameNewsState>? = null
 
-        listOfGameNewsDTO.forEach {
-            listOfGameNewStates.add(
-                GameNewsState(
-                    title = it.title,
-                    date = formatDateToDateNews(it.date),
-                    description = it.description,
-                    image = it.image,
-                    link = it.link
+        listOfGameNewsDTO?.let {
+            it.forEach { gameNewsDTO ->
+                listOfGameNewStates?.add(
+                    GameNewsState(
+                        title = gameNewsDTO.title,
+                        date = formatDateToDateNews(gameNewsDTO.date),
+                        description = gameNewsDTO.description,
+                        image = gameNewsDTO.image,
+                        link = gameNewsDTO.link
+                    )
                 )
-            )
+            }
         }
-
         return listOfGameNewStates
     }
 
-    private fun updateGameNewsState(it: MutableList<GameNewsState>) {
+    private fun updateGameNewsState(it: MutableList<GameNewsState>?) {
         _uiState.value = it
         _requestState.value = States.SUCCESS
     }

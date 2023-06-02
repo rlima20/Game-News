@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 class GameNewsUseCaseImpl(
     private val gameNewsRepository: GameNewsRepository
 ) : GameNewsUseCase {
-    override fun invoke(): Flow<Either<List<GameNewsDTO>, Throwable>> = flow {
+    override fun invoke(): Flow<Either<List<GameNewsDTO>?, Throwable>> = flow {
         try {
             val flowListOfGameNews = gameNewsRepository.getAllGameNews()
             flowListOfGameNews.collect { listOfGameNewsDTO ->
@@ -17,7 +17,7 @@ class GameNewsUseCaseImpl(
                 )
             }
         } catch (exception: Exception) {
-            emit(Failure(exception))
+            emit(Either.Failure(exception))
         }
     }
 }
