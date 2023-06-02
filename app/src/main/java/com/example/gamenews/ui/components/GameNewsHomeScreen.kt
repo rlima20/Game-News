@@ -54,6 +54,7 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
                                     }
                                 )
                             }
+                            // todo - passar por aqui somente se não tiver status de erro
                         } else {
                             Column(
                                 modifier = Modifier.fillMaxSize(),
@@ -79,6 +80,8 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
                             )
                         }
                     }
+                    // todo - Não está passando por aqui. Colocar uma validação de null lá no
+                    //  viewModel.
                     States.ERROR -> {
                         if (gameNewsUiState?.isEmpty() == true) {
                             Column(

@@ -10,6 +10,6 @@ import retrofit2.http.Headers
 interface GameNewsService {
 
     @Headers(API_KEY, API_HOST)
-    @GET("/videogames_news/recent2")
+    @GET("/videogames_news/recent")
     suspend fun getAllGameNews(): Response<List<GameNewsDTO>>?
 }
