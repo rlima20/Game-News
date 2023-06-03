@@ -13,11 +13,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
+import com.example.gamenews.provider.local.listOfNews
 import com.example.gamenews.viewmodel.GameNewsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,8 +31,9 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
 
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val requestState by gameNewsViewModel.requestState.collectAsState()
-    val searchBarText by remember { mutableStateOf("") }
+    var searchBarText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
+    val searchFromAPI = false
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -38,13 +41,23 @@ internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
     ) {
         Row {
             Column {
-                ValidateRequestState(
-                    requestState,
-                    gameNewsUiState,
-                    searchBarText,
-                    gameNewsViewModel,
-                    localContext
-                )
+                if (searchFromAPI) {
+                    ValidateRequestState(
+                        requestState,
+                        gameNewsUiState,
+                        searchBarText,
+                        gameNewsViewModel,
+                        localContext,
+                    ) { searchBarText = it }
+                } else {
+                    CreateHomeScreen(
+                        searchBarText,
+                        onSearchTextChanged = { searchBarText = it },
+                        listOfNews,
+                        gameNewsViewModel,
+                        localContext
+                    )
+                }
             }
         }
     }
@@ -56,21 +69,18 @@ private fun ValidateRequestState(
     gameNewsUiState: List<GameNewsState>?,
     searchBarText: String,
     gameNewsViewModel: GameNewsViewModel,
-    localContext: Context
+    localContext: Context,
+    onSearchTextChanged: (searchText: String) -> Unit
 ) {
-    var searchText = searchBarText
     when (requestState) {
         States.SUCCESS -> {
             if (gameNewsUiState?.isNotEmpty() == true) {
-                SearchBarComponent(searchText) { searchText = it }
-                NewsSection(
-                    listOfNews = gameNewsUiState,
-                    onImageRequested = { imageUrl ->
-                        gameNewsViewModel.getAsyncImage(
-                            imageUrl = imageUrl,
-                            context = localContext
-                        )
-                    }
+                CreateHomeScreen(
+                    searchBarText,
+                    onSearchTextChanged,
+                    gameNewsUiState,
+                    gameNewsViewModel,
+                    localContext
                 )
             } else {
                 ErrorStateComponent(
@@ -103,4 +113,27 @@ private fun ValidateRequestState(
             )
         }
     }
+}
+
+@Composable
+private fun CreateHomeScreen(
+    searchBarText: String,
+    onSearchTextChanged: (searchText: String) -> Unit,
+    gameNewsUiState: List<GameNewsState>,
+    gameNewsViewModel: GameNewsViewModel,
+    localContext: Context
+) {
+    SearchBarComponent(
+        text = searchBarText,
+        onValueChange = { onSearchTextChanged(it) }
+    )
+    NewsSection(
+        listOfNews = gameNewsUiState,
+        onImageRequested = { imageUrl ->
+            gameNewsViewModel.getAsyncImage(
+                imageUrl = imageUrl,
+                context = localContext
+            )
+        }
+    )
 }

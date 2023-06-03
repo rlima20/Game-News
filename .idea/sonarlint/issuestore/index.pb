@@ -23,8 +23,6 @@ o
 ?app/src/main/java/com/example/gamenews/di/RepositoryModuleDI.kt,7/a/7a819c9af5d72621c7453269f4c01b7a558dfba0
 v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
-s
-Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
 t
 Dapp/src/main/java/com/example/gamenews/di/gameNewsUseCaseModuleDI.kt,1/7/17a4416568ec615697749b16a8ca3cfc3be07488
 i
@@ -37,8 +35,6 @@ c
 3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
 m
 =app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
-z
-Japp/src/main/java/com/example/gamenews/ui/components/SearchBarComponent.kt,3/1/3168d682e6366ed0f4a9dc65ca770957704da97f
 s
 Capp/src/main/java/com/example/gamenews/ui/components/TextSection.kt,1/a/1ab6288462ed913dd5b5145fdee0c8dc83bd096a
 w
