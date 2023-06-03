@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.example.gamenews.R
-import com.example.gamenews.ui.components.GameNewsHomeScreen
+import com.example.gamenews.ui.components.HomeScreen
 import com.example.gamenews.viewmodel.GameNewsViewModel
-import kotlinx.coroutines.CoroutineScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -25,7 +27,12 @@ class HomeFragment : Fragment() {
         val binding = inflater.inflate(R.layout.fragment_home, container, false)
 
         binding.rootView.findViewById<ComposeView>(R.id.composeView).setContent {
-            GameNewsHomeScreen(gameNewsViewModel = gameNewsViewModel)
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colors.background
+            ) {
+                HomeScreen(gameNewsViewModel)
+            }
         }
         return binding.rootView
     }

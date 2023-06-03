@@ -26,6 +26,9 @@ class GameNewsViewModel(
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val uiState: StateFlow<List<GameNewsState>?> = _uiState.asStateFlow()
 
+    private val _searchFromAPI = MutableStateFlow(false)
+    val searchFromAPI: StateFlow<Boolean> = _searchFromAPI.asStateFlow()
+
     init {
         viewModelScope.launch {
             fetchData()

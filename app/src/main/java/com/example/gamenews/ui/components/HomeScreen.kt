@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,37 +26,32 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @Composable
-internal fun GameNewsHomeScreen(gameNewsViewModel: GameNewsViewModel) {
+internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
 
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val requestState by gameNewsViewModel.requestState.collectAsState()
     var searchBarText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
-    val searchFromAPI = false
+    val searchFromAPI by gameNewsViewModel.searchFromAPI.collectAsState()
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
-    ) {
-        Row {
-            Column {
-                if (searchFromAPI) {
-                    ValidateRequestState(
-                        requestState,
-                        gameNewsUiState,
-                        searchBarText,
-                        gameNewsViewModel,
-                        localContext,
-                    ) { searchBarText = it }
-                } else {
-                    CreateHomeScreen(
-                        searchBarText,
-                        onSearchTextChanged = { searchBarText = it },
-                        listOfNews,
-                        gameNewsViewModel,
-                        localContext
-                    )
-                }
+    Row {
+        Column {
+            if (searchFromAPI) {
+                ValidateRequestState(
+                    requestState,
+                    gameNewsUiState,
+                    searchBarText,
+                    gameNewsViewModel,
+                    localContext,
+                ) { searchBarText = it }
+            } else {
+                HomeScreenComponent(
+                    searchBarText,
+                    onSearchTextChanged = { searchBarText = it },
+                    listOfNews,
+                    gameNewsViewModel,
+                    localContext
+                )
             }
         }
     }
@@ -75,7 +69,7 @@ private fun ValidateRequestState(
     when (requestState) {
         States.SUCCESS -> {
             if (gameNewsUiState?.isNotEmpty() == true) {
-                CreateHomeScreen(
+                HomeScreenComponent(
                     searchBarText,
                     onSearchTextChanged,
                     gameNewsUiState,
@@ -113,27 +107,4 @@ private fun ValidateRequestState(
             )
         }
     }
-}
-
-@Composable
-private fun CreateHomeScreen(
-    searchBarText: String,
-    onSearchTextChanged: (searchText: String) -> Unit,
-    gameNewsUiState: List<GameNewsState>,
-    gameNewsViewModel: GameNewsViewModel,
-    localContext: Context
-) {
-    SearchBarComponent(
-        text = searchBarText,
-        onValueChange = { onSearchTextChanged(it) }
-    )
-    NewsSection(
-        listOfNews = gameNewsUiState,
-        onImageRequested = { imageUrl ->
-            gameNewsViewModel.getAsyncImage(
-                imageUrl = imageUrl,
-                context = localContext
-            )
-        }
-    )
 }
