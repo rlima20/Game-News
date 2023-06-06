@@ -15,7 +15,11 @@ fun HomeScreenComponent(
 ) {
     SearchBarComponent(
         text = searchBarText,
-        onValueChange = { onSearchTextChanged(it) }
+        onValueChange = {
+            onSearchTextChanged(it)
+        },
+        onCloseIconClicked = { gameNewsViewModel.clearFilteredListOfGameNews() },
+        onDoneKeyBoardClosed = { gameNewsViewModel.filterListOfGameNews(searchBarText) }
     )
     NewsSection(
         listOfNews = gameNewsUiState,

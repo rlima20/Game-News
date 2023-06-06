@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
 
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
+    val filteredGameNewsUiState by gameNewsViewModel.filterUiState.collectAsState()
     val requestState by gameNewsViewModel.requestState.collectAsState()
     var searchBarText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
@@ -39,7 +40,7 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
             if (searchFromAPI) {
                 ValidateRequestState(
                     requestState,
-                    gameNewsUiState,
+                    setUiState(filteredGameNewsUiState, gameNewsUiState),
                     searchBarText,
                     gameNewsViewModel,
                     localContext,
@@ -56,6 +57,13 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
         }
     }
 }
+
+@Composable
+private fun setUiState(
+    filteredGameNewsUiState: List<GameNewsState>?,
+    gameNewsUiState: List<GameNewsState>?
+) = if (filteredGameNewsUiState?.isNotEmpty() == true) filteredGameNewsUiState else
+    gameNewsUiState
 
 @Composable
 private fun ValidateRequestState(

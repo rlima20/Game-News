@@ -62,3 +62,5 @@ fun Fragment.hasInternet(): Boolean {
         connMgr.activeNetworkInfo?.isConnected == true
     }
 }
+
+fun String.removeSpaces(): String = this.replace(" ", "")
