@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 internal fun SearchBarComponent(
     text: String = "",
     onValueChange: (String) -> Unit = {},
-    onCloseIconClicked: () -> Unit,
+    onCloseIconClicked: () -> Unit = {},
     onDoneKeyBoardClosed: () -> Unit = {},
     onSearchDone: () -> Unit = {}
 ) {
