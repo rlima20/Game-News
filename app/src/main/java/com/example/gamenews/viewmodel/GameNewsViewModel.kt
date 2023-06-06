@@ -50,7 +50,6 @@ class GameNewsViewModel(
 
     fun filterListOfGameNews(
         filterParameter: String,
-        size: () -> Unit = {}
     ) {
         clearFilteredListOfGameNews()
         val textWithoutSpaces = filterParameter.removeSpaces()

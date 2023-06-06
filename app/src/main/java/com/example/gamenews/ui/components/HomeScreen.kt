@@ -1,6 +1,7 @@
 package com.example.gamenews.ui.components
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -44,7 +45,17 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     searchBarText,
                     gameNewsViewModel,
                     localContext,
-                ) { searchBarText = it }
+                    onSearchTextChanged = { searchBarText = it },
+                    onSearchDone = {
+                        if (filteredGameNewsUiState?.isEmpty() == true) {
+                            Toast.makeText(
+                                localContext, "No result for the search",
+                                Toast
+                                    .LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                )
             } else {
                 HomeScreenComponent(
                     searchBarText,
@@ -72,7 +83,8 @@ private fun ValidateRequestState(
     searchBarText: String,
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
-    onSearchTextChanged: (searchText: String) -> Unit
+    onSearchTextChanged: (searchText: String) -> Unit,
+    onSearchDone: () -> Unit = {},
 ) {
     when (requestState) {
         States.SUCCESS -> {
@@ -82,7 +94,8 @@ private fun ValidateRequestState(
                     onSearchTextChanged,
                     gameNewsUiState,
                     gameNewsViewModel,
-                    localContext
+                    localContext,
+                    onSearchDone = { onSearchDone() }
                 )
             } else {
                 ErrorStateComponent(

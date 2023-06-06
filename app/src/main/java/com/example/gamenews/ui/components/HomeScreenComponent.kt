@@ -11,7 +11,8 @@ fun HomeScreenComponent(
     onSearchTextChanged: (searchText: String) -> Unit,
     gameNewsUiState: List<GameNewsState>,
     gameNewsViewModel: GameNewsViewModel,
-    localContext: Context
+    localContext: Context,
+    onSearchDone: () -> Unit = {}
 ) {
     SearchBarComponent(
         text = searchBarText,
@@ -19,7 +20,8 @@ fun HomeScreenComponent(
             onSearchTextChanged(it)
         },
         onCloseIconClicked = { gameNewsViewModel.clearFilteredListOfGameNews() },
-        onDoneKeyBoardClosed = { gameNewsViewModel.filterListOfGameNews(searchBarText) }
+        onDoneKeyBoardClosed = { gameNewsViewModel.filterListOfGameNews(searchBarText) },
+        onSearchDone = { onSearchDone() }
     )
     NewsSection(
         listOfNews = gameNewsUiState,
