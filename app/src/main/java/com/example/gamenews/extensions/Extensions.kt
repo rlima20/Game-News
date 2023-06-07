@@ -8,6 +8,11 @@ import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.fragment.app.Fragment
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
@@ -64,3 +69,22 @@ fun Fragment.hasInternet(): Boolean {
 }
 
 fun String.removeSpaces(): String = this.replace(" ", "")
+
+@Composable
+fun formatWordSearchedToBold(text: String, word: String): AnnotatedString {
+    val textFormatted = buildAnnotatedString {
+        val startIndex = text.indexOf(word, ignoreCase = true)
+        val endIndex = startIndex + word.length
+
+        append(text.substring(0, startIndex))
+        withStyle(
+            style = SpanStyle(
+                fontWeight = FontWeight.Bold
+            )
+        ) {
+            append(text.substring(startIndex, endIndex))
+        }
+        append(text.substring(endIndex, text.length))
+    }
+    return textFormatted
+}

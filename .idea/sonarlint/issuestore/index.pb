@@ -7,8 +7,6 @@ v
 Fapp/src/main/java/com/example/gamenews/ui/activities/SplashActivity.kt,d/8/d890b88a0c47e2575c655ae59f03f22d41846ef7
 h
 8app/src/main/java/com/example/gamenews/AppApplication.kt,a/e/aee9ca3110bf2d47a667466cc40cfef1affca01b
-n
->app/src/main/java/com/example/gamenews/provider/local/Mocks.kt,f/0/f0f104c2500cba557652a6ccf84d2c9a36e402d7
 t
 Dapp/src/main/java/com/example/gamenews/ui/activities/MainActivity.kt,1/1/11856bb40d6961ce294b688de9aacc08b914b5f5
 P
@@ -29,13 +27,5 @@ m
 =app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
 w
 Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
-s
-Capp/src/main/java/com/example/gamenews/ui/components/TextSection.kt,1/a/1ab6288462ed913dd5b5145fdee0c8dc83bd096a
-s
-Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
-p
-@app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
-t
-Dapp/src/main/java/com/example/gamenews/ui/components/ImageSection.kt,c/1/c15e962938c6f894b37ee903241c5e1eca63e912
 {
 Kapp/src/main/java/com/example/gamenews/ui/components/ErrorStateComponent.kt,1/f/1f4fc25295e34846272cca1086274e5b1093218c

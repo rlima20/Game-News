@@ -76,7 +76,7 @@ internal fun SearchBarComponent(
             }
         },
         label = { Text(text = "Keyword") },
-        placeholder = { Text(text = "Search") },
+        placeholder = { Text(text = "Filter") },
         singleLine = true,
         keyboardActions = KeyboardActions(
             onDone = {

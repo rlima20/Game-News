@@ -30,7 +30,7 @@ class GameNewsViewModel(
     private val _filterUiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val filterUiState: StateFlow<List<GameNewsState>?> = _filterUiState.asStateFlow()
 
-    private val _searchFromAPI = MutableStateFlow(true)
+    private val _searchFromAPI = MutableStateFlow(false)
     val searchFromAPI: StateFlow<Boolean> = _searchFromAPI.asStateFlow()
 
     init {
