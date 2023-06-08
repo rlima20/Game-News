@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
 import com.example.gamenews.model.GameNewsState
+import java.util.Locale
 
 @Composable
 internal fun TextSection(
@@ -33,7 +34,10 @@ internal fun TextSection(
         Text(
             text = AnnotatedString(
                 text = news.title,
-                spanStyles = getSpanStyles(news.title, word)
+                spanStyles = getSpanStyles(
+                    news.title.lowercase(Locale.ROOT),
+                    word.lowercase(Locale.ROOT)
+                )
             ),
             color = colorResource(id = R.color.title_color),
             fontSize = 22.sp,
@@ -58,7 +62,11 @@ internal fun TextSection(
         Text(
             text = AnnotatedString(
                 text = news.description,
-                spanStyles = getSpanStyles(news.description, word)
+                spanStyles = getSpanStyles(
+                    news.description.lowercase(Locale.ROOT),
+                    word
+                        .lowercase(Locale.ROOT)
+                )
             ),
             fontSize = 18.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF)
@@ -94,44 +102,3 @@ private fun getSpanStyles(
         ),
     )
 }
-/*
-
-val texto = "Gremlins: Secrets Of The Mogwai Trailer Hints At Gizmo’s Magical Origins"
-
-val textoFormatadoEmNegrito1 = formatarPalavraEmNegrito(texto = texto, palavra = "Trailer")
-Text(
-text = textoFormatadoEmNegrito1
-)
-
-val textoFormatadoEmNegrito =
-    formatWordSearchedToBold(text = texto, word = "Trailer")
-Text(
-text = textoFormatadoEmNegrito
-)*/
-
-/*
-
-fun formatarPalavraEmNegrito(texto: String, palavra: String): AnnotatedString {
-    val resultado = buildAnnotatedString {
-        val startIndex = texto.indexOf(palavra, ignoreCase = true)
-        val endIndex = startIndex + palavra.length
-
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-            append(texto.substring(0, startIndex))
-            withStyle(
-                style = SpanStyle(
-                    fontWeight = MaterialTheme.typography.body1.fontWeight,
-                    fontStyle = MaterialTheme.typography.body1.fontStyle,
-                    fontSize = MaterialTheme.typography.body1.fontSize * 1.2f
-                )
-            ) {
-                append(texto.substring(startIndex, endIndex))
-            }
-            append(texto.substring(endIndex, texto.length))
-        }
-    }
-    return resultado
-
-    // Utilize o resultado como desejar, por exemplo, exibindo em um Text
-    // Text(text = resultado.toAnnotatedString())
-}*/

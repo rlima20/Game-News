@@ -57,8 +57,10 @@ class GameNewsViewModel(
         val listFiltered: MutableList<GameNewsState> = mutableListOf()
 
         uiState.value?.forEach {
-            if (it.title.contains(textWithoutSpaces) ||
-                it.description.contains(textWithoutSpaces)
+            if (it.title.toLowerCase(Locale.ROOT)
+                .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
+                it.description.toLowerCase(Locale.ROOT)
+                    .contains(textWithoutSpaces.toLowerCase(Locale.ROOT))
             ) {
                 listFiltered.add(it)
             }
