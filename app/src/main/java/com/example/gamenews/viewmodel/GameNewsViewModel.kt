@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
@@ -30,7 +31,7 @@ class GameNewsViewModel(
     private val _filterUiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val filterUiState: StateFlow<List<GameNewsState>?> = _filterUiState.asStateFlow()
 
-    private val _searchFromAPI = MutableStateFlow(false)
+    private val _searchFromAPI = MutableStateFlow(true)
     val searchFromAPI: StateFlow<Boolean> = _searchFromAPI.asStateFlow()
 
     init {
@@ -52,13 +53,12 @@ class GameNewsViewModel(
         filterParameter: String,
     ) {
         clearFilteredListOfGameNews()
-        val textWithoutSpaces = filterParameter.removeSpaces()
+        val textWithoutSpaces = filterParameter.removeSpaces().toLowerCase(Locale.ROOT)
         val listFiltered: MutableList<GameNewsState> = mutableListOf()
 
         uiState.value?.forEach {
             if (it.title.contains(textWithoutSpaces) ||
-                it.description.contains(textWithoutSpaces) ||
-                it.link.contains(textWithoutSpaces)
+                it.description.contains(textWithoutSpaces)
             ) {
                 listFiltered.add(it)
             }

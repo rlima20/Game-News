@@ -38,6 +38,7 @@ fun HomeScreenComponent(
                 imageUrl = imageUrl,
                 context = localContext
             )
-        }
+        },
+        searchBarText = searchBarText
     )
 }

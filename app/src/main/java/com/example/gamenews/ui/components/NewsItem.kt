@@ -20,6 +20,7 @@ import com.example.gamenews.model.States
 
 @Composable
 internal fun NewsItem(
+    searchBarText: String,
     news: GameNewsState,
     imageRequest: ImageRequest
 ) {
@@ -40,7 +41,7 @@ internal fun NewsItem(
     ) {
         Column {
             ImageSection(state, painter)
-            TextSection(news)
+            TextSection(searchBarText, news)
         }
     }
 }
