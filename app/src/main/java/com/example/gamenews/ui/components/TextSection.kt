@@ -24,8 +24,8 @@ import java.util.Locale
 
 @Composable
 internal fun TextSection(
-    word: String,
-    news: GameNewsState
+    searchedWord: String,
+    gameNewsState: GameNewsState
 ) {
     Column(
         modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
@@ -33,21 +33,21 @@ internal fun TextSection(
     ) {
         Text(
             text = AnnotatedString(
-                text = news.title,
+                text = gameNewsState.title,
                 spanStyles = getSpanStyles(
-                    news.title.lowercase(Locale.ROOT),
-                    word.lowercase(Locale.ROOT)
+                    mainText = gameNewsState.title.lowercase(Locale.ROOT),
+                    searchedWord = searchedWord.lowercase(Locale.ROOT)
                 )
             ),
-            color = colorResource(id = R.color.title_color),
+            color = colorResource(id = R.color.game_news_title_color),
             fontSize = 22.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
         )
 
         Text(
-            text = news.date,
-            color = colorResource(id = R.color.title_color),
+            text = gameNewsState.date,
+            color = colorResource(id = R.color.game_news_title_color),
             fontSize = 16.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
@@ -61,11 +61,10 @@ internal fun TextSection(
     ) {
         Text(
             text = AnnotatedString(
-                text = news.description,
+                text = gameNewsState.description,
                 spanStyles = getSpanStyles(
-                    news.description.lowercase(Locale.ROOT),
-                    word
-                        .lowercase(Locale.ROOT)
+                    mainText = gameNewsState.description.lowercase(Locale.ROOT),
+                    searchedWord = searchedWord.lowercase(Locale.ROOT)
                 )
             ),
             fontSize = 18.sp,
@@ -74,13 +73,13 @@ internal fun TextSection(
         Text(
             modifier = Modifier.clickable(
                 enabled = true,
-                onClickLabel = news.link,
+                onClickLabel = gameNewsState.link,
                 role = Role.Button,
                 onClick = {},
             ),
-            text = news.link,
+            text = gameNewsState.link,
             textDecoration = TextDecoration.Underline,
-            color = colorResource(id = R.color.purple_700)
+            color = colorResource(id = R.color.game_news_blue_700)
         )
     }
 }
@@ -88,17 +87,17 @@ internal fun TextSection(
 @Composable
 private fun getSpanStyles(
     mainText: String,
-    word: String,
+    searchedWord: String,
 ): List<AnnotatedString.Range<SpanStyle>> {
-    val start = mainText.indexOf(word)
+    val start = mainText.indexOf(searchedWord)
     return listOf(
         AnnotatedString.Range(
             SpanStyle(
                 color = colorResource(id = R.color.white),
-                background = colorResource(id = R.color.purple_700)
+                background = colorResource(id = R.color.game_news_blue_700)
             ),
             start = start,
-            end = start + word.length,
+            end = start + searchedWord.length,
         ),
     )
 }

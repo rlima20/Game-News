@@ -23,9 +23,5 @@ i
 9app/src/main/java/com/example/gamenews/di/AppModulesDI.kt,2/b/2b7095d1650f11edf6b2878e6800e80aca6237f5
 c
 3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
-m
-=app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
 w
 Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
-{
-Kapp/src/main/java/com/example/gamenews/ui/components/ErrorStateComponent.kt,1/f/1f4fc25295e34846272cca1086274e5b1093218c

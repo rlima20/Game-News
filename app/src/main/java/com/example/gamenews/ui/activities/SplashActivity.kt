@@ -38,7 +38,7 @@ class SplashActivity : ComponentActivity() {
                 ) {
                     Image(
                         modifier = Modifier.background(
-                            color = colorResource(id = R.color.splash_activity_main_color)
+                            color = colorResource(id = R.color.game_news_splash_activity_main_color)
                         ),
                         painter = painterResource(id = R.drawable.logo),
                         contentDescription = null

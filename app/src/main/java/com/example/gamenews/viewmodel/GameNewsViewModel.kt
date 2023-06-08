@@ -21,18 +21,19 @@ class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase
 ) : ViewModel() {
 
-    private val _requestState = MutableStateFlow(States.LOADING)
-    val requestState: StateFlow<States>
-        get() = _requestState
+    /* Feature flags */
+    private val _shouldSearchFromAPI = MutableStateFlow(true)
+    val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
 
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val uiState: StateFlow<List<GameNewsState>?> = _uiState.asStateFlow()
 
-    private val _filterUiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
-    val filterUiState: StateFlow<List<GameNewsState>?> = _filterUiState.asStateFlow()
+    private val _uiStateFiltered = MutableStateFlow<MutableList<GameNewsState>?>(null)
+    val uiStateFiltered: StateFlow<List<GameNewsState>?> = _uiStateFiltered.asStateFlow()
 
-    private val _searchFromAPI = MutableStateFlow(true)
-    val searchFromAPI: StateFlow<Boolean> = _searchFromAPI.asStateFlow()
+    private val _requestStatus = MutableStateFlow(States.LOADING)
+    val requestStatus: StateFlow<States>
+        get() = _requestStatus
 
     init {
         viewModelScope.launch {
@@ -42,11 +43,11 @@ class GameNewsViewModel(
 
     private fun updateGameNewsState(it: MutableList<GameNewsState>?) {
         _uiState.value = it
-        _requestState.value = if (it != null) States.SUCCESS else States.ERROR
+        _requestStatus.value = if (it != null) States.SUCCESS else States.ERROR
     }
 
     private fun updateRequestErrorState() {
-        _requestState.value = States.ERROR
+        _requestStatus.value = States.ERROR
     }
 
     fun filterListOfGameNews(
@@ -65,15 +66,15 @@ class GameNewsViewModel(
                 listFiltered.add(it)
             }
         }
-        _filterUiState.value = listFiltered
+        _uiStateFiltered.value = listFiltered
     }
 
     fun clearFilteredListOfGameNews() {
-        _filterUiState.value?.clear()
+        _uiStateFiltered.value?.clear()
     }
 
     fun fetchData() {
-        _requestState.value = States.LOADING
+        _requestStatus.value = States.LOADING
         viewModelScope.launch {
             gameNewsUseCase.invoke().collect { result ->
                 result.either(

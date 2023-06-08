@@ -16,10 +16,10 @@ import com.example.gamenews.model.States
 
 @Composable
 internal fun ImageSection(
-    state: States,
+    imageRequestState: States,
     painter: Painter
 ) {
-    when (state) {
+    when (imageRequestState) {
         States.SUCCESS -> {
             Image(
                 modifier = Modifier

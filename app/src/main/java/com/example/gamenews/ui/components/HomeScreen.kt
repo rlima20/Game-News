@@ -29,30 +29,33 @@ import kotlinx.coroutines.launch
 internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
 
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
-    val filteredGameNewsUiState by gameNewsViewModel.filterUiState.collectAsState()
-    val requestState by gameNewsViewModel.requestState.collectAsState()
-    var searchBarText by remember { mutableStateOf("") }
+    val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
+    val requestState by gameNewsViewModel.requestStatus.collectAsState()
+    val shouldSarchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
+    var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
-    val searchFromAPI by gameNewsViewModel.searchFromAPI.collectAsState()
 
     Row {
         Column {
-            if (searchFromAPI) {
-                ValidateRequestState(
-                    requestState,
-                    setUiState(filteredGameNewsUiState, gameNewsUiState),
-                    searchBarText,
-                    gameNewsViewModel,
-                    localContext,
-                    onSearchTextChanged = { searchBarText = it }
+            if (shouldSarchFromAPI) {
+                ValidateRequestStatus(
+                    requestStatus = requestState,
+                    listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
+                        gameNewsUiStateFiltered,
+                        gameNewsUiState
+                    ),
+                    searchedText = searchedText,
+                    gameNewsViewModel = gameNewsViewModel,
+                    localContext = localContext,
+                    onSearchTextChanged = { searchedText = it }
                 )
             } else {
                 HomeScreenComponent(
-                    searchBarText,
-                    onSearchTextChanged = { searchBarText = it },
-                    listOfNews,
-                    gameNewsViewModel,
-                    localContext
+                    searchedText = searchedText,
+                    listOfGameNewsState = listOfNews,
+                    gameNewsViewModel = gameNewsViewModel,
+                    localContext = localContext,
+                    onSearchTextChanged = { searchedText = it }
                 )
             }
         }
@@ -60,30 +63,23 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
 }
 
 @Composable
-private fun setUiState(
-    filteredGameNewsUiState: List<GameNewsState>?,
-    gameNewsUiState: List<GameNewsState>?
-) = if (filteredGameNewsUiState?.isNotEmpty() == true) filteredGameNewsUiState else
-    gameNewsUiState
-
-@Composable
-private fun ValidateRequestState(
-    requestState: States,
-    gameNewsUiState: List<GameNewsState>?,
-    searchBarText: String,
+private fun ValidateRequestStatus(
+    requestStatus: States,
+    listOfGameNewsUiState: List<GameNewsState>?,
+    searchedText: String,
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
     onSearchTextChanged: (searchText: String) -> Unit,
 ) {
-    when (requestState) {
+    when (requestStatus) {
         States.SUCCESS -> {
-            if (gameNewsUiState?.isNotEmpty() == true) {
+            if (listOfGameNewsUiState?.isNotEmpty() == true) {
                 HomeScreenComponent(
-                    searchBarText,
-                    onSearchTextChanged,
-                    gameNewsUiState,
-                    gameNewsViewModel,
-                    localContext
+                    searchedText = searchedText,
+                    onSearchTextChanged = onSearchTextChanged,
+                    listOfGameNewsState = listOfGameNewsUiState,
+                    gameNewsViewModel = gameNewsViewModel,
+                    localContext = localContext
                 )
             } else {
                 ErrorStateComponent(
@@ -117,3 +113,10 @@ private fun ValidateRequestState(
         }
     }
 }
+
+@Composable
+private fun getListOfGameNewsFilteredOrNot(
+    filteredGameNewsUiState: List<GameNewsState>?,
+    gameNewsUiState: List<GameNewsState>?
+) = if (filteredGameNewsUiState?.isNotEmpty() == true) filteredGameNewsUiState else
+    gameNewsUiState

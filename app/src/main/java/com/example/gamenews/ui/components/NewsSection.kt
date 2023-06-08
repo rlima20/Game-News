@@ -13,9 +13,9 @@ import com.example.gamenews.model.GameNewsState
 
 @Composable
 internal fun NewsSection(
-    listOfNews: List<GameNewsState>,
+    listOfGameNewsState: List<GameNewsState>,
     onImageRequested: (imageUrl: String) -> ImageRequest,
-    searchBarText: String
+    searchedText: String
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -23,11 +23,11 @@ internal fun NewsSection(
             .padding(16.dp)
             .fillMaxSize()
     ) {
-        items(listOfNews) { news ->
+        items(listOfGameNewsState) { gameNewsState ->
             NewsItem(
-                searchBarText = searchBarText,
-                news = news,
-                imageRequest = onImageRequested(news.image)
+                searchedText = searchedText,
+                gameNewsState = gameNewsState,
+                imageRequest = onImageRequested(gameNewsState.image)
             )
         }
     }

@@ -28,8 +28,7 @@ internal fun SearchBarComponent(
     text: String = "",
     onValueChange: (String) -> Unit = {},
     onCloseIconClicked: () -> Unit = {},
-    onDoneKeyBoardClosed: () -> Unit = {},
-    onSearchDone: () -> Unit = {}
+    onSearched: () -> Unit = {},
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -82,8 +81,7 @@ internal fun SearchBarComponent(
             onDone = {
                 keyboardController?.hide()
                 focusManager.clearFocus()
-                onDoneKeyBoardClosed()
-                onSearchDone()
+                onSearched()
             }
         )
     )

@@ -20,14 +20,14 @@ import com.example.gamenews.model.States
 
 @Composable
 internal fun NewsItem(
-    searchBarText: String,
-    news: GameNewsState,
+    searchedText: String,
+    gameNewsState: GameNewsState,
     imageRequest: ImageRequest
 ) {
-    var state by remember { mutableStateOf(States.LOADING) }
+    var imageRequestState by remember { mutableStateOf(States.LOADING) }
     val painter = imageRequest.getAsyncImagePainter(
         onStateChanged = {
-            state = it
+            imageRequestState = it
         }
     )
 
@@ -40,8 +40,14 @@ internal fun NewsItem(
         color = MaterialTheme.colors.background
     ) {
         Column {
-            ImageSection(state, painter)
-            TextSection(searchBarText, news)
+            ImageSection(
+                imageRequestState = imageRequestState,
+                painter = painter
+            )
+            TextSection(
+                searchedWord = searchedText,
+                gameNewsState = gameNewsState
+            )
         }
     }
 }

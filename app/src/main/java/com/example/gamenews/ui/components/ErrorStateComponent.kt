@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,28 +40,28 @@ fun ErrorStateComponent(
         )
 
         Text(
-            color = colorResource(id = R.color.error_color),
+            text = stringResource(id = R.string.game_news_error),
+            color = colorResource(id = R.color.game_news_error_color),
             fontSize = 22.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
-            text = "Error!"
         )
         Text(
+            text = stringResource(id = R.string.game_news_something_went_wrong),
+            color = colorResource(id = R.color.game_news_title_color),
+            fontSize = 18.sp,
             modifier = Modifier.padding(bottom = 8.dp),
             textAlign = TextAlign.Center,
-            color = colorResource(id = R.color.title_color),
-            fontSize = 18.sp,
-            text = "Something went wrong. Please try again later"
         )
         Button(
             enabled = true,
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = colorResource(id = R.color.try_again_button_color),
+                backgroundColor = colorResource(id = R.color.game_news_try_again_button_color),
             ),
             onClick = { onButtonCLicked() }
         ) {
             Text(
-                text = "Try again",
+                text = stringResource(id = R.string.game_news_try_again),
             )
         }
     }
