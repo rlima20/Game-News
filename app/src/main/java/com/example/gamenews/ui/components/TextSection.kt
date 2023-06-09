@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -16,6 +17,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
@@ -40,15 +42,17 @@ internal fun TextSection(
                 )
             ),
             color = colorResource(id = R.color.game_news_title_color),
-            fontSize = 22.sp,
+            fontSize = dimensionResource(id = R.dimen.game_news_title_size).value.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 2
         )
 
         Text(
             text = gameNewsState.date,
             color = colorResource(id = R.color.game_news_title_color),
-            fontSize = 16.sp,
+            fontSize = dimensionResource(id = R.dimen.game_news_date_size).value.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
             maxLines = 1
@@ -56,7 +60,7 @@ internal fun TextSection(
     }
 
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(start = 16.dp, bottom = 16.dp, end = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
@@ -67,8 +71,10 @@ internal fun TextSection(
                     searchedWord = searchedWord.lowercase(Locale.ROOT)
                 )
             ),
-            fontSize = 18.sp,
-            fontFamily = FontFamily(Typeface.SANS_SERIF)
+            fontSize = dimensionResource(id = R.dimen.game_news_description_size).value.sp,
+            fontFamily = FontFamily(Typeface.SANS_SERIF),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 3
         )
         Text(
             modifier = Modifier.clickable(

@@ -11,7 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.example.gamenews.R
 import com.example.gamenews.model.States
 
 @Composable
@@ -24,7 +25,7 @@ internal fun ImageSection(
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp),
+                    .height(dimensionResource(id = R.dimen.game_news_image_height)),
                 painter = painter,
                 contentDescription = null,
                 contentScale = ContentScale.Crop
@@ -34,7 +35,7 @@ internal fun ImageSection(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp),
+                    .height(dimensionResource(id = R.dimen.game_news_image_height)),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator(

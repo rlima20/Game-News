@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- font sizes -->
+    <dimen name="game_news_title_size">17.00dp</dimen>
+    <dimen name="game_news_date_size">14.00dp</dimen>
+    <dimen name="game_news_description_size">16.00dp</dimen>
+
+    <!-- image size -->
+    <dimen name="game_news_image_height">95.00dp</dimen>
+</resources>
