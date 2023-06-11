@@ -22,7 +22,7 @@ class GameNewsViewModel(
 ) : ViewModel() {
 
     /* Feature flags */
-    private val _shouldSearchFromAPI = MutableStateFlow(true)
+    private val _shouldSearchFromAPI = MutableStateFlow(false)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
 
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
@@ -34,6 +34,9 @@ class GameNewsViewModel(
     private val _requestStatus = MutableStateFlow(States.LOADING)
     val requestStatus: StateFlow<States>
         get() = _requestStatus
+
+    private val _imageDialog = MutableStateFlow(false)
+    val imageDialog: StateFlow<Boolean> = _imageDialog.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -71,6 +74,11 @@ class GameNewsViewModel(
 
     fun clearFilteredListOfGameNews() {
         _uiStateFiltered.value?.clear()
+    }
+
+    fun setImageDialog(value: Boolean): Boolean {
+        _imageDialog.value = value
+        return imageDialog.value
     }
 
     fun fetchData() {

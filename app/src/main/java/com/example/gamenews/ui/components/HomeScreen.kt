@@ -26,7 +26,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 @Composable
-internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
+internal fun HomeScreen(
+    gameNewsViewModel: GameNewsViewModel,
+    onClick: (bool: Boolean) -> Boolean
+) {
 
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
@@ -55,7 +58,8 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     listOfGameNewsState = listOfNews,
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
-                    onSearchTextChanged = { searchedText = it }
+                    onSearchTextChanged = { searchedText = it },
+                    onClick = { gameNewsViewModel.setImageDialog(onClick(it)) }
                 )
             }
         }

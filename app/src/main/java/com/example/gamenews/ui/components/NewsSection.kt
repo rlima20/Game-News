@@ -15,7 +15,9 @@ import com.example.gamenews.model.GameNewsState
 internal fun NewsSection(
     listOfGameNewsState: List<GameNewsState>,
     onImageRequested: (imageUrl: String) -> ImageRequest,
-    searchedText: String
+    searchedText: String,
+    onClick: (bool: Boolean) -> Boolean = { false },
+    imageDialog: Boolean
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -27,7 +29,9 @@ internal fun NewsSection(
             NewsItem(
                 searchedText = searchedText,
                 gameNewsState = gameNewsState,
-                imageRequest = onImageRequested(gameNewsState.image)
+                imageRequest = onImageRequested(gameNewsState.image),
+                onClick = { onClick(it) },
+                imageDialog = imageDialog
             )
         }
     }

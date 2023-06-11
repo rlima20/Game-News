@@ -1,11 +1,13 @@
 package com.example.gamenews.ui.components
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.viewmodel.GameNewsViewModel
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun HomeScreenComponent(
     searchedText: String,
@@ -13,6 +15,7 @@ fun HomeScreenComponent(
     listOfGameNewsState: List<GameNewsState>,
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
+    onClick: (bool: Boolean) -> Boolean = { false },
 ) {
     SearchBarComponent(
         text = searchedText,
@@ -41,6 +44,8 @@ fun HomeScreenComponent(
                 context = localContext
             )
         },
-        searchedText = searchedText
+        searchedText = searchedText,
+        onClick = { gameNewsViewModel.setImageDialog(it) },
+        imageDialog = gameNewsViewModel.imageDialog.value
     )
 }

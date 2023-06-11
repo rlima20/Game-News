@@ -22,7 +22,9 @@ import com.example.gamenews.model.States
 internal fun NewsItem(
     searchedText: String,
     gameNewsState: GameNewsState,
-    imageRequest: ImageRequest
+    imageRequest: ImageRequest,
+    onClick: (bool: Boolean) -> Boolean = { false },
+    imageDialog: Boolean
 ) {
     var imageRequestState by remember { mutableStateOf(States.LOADING) }
     val painter = imageRequest.getAsyncImagePainter(
@@ -42,7 +44,9 @@ internal fun NewsItem(
         Column {
             ImageSection(
                 imageRequestState = imageRequestState,
-                painter = painter
+                painter = painter,
+                onClick = { onClick(it) },
+                imageDialog = imageDialog
             )
             TextSection(
                 searchedWord = searchedText,
