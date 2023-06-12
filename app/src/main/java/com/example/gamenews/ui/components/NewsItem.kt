@@ -23,8 +23,8 @@ internal fun NewsItem(
     searchedText: String,
     gameNewsState: GameNewsState,
     imageRequest: ImageRequest,
-    onClick: (bool: Boolean) -> Boolean = { false },
-    imageDialog: Boolean
+    imageDialogFlag: Boolean,
+    onClick: (value: Boolean) -> Boolean = { false }
 ) {
     var imageRequestState by remember { mutableStateOf(States.LOADING) }
     val painter = imageRequest.getAsyncImagePainter(
@@ -45,9 +45,8 @@ internal fun NewsItem(
             ImageSection(
                 imageRequestState = imageRequestState,
                 painter = painter,
-                onClick = { onClick(it) },
-                imageDialog = imageDialog
-            )
+                imageDialogFlag = imageDialogFlag
+            ) { onClick(it) }
             TextSection(
                 searchedWord = searchedText,
                 gameNewsState = gameNewsState

@@ -16,8 +16,8 @@ internal fun NewsSection(
     listOfGameNewsState: List<GameNewsState>,
     onImageRequested: (imageUrl: String) -> ImageRequest,
     searchedText: String,
-    onClick: (bool: Boolean) -> Boolean = { false },
-    imageDialog: Boolean
+    imageDialog: Boolean,
+    onClick: (bool: Boolean) -> Boolean = { false }
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -30,9 +30,8 @@ internal fun NewsSection(
                 searchedText = searchedText,
                 gameNewsState = gameNewsState,
                 imageRequest = onImageRequested(gameNewsState.image),
-                onClick = { onClick(it) },
-                imageDialog = imageDialog
-            )
+                imageDialogFlag = imageDialog
+            ) { onClick(it) }
         }
     }
 }

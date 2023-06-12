@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colors.background
             ) {
-                HomeScreen(gameNewsViewModel) { gameNewsViewModel.imageDialog.value }
+                HomeScreen(gameNewsViewModel)
             }
         }
         return binding.rootView

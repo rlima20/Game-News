@@ -14,8 +14,7 @@ fun HomeScreenComponent(
     onSearchTextChanged: (searchText: String) -> Unit,
     listOfGameNewsState: List<GameNewsState>,
     gameNewsViewModel: GameNewsViewModel,
-    localContext: Context,
-    onClick: (bool: Boolean) -> Boolean = { false },
+    localContext: Context
 ) {
     SearchBarComponent(
         text = searchedText,
