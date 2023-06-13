@@ -1,7 +1,6 @@
 package com.example.gamenews.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,34 +25,30 @@ fun ImageDialog(
     painter: Painter,
     onClick: () -> Unit = {}
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        AlertDialog(
-            properties = DialogProperties(),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(height = 220.dp),
-            text = {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(
-                        painter = painter,
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.FillWidth
-                    )
-                }
-            },
-            shape = MaterialTheme.shapes.large,
-            confirmButton = { },
-            onDismissRequest = { },
-            dismissButton = {
-                IconButton(onClick = { onClick() }) { Text(text = "x") }
+    AlertDialog(
+        properties = DialogProperties(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height = 220.dp),
+        text = {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painter,
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.FillWidth
+                )
             }
-        )
-    }
+        },
+        shape = MaterialTheme.shapes.large,
+        confirmButton = { },
+        onDismissRequest = { },
+        dismissButton = {
+            IconButton(onClick = { onClick() }) { Text(text = "x") }
+        }
+    )
 }
 
 @Composable
