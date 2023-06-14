@@ -34,12 +34,22 @@ internal fun SearchBarComponent(
     val focusManager = LocalFocusManager.current
 
     OutlinedTextField(
+        value = text,
+        label = { Text(text = "Keyword") },
+        placeholder = { Text(text = "Filter") },
+        singleLine = true,
+        onValueChange = { onValueChange(it) },
+        shape = RoundedCornerShape(100),
+        keyboardActions = KeyboardActions(
+            onDone = {
+                keyboardController?.hide()
+                focusManager.clearFocus()
+                onSearched()
+            }
+        ),
         modifier = Modifier
             .padding(top = 8.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth(),
-        value = text,
-        onValueChange = { onValueChange(it) },
-        shape = RoundedCornerShape(100),
         leadingIcon = {
             Icon(
                 Icons.Default.Search,
@@ -74,16 +84,6 @@ internal fun SearchBarComponent(
                 }
             }
         },
-        label = { Text(text = "Keyword") },
-        placeholder = { Text(text = "Filter") },
-        singleLine = true,
-        keyboardActions = KeyboardActions(
-            onDone = {
-                keyboardController?.hide()
-                focusManager.clearFocus()
-                onSearched()
-            }
-        )
     )
 }
 

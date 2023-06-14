@@ -18,9 +18,7 @@ fun HomeScreenComponent(
 ) {
     SearchBarComponent(
         text = searchedText,
-        onValueChange = { typedText ->
-            onSearchTextChanged(typedText)
-        },
+        onValueChange = { typedText -> onSearchTextChanged(typedText) },
         onCloseIconClicked = { gameNewsViewModel.clearFilteredListOfGameNews() },
         onSearched = {
             gameNewsViewModel.filterListOfGameNews(searchedText)
@@ -36,15 +34,15 @@ fun HomeScreenComponent(
     )
 
     NewsSection(
+        searchedText = searchedText,
         listOfGameNewsState = listOfGameNewsState,
+        imageDialog = gameNewsViewModel.imageDialog.value,
+        onClick = { gameNewsViewModel.setImageDialog(it) },
         onImageRequested = { imageUrl ->
             gameNewsViewModel.getAsyncImage(
                 imageUrl = imageUrl,
                 context = localContext
             )
         },
-        searchedText = searchedText,
-        onClick = { gameNewsViewModel.setImageDialog(it) },
-        imageDialog = gameNewsViewModel.imageDialog.value
     )
 }

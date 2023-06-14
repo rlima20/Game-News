@@ -18,13 +18,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
 
 @Composable
 fun ErrorStateComponent(
-    onButtonCLicked: () -> Unit = {}
+    onButtonClicked: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -46,6 +47,7 @@ fun ErrorStateComponent(
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
         )
+
         Text(
             text = stringResource(id = R.string.game_news_something_went_wrong),
             color = colorResource(id = R.color.game_news_title_color),
@@ -53,16 +55,23 @@ fun ErrorStateComponent(
             modifier = Modifier.padding(bottom = 8.dp),
             textAlign = TextAlign.Center,
         )
+
         Button(
             enabled = true,
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = R.color.game_news_try_again_button_color),
             ),
-            onClick = { onButtonCLicked() }
+            onClick = { onButtonClicked() }
         ) {
             Text(
                 text = stringResource(id = R.string.game_news_try_again),
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun ErrorStateComponentPreview() {
+    ErrorStateComponent()
 }

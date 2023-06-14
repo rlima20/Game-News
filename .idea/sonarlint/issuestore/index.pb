@@ -25,15 +25,5 @@ c
 3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
 w
 Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
-u
-Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
-r
-Bapp/src/main/java/com/example/gamenews/ui/fragment/HomeFragment.kt,c/9/c9033f2523b8fbaa4fb0579dbfdd2797ec1b230b
-r
-Bapp/src/main/java/com/example/gamenews/ui/components/HomeScreen.kt,e/d/ed37afdea655c86a9325301825ddaa01c0017e0e
-{
-Kapp/src/main/java/com/example/gamenews/ui/components/HomeScreenComponent.kt,0/7/076d9dd29ea4a86cb71b74c901b8ece63fca99ce
 s
-Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
-p
-@app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
+Capp/src/main/java/com/example/gamenews/ui/components/ImageDialog.kt,1/7/17f6016de2843aaf708115aff27ec25158d38a21

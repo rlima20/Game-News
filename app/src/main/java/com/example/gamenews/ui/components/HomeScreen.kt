@@ -31,13 +31,13 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
     val requestState by gameNewsViewModel.requestStatus.collectAsState()
-    val shouldSarchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
+    val shouldSearchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
 
     Row {
         Column {
-            if (shouldSarchFromAPI) {
+            if (shouldSearchFromAPI) {
                 ValidateRequestStatus(
                     requestStatus = requestState,
                     listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
@@ -83,7 +83,7 @@ private fun ValidateRequestStatus(
                 )
             } else {
                 ErrorStateComponent(
-                    onButtonCLicked = {
+                    onButtonClicked = {
                         CoroutineScope(Dispatchers.Main + Job()).launch {
                             gameNewsViewModel.fetchData()
                         }
@@ -104,7 +104,7 @@ private fun ValidateRequestStatus(
         }
         States.ERROR -> {
             ErrorStateComponent(
-                onButtonCLicked = {
+                onButtonClicked = {
                     CoroutineScope(Dispatchers.Main + Job()).launch {
                         gameNewsViewModel.fetchData()
                     }

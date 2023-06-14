@@ -14,9 +14,9 @@ import com.example.gamenews.model.GameNewsState
 @Composable
 internal fun NewsSection(
     listOfGameNewsState: List<GameNewsState>,
-    onImageRequested: (imageUrl: String) -> ImageRequest,
     searchedText: String,
     imageDialog: Boolean,
+    onImageRequested: (imageUrl: String) -> ImageRequest,
     onClick: (bool: Boolean) -> Boolean = { false }
 ) {
     LazyColumn(
@@ -29,8 +29,8 @@ internal fun NewsSection(
             NewsItem(
                 searchedText = searchedText,
                 gameNewsState = gameNewsState,
-                imageRequest = onImageRequested(gameNewsState.image),
-                imageDialogFlag = imageDialog
+                imageDialogFlag = imageDialog,
+                imageRequest = onImageRequested(gameNewsState.image)
             ) { onClick(it) }
         }
     }
