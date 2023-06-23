@@ -23,16 +23,10 @@ c
 3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
 >
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-{
-Kapp/src/main/java/com/example/gamenews/repository/GameNewsRepositoryImpl.kt,2/8/2864eb3935c730f29fb8d335fb496ef0246c8f1f
-w
-Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
 e
 5app/src/main/java/com/example/gamenews/core/Either.kt,b/a/ba00a381ef54808022820653d56464edc070f303
 i
 9app/src/main/java/com/example/gamenews/mappers/Mappers.kt,5/2/52acb82ead4a8e71947d35aee151bdb1aa64e1bb
-v
-Fapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCaseImpl.kt,f/8/f84a2b5741702d5fd6795ba07f1ab083b8a347dd
 {
 Kapp/src/main/java/com/example/gamenews/ui/components/HomeScreenComponent.kt,0/7/076d9dd29ea4a86cb71b74c901b8ece63fca99ce
 s

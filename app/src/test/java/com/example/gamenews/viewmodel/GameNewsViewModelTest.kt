@@ -2,31 +2,23 @@ package com.example.gamenews.viewmodel
 
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.gamenews.CoroutineTestRule
 import com.example.gamenews.core.Either
+import com.example.gamenews.emmits
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNewsDTO
 import com.example.gamenews.usecases.GameNewsUseCase
 import io.kotlintest.shouldBe
-import io.mockk.ConstantAnswer
-import io.mockk.MockKAnnotations
-import io.mockk.MockKStubScope
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestDispatcher
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
 
-class GameNewsViewModelTest {
+@OptIn(ExperimentalCoroutinesApi::class)
+class GameNewsViewModelTest : CoroutineTestRule() {
 
     private var viewModelUseCase: GameNewsUseCase = mockk(relaxed = true)
     lateinit var gameNewsViewModel: GameNewsViewModel
@@ -206,38 +198,5 @@ class GameNewsViewModelTest {
 
     @Test
     fun filterListOfGameNews() {
-    }
-}
-
-fun Any.initMockKAnnotations() {
-    MockKAnnotations.init(this, relaxUnitFun = true)
-}
-
-infix fun <T, B> MockKStubScope<Flow<T>, B>.emmits(emitValue: T) =
-    answers(ConstantAnswer(flow { emit(emitValue) }))
-
-infix fun <T, B> MockKStubScope<Flow<T>, B>.emmits(emitValues: List<T>) = answers(
-    ConstantAnswer(
-        flow {
-            emitValues.forEach { value ->
-                emit(value)
-            }
-        },
-    ),
-)
-
-@ExperimentalCoroutinesApi
-class CoroutineTestRule(
-    private val dispatcher: TestDispatcher = UnconfinedTestDispatcher(),
-) : TestWatcher() {
-
-    override fun starting(description: Description) {
-        super.starting(description)
-        Dispatchers.setMain(dispatcher)
-    }
-
-    override fun finished(description: Description) {
-        super.finished(description)
-        Dispatchers.resetMain()
     }
 }
