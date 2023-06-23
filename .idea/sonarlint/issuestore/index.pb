@@ -41,3 +41,13 @@ n
 >app/src/main/java/com/example/gamenews/provider/local/Mocks.kt,f/0/f0f104c2500cba557652a6ccf84d2c9a36e402d7
 F
 app/proguard-rules.pro,9/e/9e08934d811afe28fbc77aaa3c0d747b94348db9
+i
+9app/src/test/java/com/example/gamenews/ExampleUnitTest.kt,5/e/5ea115bc35b42cceb952ce1704983799c7fdfedd
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+r
+Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
+u
+Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
+k
+;app/src/test/java/com/example/gamenews/CoroutineTestRule.kt,e/b/eb599707719ced37d0b611088417dee04e064bc4
