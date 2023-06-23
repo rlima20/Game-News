@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android-extensions'
-    id 'jacoco'
 }
 
 android {
@@ -26,6 +25,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled = true
         }
     }
 
@@ -101,7 +103,4 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'io.kotlintest:kotlintest-assertions:3.4.2'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
-
-    // Jacoco
-    implementation "org.jacoco:org.jacoco.core:$jacocoVersion"
 }

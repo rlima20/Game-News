@@ -52,7 +52,7 @@ class GameNewsViewModelTest {
         }
 
     @Test
-    fun `Test when useCase returns a success with null result then uiState should be null`() =
+    fun `Test when useCase returns a success with empty result then uiState should be empty`() =
         runBlocking {
             // GIVEN
             gameNewsViewModel = GameNewsViewModel(viewModelUseCase)
@@ -65,6 +65,22 @@ class GameNewsViewModelTest {
             // THEN
             gameNewsViewModel.uiState.value shouldBe emptyList()
             gameNewsViewModel.requestStatus.value shouldBe States.SUCCESS
+        }
+
+    @Test
+    fun `Test when useCase returns a success with null result then uiState should be null`() =
+        runBlocking {
+            // GIVEN
+            gameNewsViewModel = GameNewsViewModel(viewModelUseCase)
+
+            coEvery { viewModelUseCase.invoke() } emmits Either.Success(null)
+
+            // WHEN
+            gameNewsViewModel.fetchData()
+
+            // THEN
+            gameNewsViewModel.uiState.value shouldBe null
+            gameNewsViewModel.requestStatus.value shouldBe States.ERROR
         }
 
     @Test
@@ -161,6 +177,20 @@ class GameNewsViewModelTest {
         // GIVEN
         gameNewsViewModel = GameNewsViewModel(viewModelUseCase)
         coEvery { viewModelUseCase.invoke() } emmits Either.Success(listOfNewsDTO)
+
+        // WHEN
+        gameNewsViewModel.fetchData()
+        gameNewsViewModel.filterListOfGameNews("noword")
+
+        // THEN
+        gameNewsViewModel.uiStateFiltered.value shouldBe emptyList()
+    }
+
+    @Test
+    fun `test when uiState is null then the uiStateFiltered should be null`() {
+        // GIVEN
+        gameNewsViewModel = GameNewsViewModel(viewModelUseCase)
+        coEvery { viewModelUseCase.invoke() } emmits Either.Success(null)
 
         // WHEN
         gameNewsViewModel.fetchData()

@@ -29,8 +29,6 @@ w
 Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
 e
 5app/src/main/java/com/example/gamenews/core/Either.kt,b/a/ba00a381ef54808022820653d56464edc070f303
-r
-Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
 i
 9app/src/main/java/com/example/gamenews/mappers/Mappers.kt,5/2/52acb82ead4a8e71947d35aee151bdb1aa64e1bb
 v
@@ -45,8 +43,6 @@ p
 @app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
 t
 Dapp/src/main/java/com/example/gamenews/ui/components/ImageSection.kt,c/1/c15e962938c6f894b37ee903241c5e1eca63e912
-u
-Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
 n
 >app/src/main/java/com/example/gamenews/provider/local/Mocks.kt,f/0/f0f104c2500cba557652a6ccf84d2c9a36e402d7
 F
