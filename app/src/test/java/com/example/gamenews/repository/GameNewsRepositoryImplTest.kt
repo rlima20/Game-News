@@ -22,8 +22,8 @@ internal class GameNewsRepositoryImplTest : CoroutineTestRule() {
     @ExperimentalCoroutinesApi
     val coroutineTestRule = CoroutineTestRule()
 
-    //@Test
-/*    fun `test When request is success and it returns a listOfNewsDTO`() = runBlocking {
+    @Test
+    fun `test When request is success and it returns a listOfNewsDTO`() = runBlocking {
         // GIVEN
         val gameNewsRepositoryImpl = GameNewsRepositoryImpl(gameNewsService)
         coEvery { gameNewsService.getAllGameNews() } returns Response.success(listOfNewsDTO)
@@ -55,7 +55,7 @@ internal class GameNewsRepositoryImplTest : CoroutineTestRule() {
                     it shouldBe listOf()
                 }
             )
-        }*/
+        }
 
     @Test
     fun getAllGameNewsLocal() {

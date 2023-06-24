@@ -190,12 +190,4 @@ class GameNewsViewModelTest : CoroutineTestRule() {
         // THEN
         gameNewsViewModel.uiStateFiltered.value shouldBe emptyList()
     }
-
-    @Test
-    fun getRequestStatus() {
-    }
-
-    @Test
-    fun filterListOfGameNews() {
-    }
 }
