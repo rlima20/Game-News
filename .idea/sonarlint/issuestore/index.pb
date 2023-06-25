@@ -23,8 +23,6 @@ c
 3app/src/main/java/com/example/gamenews/Constants.kt,1/0/107ef85a5eb0c4e606f6011528efbb556c7dc320
 >
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-e
-5app/src/main/java/com/example/gamenews/core/Either.kt,b/a/ba00a381ef54808022820653d56464edc070f303
 i
 9app/src/main/java/com/example/gamenews/mappers/Mappers.kt,5/2/52acb82ead4a8e71947d35aee151bdb1aa64e1bb
 {
@@ -47,11 +45,13 @@ u
 Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
 w
 Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
-v
-Fapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCaseImpl.kt,f/8/f84a2b5741702d5fd6795ba07f1ab083b8a347dd
 i
 9app/src/test/java/com/example/gamenews/MockkExtensions.kt,6/3/631362c67900ff8fa41f6a1aa9605d1b3380f49f
 y
 Iapp/src/test/java/com/example/gamenews/viewmodel/GameNewsViewModelTest.kt,2/d/2df86e8e0cef43778fd59c816c9ec16b1a731a7b
 k
 ;app/src/test/java/com/example/gamenews/CoroutineTestRule.kt,e/b/eb599707719ced37d0b611088417dee04e064bc4
+<
+build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
+@
+app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
