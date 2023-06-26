@@ -7,14 +7,6 @@ t
 Dapp/src/main/java/com/example/gamenews/ui/activities/MainActivity.kt,1/1/11856bb40d6961ce294b688de9aacc08b914b5f5
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
-l
-<app/src/main/java/com/example/gamenews/di/NetworkModuleDI.kt,5/8/5818deedc8a687a709e0b0ca167bf25767c54e0c
-o
-?app/src/main/java/com/example/gamenews/di/RepositoryModuleDI.kt,7/a/7a819c9af5d72621c7453269f4c01b7a558dfba0
-v
-Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
-t
-Dapp/src/main/java/com/example/gamenews/di/gameNewsUseCaseModuleDI.kt,1/7/17a4416568ec615697749b16a8ca3cfc3be07488
 s
 Capp/src/main/java/com/example/gamenews/ui/components/ImageDialog.kt,1/7/17f6016de2843aaf708115aff27ec25158d38a21
 c
