@@ -1,33 +1,16 @@
 package com.example.gamenews.extensions
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET
-import android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED
-import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
-import androidx.fragment.app.Fragment
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.gamenews.R
 import com.example.gamenews.model.States
-
-/**
- * Format date to date news.
- * This extension returns a string from the first letter until to letter on index 16
- * @receiver
- */
-fun String.formatDateToDateNews() {
-    this.substring(startIndex = 0, endIndex = 16)
-}
 
 /**
  * Get async image painter.
@@ -55,36 +38,22 @@ fun ImageRequest.getAsyncImagePainter(
     }
 }
 
-fun Fragment.hasInternet(): Boolean {
-    val connMgr =
-        requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        val capabilities = connMgr.getNetworkCapabilities(connMgr.activeNetwork)
-        capabilities != null && capabilities.hasCapability(NET_CAPABILITY_INTERNET) &&
-            capabilities.hasCapability(NET_CAPABILITY_VALIDATED)
-    } else {
-        @Suppress("DEPRECATION")
-        connMgr.activeNetworkInfo?.isConnected == true
-    }
-}
-
 fun String.removeSpaces(): String = this.replace(" ", "")
 
 @Composable
-fun formatWordSearchedToBold(text: String, word: String): AnnotatedString {
-    val textFormatted = buildAnnotatedString {
-        val startIndex = text.indexOf(word, ignoreCase = true)
-        val endIndex = startIndex + word.length
-
-        append(text.substring(0, startIndex))
-        withStyle(
-            style = SpanStyle(
-                fontWeight = FontWeight.Bold
-            )
-        ) {
-            append(text.substring(startIndex, endIndex))
-        }
-        append(text.substring(endIndex, text.length))
-    }
-    return textFormatted
+fun getSpanStyles(
+    mainText: String,
+    searchedWord: String,
+): List<AnnotatedString.Range<SpanStyle>> {
+    val start = mainText.indexOf(searchedWord)
+    return listOf(
+        AnnotatedString.Range(
+            SpanStyle(
+                color = colorResource(id = R.color.white),
+                background = colorResource(id = R.color.game_news_blue_700)
+            ),
+            start = start,
+            end = start + searchedWord.length,
+        ),
+    )
 }

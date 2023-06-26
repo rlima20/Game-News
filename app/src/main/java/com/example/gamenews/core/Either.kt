@@ -9,9 +9,6 @@ sealed class Either<out S, out F> {
     val isSuccess get() = this is Success<S>
     val isFailure get() = this is Failure<F>
 
-    fun <F> failure(a: F) = Failure(a)
-    fun <S> success(b: S) = Success(b)
-
     fun either(onSuccess: (S) -> Any, onFailure: (F) -> Any): Any = when (this) {
         is Failure -> onFailure(failure)
         is Success -> onSuccess(success)

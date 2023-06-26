@@ -15,8 +15,6 @@ v
 Fapp/src/main/java/com/example/gamenews/di/gameNewsViewModelModuleDI.kt,8/a/8a70cff0edb3cc00fe6f11c5ffd37f716b177f2f
 t
 Dapp/src/main/java/com/example/gamenews/di/gameNewsUseCaseModuleDI.kt,1/7/17a4416568ec615697749b16a8ca3cfc3be07488
-i
-9app/src/main/java/com/example/gamenews/di/AppModulesDI.kt,2/b/2b7095d1650f11edf6b2878e6800e80aca6237f5
 s
 Capp/src/main/java/com/example/gamenews/ui/components/ImageDialog.kt,1/7/17f6016de2843aaf708115aff27ec25158d38a21
 c
@@ -27,12 +25,8 @@ i
 9app/src/main/java/com/example/gamenews/mappers/Mappers.kt,5/2/52acb82ead4a8e71947d35aee151bdb1aa64e1bb
 {
 Kapp/src/main/java/com/example/gamenews/ui/components/HomeScreenComponent.kt,0/7/076d9dd29ea4a86cb71b74c901b8ece63fca99ce
-s
-Capp/src/main/java/com/example/gamenews/ui/components/NewsSection.kt,c/4/c42d1c528072c89066c74d38ab4a22b4a37a9761
 r
 Bapp/src/main/java/com/example/gamenews/ui/components/HomeScreen.kt,e/d/ed37afdea655c86a9325301825ddaa01c0017e0e
-p
-@app/src/main/java/com/example/gamenews/ui/components/NewsItem.kt,f/5/f53c46c15fef26e0ec331ad7d6351d0e8a6f29a4
 t
 Dapp/src/main/java/com/example/gamenews/ui/components/ImageSection.kt,c/1/c15e962938c6f894b37ee903241c5e1eca63e912
 n
@@ -43,11 +37,17 @@ r
 Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
 u
 Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
-i
-9app/src/test/java/com/example/gamenews/MockkExtensions.kt,6/3/631362c67900ff8fa41f6a1aa9605d1b3380f49f
 k
 ;app/src/test/java/com/example/gamenews/CoroutineTestRule.kt,e/b/eb599707719ced37d0b611088417dee04e064bc4
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
+m
+=app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
+q
+Aapp/src/test/java/com/example/gamenews/model/GameNewsStateTest.kt,4/e/4ea37e04d81ea227384d8fe8f7f708909ba1d70a
+w
+Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
+{
+Kapp/src/main/java/com/example/gamenews/repository/GameNewsRepositoryImpl.kt,2/8/2864eb3935c730f29fb8d335fb496ef0246c8f1f

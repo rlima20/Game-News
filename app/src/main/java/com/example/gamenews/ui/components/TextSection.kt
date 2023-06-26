@@ -12,7 +12,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
+import com.example.gamenews.extensions.getSpanStyles
 import com.example.gamenews.model.GameNewsState
 import java.util.Locale
 
@@ -90,20 +90,3 @@ internal fun TextSection(
     }
 }
 
-@Composable
-private fun getSpanStyles(
-    mainText: String,
-    searchedWord: String,
-): List<AnnotatedString.Range<SpanStyle>> {
-    val start = mainText.indexOf(searchedWord)
-    return listOf(
-        AnnotatedString.Range(
-            SpanStyle(
-                color = colorResource(id = R.color.white),
-                background = colorResource(id = R.color.game_news_blue_700)
-            ),
-            start = start,
-            end = start + searchedWord.length,
-        ),
-    )
-}

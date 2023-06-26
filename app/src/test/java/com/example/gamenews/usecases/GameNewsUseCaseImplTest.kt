@@ -6,7 +6,6 @@ import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.provider.local.listOfNewsDTO
 import com.example.gamenews.provider.remote.GameNewsService
 import com.example.gamenews.repository.GameNewsRepository
-import com.example.gamenews.repository.GameNewsRepositoryImpl
 import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -47,6 +46,47 @@ class GameNewsUseCaseImplTest : CoroutineTestRule() {
     }
 
     @Test
+    fun `test useCase invoke method returns an Either success`() =
+        runBlocking {
+            // Given
+            coEvery { gameNewsRepository.getAllGameNews() } returns flow {
+                emit(emptyList())
+            }
+
+            // When
+            val result = GameNewsUseCaseImpl(gameNewsRepository).invoke()
+
+            // Then
+            result.collect(
+                collector = {
+                    it.isSuccess shouldBe true
+                }
+            )
+        }
+
+    @Test
+    fun `test useCase invoke method returns an Either failure`() =
+        runBlocking {
+            // Given
+            val response: Response<List<GameNewsDTO>>? = Response.error(
+                502,
+                ResponseBody.create(null, "")
+            )
+
+            coEvery { gameNewsService.getAllGameNews() } returns response
+
+            // When
+            val result = GameNewsUseCaseImpl(gameNewsRepository).invoke()
+
+            // Then
+            result.collect(
+                collector = {
+                    it.isFailure shouldBe true
+                }
+            )
+        }
+
+    @Test
     fun `test useCase invoke method returns an Either success with a listOfNewsDTO`() =
         runBlocking {
             // Given
@@ -85,7 +125,7 @@ class GameNewsUseCaseImplTest : CoroutineTestRule() {
         }
 
     // todo - retomar daqui
-/*    @Test
+    @Test
     fun `test useCase invoke method returns an Either error`() =
         runBlocking {
             // Given
@@ -105,5 +145,5 @@ class GameNewsUseCaseImplTest : CoroutineTestRule() {
                     it shouldBe Either.Failure(Exception())
                 }
             )
-        }*/
+        }
 }
