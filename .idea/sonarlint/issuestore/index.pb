@@ -43,12 +43,8 @@ r
 Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
 u
 Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
-w
-Gapp/src/main/java/com/example/gamenews/repository/GameNewsRepository.kt,e/f/efab506d0a64b5ed17ab4ee913b63a5590f4d9b8
 i
 9app/src/test/java/com/example/gamenews/MockkExtensions.kt,6/3/631362c67900ff8fa41f6a1aa9605d1b3380f49f
-y
-Iapp/src/test/java/com/example/gamenews/viewmodel/GameNewsViewModelTest.kt,2/d/2df86e8e0cef43778fd59c816c9ec16b1a731a7b
 k
 ;app/src/test/java/com/example/gamenews/CoroutineTestRule.kt,e/b/eb599707719ced37d0b611088417dee04e064bc4
 <
