@@ -1,8 +1,6 @@
 
 v
 Fapp/src/main/java/com/example/gamenews/ui/activities/SplashActivity.kt,d/8/d890b88a0c47e2575c655ae59f03f22d41846ef7
-h
-8app/src/main/java/com/example/gamenews/AppApplication.kt,a/e/aee9ca3110bf2d47a667466cc40cfef1affca01b
 t
 Dapp/src/main/java/com/example/gamenews/ui/activities/MainActivity.kt,1/1/11856bb40d6961ce294b688de9aacc08b914b5f5
 P
@@ -19,8 +17,6 @@ i
 Kapp/src/main/java/com/example/gamenews/ui/components/HomeScreenComponent.kt,0/7/076d9dd29ea4a86cb71b74c901b8ece63fca99ce
 r
 Bapp/src/main/java/com/example/gamenews/ui/components/HomeScreen.kt,e/d/ed37afdea655c86a9325301825ddaa01c0017e0e
-t
-Dapp/src/main/java/com/example/gamenews/ui/components/ImageSection.kt,c/1/c15e962938c6f894b37ee903241c5e1eca63e912
 n
 >app/src/main/java/com/example/gamenews/provider/local/Mocks.kt,f/0/f0f104c2500cba557652a6ccf84d2c9a36e402d7
 F
@@ -29,12 +25,6 @@ r
 Bapp/src/main/java/com/example/gamenews/usecases/GameNewsUseCase.kt,9/1/91b158fa36c53cc98ef9c265070ca77ecf6cce22
 u
 Eapp/src/main/java/com/example/gamenews/viewmodel/GameNewsViewModel.kt,f/1/f181cb8d4b1dc66ff221e29caa60e15fea45667d
-k
-;app/src/test/java/com/example/gamenews/CoroutineTestRule.kt,e/b/eb599707719ced37d0b611088417dee04e064bc4
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-@
-app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 m
 =app/src/main/java/com/example/gamenews/model/GameNewsState.kt,1/b/1bcdfeadd87f2e26a6e16e5d594df361c25114a3
 q

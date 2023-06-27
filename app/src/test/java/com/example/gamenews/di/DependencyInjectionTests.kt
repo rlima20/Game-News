@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.di
 
 import com.example.gamenews.di.appModules
 import com.example.gamenews.di.gameNewsUseCaseModuleDI

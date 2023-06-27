@@ -1,5 +1,6 @@
-package com.example.gamenews
+package com.example.gamenews.core
 
+import com.example.gamenews.CoroutineTestRule
 import com.example.gamenews.core.Either
 import com.example.gamenews.repository.GameNewsRepository
 import com.example.gamenews.usecases.GameNewsUseCaseImpl

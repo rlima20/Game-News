@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        compose_ui_version = '1.2.0'
+        compose_ui_version = '1.4.1'
         mockkVersion = '1.12.3'
         koin = '2.2.0'
     }
