@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider
 import com.example.gamenews.R
 import com.example.gamenews.di.appModules
 import io.mockk.clearAllMocks
-import io.mockk.mockk
 import io.mockk.unmockkAll
 import org.junit.After
 import org.junit.Before
@@ -31,7 +30,7 @@ abstract class RobolectricTestRunner {
 
     private lateinit var activityController: ActivityController<AppCompatActivity>
 
-    internal lateinit var activity: AppCompatActivity
+    private lateinit var activity: AppCompatActivity
 
     open fun onSetup() {}
 
@@ -57,11 +56,6 @@ abstract class RobolectricTestRunner {
     @After
     fun tearDown() {
         onTearDown()
-
-        activity = mockk()
-        activityController.close()
-
-        stopKoin()
         unmockkAll()
         clearAllMocks()
     }

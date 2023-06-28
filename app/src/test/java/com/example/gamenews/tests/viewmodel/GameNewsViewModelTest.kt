@@ -1,13 +1,14 @@
-package com.example.gamenews.viewmodel
+package com.example.gamenews.tests.viewmodel
 
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.gamenews.CoroutineTestRule
+import com.example.gamenews.global.CoroutineTestRule
 import com.example.gamenews.core.Either
-import com.example.gamenews.emmits
+import com.example.gamenews.global.emmits
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNewsDTO
 import com.example.gamenews.usecases.GameNewsUseCase
+import com.example.gamenews.viewmodel.GameNewsViewModel
 import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk

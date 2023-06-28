@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.base.compose
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import com.example.gamenews.base.RobolectricTestRunner

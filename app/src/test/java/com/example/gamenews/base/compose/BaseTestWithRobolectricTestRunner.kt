@@ -1,9 +1,10 @@
-package com.example.gamenews
+package com.example.gamenews.base.compose
 
 import android.app.Activity
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import com.example.gamenews.global.IS_INFINITE_ANIMATION_ENABLED
 import io.mockk.unmockkAll
 import org.junit.After
 import org.junit.Before
@@ -25,6 +26,7 @@ abstract class BaseTestWithRobolectricTestRunner {
 
     @Before
     fun setUp() {
+        IS_INFINITE_ANIMATION_ENABLED = false
 
         activityController = Robolectric.buildActivity(Activity::class.java)
             .create()

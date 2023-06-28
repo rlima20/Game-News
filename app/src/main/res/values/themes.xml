@@ -4,4 +4,6 @@
     <style name="Theme.GameNews" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/game_news_blue_700</item>
     </style>
+    <style name="Theme.MaterialComponents" parent="Base.Theme.MaterialComponents"/>
+
 </resources>

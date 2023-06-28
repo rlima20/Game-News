@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.global
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

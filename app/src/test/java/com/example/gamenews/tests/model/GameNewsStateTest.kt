@@ -1,5 +1,6 @@
-package com.example.gamenews.model
+package com.example.gamenews.tests.model
 
+import com.example.gamenews.model.GameNewsState
 import io.kotlintest.shouldBe
 import org.junit.Test
 

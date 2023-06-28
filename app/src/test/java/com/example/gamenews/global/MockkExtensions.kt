@@ -1,4 +1,4 @@
-package com.example.gamenews
+package com.example.gamenews.global
 
 import io.mockk.ConstantAnswer
 import io.mockk.MockKAnnotations

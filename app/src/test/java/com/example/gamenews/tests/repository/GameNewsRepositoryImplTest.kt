@@ -1,10 +1,11 @@
-package com.example.gamenews.repository
+package com.example.gamenews.tests.repository
 
-import com.example.gamenews.CoroutineTestRule
+import com.example.gamenews.global.CoroutineTestRule
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.provider.local.listOfNews
 import com.example.gamenews.provider.local.listOfNewsDTO
 import com.example.gamenews.provider.remote.GameNewsService
+import com.example.gamenews.repository.GameNewsRepositoryImpl
 import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotBe
 import io.mockk.coEvery
