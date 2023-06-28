@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.semantics.Role
@@ -30,10 +31,13 @@ internal fun TextSection(
     gameNewsState: GameNewsState
 ) {
     Column(
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
+        modifier = Modifier
+            .testTag("TEXT_SECTION_TEST_TAG")
+            .padding(start = 16.dp, end = 16.dp, top = 16.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         Text(
+            modifier = Modifier.testTag("TEXT_SECTION_TITLE_TEST_TAG"),
             text = AnnotatedString(
                 text = gameNewsState.title,
                 spanStyles = getSpanStyles(
@@ -50,6 +54,7 @@ internal fun TextSection(
         )
 
         Text(
+            modifier = Modifier.testTag("TEXT_SECTION_DATE_TEST_TAG"),
             text = gameNewsState.date,
             color = colorResource(id = R.color.game_news_title_color),
             fontSize = dimensionResource(id = R.dimen.game_news_date_size).value.sp,
@@ -64,6 +69,7 @@ internal fun TextSection(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
+            modifier = Modifier.testTag("TEXT_SECTION_DESCRIPTION_TEST_TAG"),
             text = AnnotatedString(
                 text = gameNewsState.description,
                 spanStyles = getSpanStyles(
@@ -77,16 +83,17 @@ internal fun TextSection(
             maxLines = 3
         )
         Text(
-            modifier = Modifier.clickable(
-                enabled = true,
-                onClickLabel = gameNewsState.link,
-                role = Role.Button,
-                onClick = {},
-            ),
+            modifier = Modifier
+                .testTag("TEXT_SECTION_LINK_TEST_TAG")
+                .clickable(
+                    enabled = true,
+                    onClickLabel = gameNewsState.link,
+                    role = Role.Button,
+                    onClick = {},
+                ),
             text = gameNewsState.link,
             textDecoration = TextDecoration.Underline,
             color = colorResource(id = R.color.game_news_blue_700)
         )
     }
 }
-
