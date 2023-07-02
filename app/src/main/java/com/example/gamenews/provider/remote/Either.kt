@@ -1,4 +1,4 @@
-package com.example.gamenews.core
+package com.example.gamenews.provider.remote
 
 sealed class Either<out S, out F> {
 

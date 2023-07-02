@@ -1,6 +1,6 @@
 package com.example.gamenews.usecases
 
-import com.example.gamenews.core.Either
+import com.example.gamenews.provider.remote.Either
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.repository.GameNewsRepository
 import kotlinx.coroutines.flow.Flow

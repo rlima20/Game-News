@@ -1,7 +1,7 @@
 package com.example.gamenews.tests.usecases
 
 import com.example.gamenews.global.CoroutineTestRule
-import com.example.gamenews.core.Either
+import com.example.gamenews.provider.remote.Either
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.provider.local.listOfNewsDTO
 import com.example.gamenews.provider.remote.GameNewsService

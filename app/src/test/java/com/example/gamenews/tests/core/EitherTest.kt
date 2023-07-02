@@ -1,6 +1,6 @@
 package com.example.gamenews.tests.core
 
-import com.example.gamenews.core.Either
+import com.example.gamenews.provider.remote.Either
 import com.example.gamenews.global.CoroutineTestRule
 import com.example.gamenews.repository.GameNewsRepository
 import com.example.gamenews.usecases.GameNewsUseCaseImpl
