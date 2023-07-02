@@ -3,8 +3,6 @@ v
 Fapp/src/main/java/com/example/gamenews/ui/activities/SplashActivity.kt,d/8/d890b88a0c47e2575c655ae59f03f22d41846ef7
 t
 Dapp/src/main/java/com/example/gamenews/ui/activities/MainActivity.kt,1/1/11856bb40d6961ce294b688de9aacc08b914b5f5
-P
- app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 s
 Capp/src/main/java/com/example/gamenews/ui/components/ImageDialog.kt,1/7/17f6016de2843aaf708115aff27ec25158d38a21
 >
