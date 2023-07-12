@@ -74,6 +74,7 @@ private fun ValidateRequestStatus(
     when (requestStatus) {
         States.SUCCESS -> {
             if (listOfGameNewsUiState?.isNotEmpty() == true) {
+                AdvancedSearchComponent()
                 HomeScreenComponent(
                     searchedText = searchedText,
                     onSearchTextChanged = onSearchTextChanged,
