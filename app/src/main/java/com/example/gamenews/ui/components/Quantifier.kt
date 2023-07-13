@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
@@ -28,6 +29,7 @@ internal fun Quantifier(
     modifier: Modifier = Modifier,
     quantifier: Int,
     onQuantifierChange: (Int) -> Unit,
+    width: Dp,
 ) {
     val isLeftIconEnabled = quantifier > 1
     val isRightIconEnabled = quantifier < 9
@@ -35,7 +37,7 @@ internal fun Quantifier(
     Surface(
         modifier = Modifier
             .height(48.dp)
-            .width(138.dp)
+            .width(width)
             .padding(
                 start = 16.dp,
                 top = 8.dp,
@@ -106,5 +108,6 @@ private fun QuantifierPreview() {
         Modifier,
         9,
         {},
+        48.dp,
     )
 }

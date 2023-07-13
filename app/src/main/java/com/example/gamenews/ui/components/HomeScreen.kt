@@ -27,7 +27,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
-
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
     val requestState by gameNewsViewModel.requestStatus.collectAsState()
@@ -42,12 +41,12 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     requestStatus = requestState,
                     listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
                         gameNewsUiStateFiltered,
-                        gameNewsUiState
+                        gameNewsUiState,
                     ),
                     searchedText = searchedText,
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
-                    onSearchTextChanged = { searchedText = it }
+                    onSearchTextChanged = { searchedText = it },
                 )
             } else {
                 HomeScreenComponent(
@@ -80,7 +79,7 @@ private fun ValidateRequestStatus(
                     onSearchTextChanged = onSearchTextChanged,
                     listOfGameNewsState = listOfGameNewsUiState,
                     gameNewsViewModel = gameNewsViewModel,
-                    localContext = localContext
+                    localContext = localContext,
                 )
             } else {
                 ErrorStateComponent(
@@ -88,28 +87,30 @@ private fun ValidateRequestStatus(
                         CoroutineScope(Dispatchers.Main + Job()).launch {
                             gameNewsViewModel.fetchData()
                         }
-                    }
+                    },
                 )
             }
         }
+
         States.LOADING -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.onSurface,
                 )
             }
         }
+
         States.ERROR -> {
             ErrorStateComponent(
                 onButtonClicked = {
                     CoroutineScope(Dispatchers.Main + Job()).launch {
                         gameNewsViewModel.fetchData()
                     }
-                }
+                },
             )
         }
     }
@@ -118,6 +119,9 @@ private fun ValidateRequestStatus(
 @Composable
 private fun getListOfGameNewsFilteredOrNot(
     filteredGameNewsUiState: List<GameNewsState>?,
-    gameNewsUiState: List<GameNewsState>?
-) = if (filteredGameNewsUiState?.isNotEmpty() == true) filteredGameNewsUiState else
+    gameNewsUiState: List<GameNewsState>?,
+) = if (filteredGameNewsUiState?.isNotEmpty() == true) {
+    filteredGameNewsUiState
+} else {
     gameNewsUiState
+}
