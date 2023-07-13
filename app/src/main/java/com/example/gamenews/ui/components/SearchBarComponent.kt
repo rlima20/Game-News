@@ -45,7 +45,7 @@ internal fun SearchBarComponent(
                 keyboardController?.hide()
                 focusManager.clearFocus()
                 onSearched()
-            }
+            },
         ),
         modifier = Modifier
             .padding(top = 8.dp, start = 16.dp, end = 16.dp)
@@ -54,31 +54,31 @@ internal fun SearchBarComponent(
             Icon(
                 Icons.Default.Search,
                 modifier = Modifier.padding(start = 8.dp),
-                contentDescription = null
+                contentDescription = null,
             )
         },
         trailingIcon = {
             Column(
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 if (text.isNotEmpty()) {
                     IconButton(
                         modifier = Modifier
                             .padding(
                                 bottom = 6.dp,
-                                end = 8.dp
+                                end = 8.dp,
                             ),
                         onClick = {
                             onValueChange("")
                             onCloseIconClicked()
                             keyboardController?.hide()
                             focusManager.clearFocus()
-                        }
+                        },
                     ) {
                         Text(
                             text = "x",
-                            fontSize = 22.sp
+                            fontSize = 22.sp,
                         )
                     }
                 }
@@ -94,6 +94,6 @@ fun Preview() {
         "Abc",
         {},
         {},
-        {}
+        {},
     )
 }

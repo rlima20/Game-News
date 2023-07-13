@@ -6,7 +6,10 @@
     <color name="game_news_blue_teal_200">#79A29E</color>
     <color name="game_news_blue_teal_700">#FF018786</color>
     <color name="game_news_title_color">#4B4B4B</color>
+    <color name="game_news_quantifier_icon_enabled_color">#4B4B4B</color>
+    <color name="game_news_quantifier_icon_disabled_color">#ABABAB</color>
     <color name="game_news_title_color2">#A6A6A6</color>
+    <color name="game_news_title_color3">#C4C4C4</color>
     <color name="game_news_error_color">#E5BE635C</color>
     <color name="game_news_splash_activity_main_color">#003c51</color>
     <color name="game_news_try_again_button_color">#E9E9E9</color>
