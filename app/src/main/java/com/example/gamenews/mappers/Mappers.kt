@@ -4,7 +4,6 @@ import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
 
 fun toMap(listOfGameNewsDTO: List<GameNewsDTO>?): MutableList<GameNewsState>? {
-
     var listOfGameNewStates: MutableList<GameNewsState>? = mutableListOf()
 
     if (listOfGameNewsDTO == null) {
@@ -18,8 +17,8 @@ fun toMap(listOfGameNewsDTO: List<GameNewsDTO>?): MutableList<GameNewsState>? {
                         date = formatDateToDateNews(gameNewsDTO.date),
                         description = gameNewsDTO.description,
                         image = gameNewsDTO.image,
-                        link = gameNewsDTO.link
-                    )
+                        link = gameNewsDTO.link,
+                    ),
                 )
             }
         }

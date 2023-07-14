@@ -1,4 +1,4 @@
-package com.example.gamenews.di
+package com.example.gamenews.di // ktlint-disable filename
 
 import com.example.gamenews.viewmodel.GameNewsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

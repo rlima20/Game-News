@@ -25,19 +25,19 @@ import com.example.gamenews.R
 
 @Composable
 fun ErrorStateComponent(
-    onButtonClicked: () -> Unit = {}
+    onButtonClicked: () -> Unit = {},
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = 32.dp, end = 32.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             modifier = Modifier.size(180.dp, 180.dp),
-            painter = painterResource(id = R.drawable.oops),
-            contentDescription = null
+            painter = painterResource(id = R.drawable.error_404),
+            contentDescription = null,
         )
 
         Text(
@@ -61,7 +61,7 @@ fun ErrorStateComponent(
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = R.color.game_news_try_again_button_color),
             ),
-            onClick = { onButtonClicked() }
+            onClick = { onButtonClicked() },
         ) {
             Text(
                 text = stringResource(id = R.string.game_news_try_again),

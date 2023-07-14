@@ -7,4 +7,10 @@
 
     <!-- image size -->
     <dimen name="game_news_image_height">95.00dp</dimen>
+
+
+    <!-- advanced search -->
+    <dimen name="game_news_advanced_search_height">188.00dp</dimen>
+    <dimen name="game_news_advanced_search_title_size">19.00dp</dimen>
+
 </resources>

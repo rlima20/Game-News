@@ -18,7 +18,7 @@ import java.util.Locale
 
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
-    private val gameNewsUseCase: GameNewsUseCase
+    private val gameNewsUseCase: GameNewsUseCase,
 ) : ViewModel() {
 
     /* Feature flags */
@@ -62,7 +62,7 @@ class GameNewsViewModel(
 
         uiState.value?.forEach {
             if (it.title.toLowerCase(Locale.ROOT)
-                .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
+                    .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
                 it.description.toLowerCase(Locale.ROOT)
                     .contains(textWithoutSpaces.toLowerCase(Locale.ROOT))
             ) {
@@ -87,7 +87,7 @@ class GameNewsViewModel(
             gameNewsUseCase.invoke().collect { result ->
                 result.either(
                     onSuccess = { updateGameNewsState(toMap(it)) },
-                    onFailure = { updateRequestErrorState() }
+                    onFailure = { updateRequestErrorState() },
                 )
             }
         }
@@ -95,7 +95,7 @@ class GameNewsViewModel(
 
     fun getAsyncImage(
         context: Context,
-        imageUrl: String
+        imageUrl: String,
     ): ImageRequest {
         return ImageRequest.Builder(context)
             .data(imageUrl)

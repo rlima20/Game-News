@@ -21,7 +21,7 @@ import com.example.gamenews.model.States
  */
 @Composable
 fun ImageRequest.getAsyncImagePainter(
-    onStateChanged: (state: States) -> Unit = {}
+    onStateChanged: (state: States) -> Unit = {},
 ): Painter {
     if (rememberAsyncImagePainter(this).state is AsyncImagePainter.State.Success) {
         onStateChanged(States.SUCCESS)
@@ -50,7 +50,7 @@ fun getSpanStyles(
         AnnotatedString.Range(
             SpanStyle(
                 color = colorResource(id = R.color.white),
-                background = colorResource(id = R.color.game_news_blue_700)
+                background = colorResource(id = R.color.game_news_blue_700),
             ),
             start = start,
             end = start + searchedWord.length,

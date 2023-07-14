@@ -17,20 +17,20 @@ internal fun NewsSection(
     searchedText: String,
     imageDialog: Boolean,
     onImageRequested: (imageUrl: String) -> ImageRequest,
-    onClick: (bool: Boolean) -> Boolean = { false }
+    onClick: (bool: Boolean) -> Boolean = { false },
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .padding(16.dp)
-            .fillMaxSize()
+            .fillMaxSize(),
     ) {
         items(listOfGameNewsState) { gameNewsState ->
             NewsItem(
                 searchedText = searchedText,
                 gameNewsState = gameNewsState,
                 imageDialogFlag = imageDialog,
-                imageRequest = onImageRequested(gameNewsState.image)
+                imageRequest = onImageRequested(gameNewsState.image),
             ) { onClick(it) }
         }
     }

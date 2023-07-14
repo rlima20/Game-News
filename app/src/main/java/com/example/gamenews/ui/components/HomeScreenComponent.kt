@@ -14,7 +14,7 @@ fun HomeScreenComponent(
     onSearchTextChanged: (searchText: String) -> Unit,
     listOfGameNewsState: List<GameNewsState>,
     gameNewsViewModel: GameNewsViewModel,
-    localContext: Context
+    localContext: Context,
 ) {
     SearchBarComponent(
         text = searchedText,
@@ -25,12 +25,13 @@ fun HomeScreenComponent(
 
             if (gameNewsViewModel.uiStateFiltered.value?.isEmpty() == true) {
                 Toast.makeText(
-                    localContext, "No result for the search",
+                    localContext,
+                    "No result for the search",
                     Toast
-                        .LENGTH_SHORT
+                        .LENGTH_SHORT,
                 ).show()
             }
-        }
+        },
     )
 
     NewsSection(
@@ -41,7 +42,7 @@ fun HomeScreenComponent(
         onImageRequested = { imageUrl ->
             gameNewsViewModel.getAsyncImage(
                 imageUrl = imageUrl,
-                context = localContext
+                context = localContext,
             )
         },
     )

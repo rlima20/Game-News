@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val binding = inflater.inflate(R.layout.fragment_home, container, false)
 
         binding.rootView.findViewById<ComposeView>(R.id.composeView).setContent {
             Surface(
                 modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colors.background
+                color = MaterialTheme.colors.background,
             ) {
                 HomeScreen(gameNewsViewModel)
             }

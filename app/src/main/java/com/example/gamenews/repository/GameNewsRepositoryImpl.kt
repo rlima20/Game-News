@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class GameNewsRepositoryImpl(
-    private val gameNewsService: GameNewsService
+    private val gameNewsService: GameNewsService,
 ) : GameNewsRepository {
     override fun getAllGameNews(): Flow<List<GameNewsDTO>?> = flow {
         with(gameNewsService.getAllGameNews()) {
@@ -22,10 +22,15 @@ class GameNewsRepositoryImpl(
                     code == 501 ||
                     code == 500 ||
                     code == 502
-                ) emit(null)
-                else if (this?.isSuccessful == true) this.body()?.let { emit(it) } else emit(
-                    emptyList()
-                )
+                ) {
+                    emit(null)
+                } else if (this?.isSuccessful == true) {
+                    this.body()?.let { emit(it) }
+                } else {
+                    emit(
+                        emptyList(),
+                    )
+                }
             }
         }
     }

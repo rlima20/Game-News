@@ -2,6 +2,7 @@ package com.example.gamenews.ui.components
 
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -73,14 +74,19 @@ private fun ValidateRequestStatus(
     when (requestStatus) {
         States.SUCCESS -> {
             if (listOfGameNewsUiState?.isNotEmpty() == true) {
-                AdvancedSearchComponent()
-                HomeScreenComponent(
-                    searchedText = searchedText,
-                    onSearchTextChanged = onSearchTextChanged,
-                    listOfGameNewsState = listOfGameNewsUiState,
-                    gameNewsViewModel = gameNewsViewModel,
-                    localContext = localContext,
-                )
+                Box {
+                    Box {
+                        HomeScreenComponent(
+                            searchedText = searchedText,
+                            onSearchTextChanged = onSearchTextChanged,
+                            listOfGameNewsState = listOfGameNewsUiState,
+                            gameNewsViewModel = gameNewsViewModel,
+                            localContext = localContext,
+                        )
+                    }
+
+                    AdvancedSearchComponent {}
+                }
             } else {
                 ErrorStateComponent(
                     onButtonClicked = {
