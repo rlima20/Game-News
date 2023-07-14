@@ -15,6 +15,8 @@ fun HomeScreenComponent(
     listOfGameNewsState: List<GameNewsState>,
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
+    onAdvancedSearchIconClicked: () -> Unit,
+    advancedSearchIconClickedValue: Boolean,
 ) {
     SearchBarComponent(
         text = searchedText,
@@ -32,6 +34,8 @@ fun HomeScreenComponent(
                 ).show()
             }
         },
+        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
+        advancedSearchIconClickedValue = advancedSearchIconClickedValue
     )
 
     NewsSection(

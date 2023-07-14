@@ -2,7 +2,6 @@ package com.example.gamenews.ui.components
 
 import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +33,7 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val shouldSearchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
+    var advancedSearchIconClicked by remember { mutableStateOf(true) }
 
     Row {
         Column {
@@ -48,6 +48,11 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
                     onSearchTextChanged = { searchedText = it },
+                    onAdvancedSearchIconClicked = {
+                        advancedSearchIconClicked =
+                            !advancedSearchIconClicked
+                    },
+                    advancedSearchIconClickedValue = advancedSearchIconClicked,
                 )
             } else {
                 HomeScreenComponent(
@@ -56,6 +61,8 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
                     onSearchTextChanged = { searchedText = it },
+                    onAdvancedSearchIconClicked = { advancedSearchIconClicked },
+                    advancedSearchIconClickedValue = false,
                 )
             }
         }
@@ -70,29 +77,30 @@ private fun ValidateRequestStatus(
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
     onSearchTextChanged: (searchText: String) -> Unit,
+    onAdvancedSearchIconClicked: () -> Unit,
+    advancedSearchIconClickedValue: Boolean
 ) {
     when (requestStatus) {
         States.SUCCESS -> {
             if (listOfGameNewsUiState?.isNotEmpty() == true) {
-                Box {
-                    Box {
-                        HomeScreenComponent(
-                            searchedText = searchedText,
-                            onSearchTextChanged = onSearchTextChanged,
-                            listOfGameNewsState = listOfGameNewsUiState,
-                            gameNewsViewModel = gameNewsViewModel,
-                            localContext = localContext,
-                        )
-                    }
-
+                Column {
                     AdvancedSearchComponent(
-                        onExitButtonClick = {},
+                        onExitButtonClick = { !advancedSearchIconClickedValue },
                         onSubmitButtonClicked = { itemsPerPage, query ->
                             gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
                                 itemsPerPage = itemsPerPage,
                                 query = query,
                             )
                         },
+                    )
+                    HomeScreenComponent(
+                        searchedText = searchedText,
+                        onSearchTextChanged = onSearchTextChanged,
+                        listOfGameNewsState = listOfGameNewsUiState,
+                        gameNewsViewModel = gameNewsViewModel,
+                        localContext = localContext,
+                        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
+                        advancedSearchIconClickedValue = advancedSearchIconClickedValue,
                     )
                 }
             } else {
