@@ -72,6 +72,15 @@ class GameNewsViewModel(
         _uiStateFiltered.value = listFiltered
     }
 
+    fun getListOfGameNewsByQueryAndItemsPerPage(
+        query: String,
+        itemsPerPage: Int,
+    ) { /*: List<GameNewsState>? {
+        return uiState.value?.filter {
+            it.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))
+        }?.take(itemsPerPage)*/
+    }
+
     fun clearFilteredListOfGameNews() {
         _uiStateFiltered.value?.clear()
     }

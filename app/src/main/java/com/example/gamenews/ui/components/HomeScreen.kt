@@ -85,7 +85,15 @@ private fun ValidateRequestStatus(
                         )
                     }
 
-                    AdvancedSearchComponent {}
+                    AdvancedSearchComponent(
+                        onExitButtonClick = {},
+                        onSubmitButtonClicked = { itemsPerPage, query ->
+                            gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
+                                itemsPerPage = itemsPerPage,
+                                query = query,
+                            )
+                        },
+                    )
                 }
             } else {
                 ErrorStateComponent(

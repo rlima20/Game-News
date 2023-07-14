@@ -20,6 +20,7 @@ import com.example.gamenews.R
 @Composable
 internal fun SubmitButtonComponent(
     width: Dp,
+    onClick: () -> Unit,
 ) {
     Surface(
         modifier = Modifier
@@ -41,7 +42,7 @@ internal fun SubmitButtonComponent(
                 .height(38.dp)
                 .width(400.dp)
                 .background(colorResource(id = R.color.game_news_splash_activity_main_color)),
-            onClick = { /*TODO*/ },
+            onClick = { onClick() },
             shape = RoundedCornerShape(
                 topStart = 5.dp,
                 topEnd = 5.dp,
