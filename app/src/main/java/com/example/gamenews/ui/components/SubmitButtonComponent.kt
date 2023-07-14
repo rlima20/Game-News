@@ -34,7 +34,7 @@ internal fun SubmitButtonComponent(
             bottomEnd = 25.dp,
         ),
         elevation = 4.dp,
-        color = colorResource(id = R.color.white),
+        color = colorResource(id = R.color.game_news_white_color),
     ) {
         TextButton(
             modifier = Modifier
@@ -53,7 +53,7 @@ internal fun SubmitButtonComponent(
                 text = "Submit",
                 fontSize = 12.dp.value.sp,
                 overflow = TextOverflow.Ellipsis,
-                color = colorResource(id = R.color.white),
+                color = colorResource(id = R.color.game_news_white_color),
             )
         }
     }

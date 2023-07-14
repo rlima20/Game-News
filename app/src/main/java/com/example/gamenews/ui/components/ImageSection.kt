@@ -45,7 +45,7 @@ internal fun ImageSection(
                 TextButton(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(id = R.color.transparent))
+                        .background(colorResource(id = R.color.game_news_transparent_color))
                         .height(dimensionResource(id = R.dimen.game_news_image_height)),
                     onClick = {
                         onClick(true)

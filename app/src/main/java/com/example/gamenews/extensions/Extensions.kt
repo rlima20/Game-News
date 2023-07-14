@@ -49,7 +49,7 @@ fun getSpanStyles(
     return listOf(
         AnnotatedString.Range(
             SpanStyle(
-                color = colorResource(id = R.color.white),
+                color = colorResource(id = R.color.game_news_white_color),
                 background = colorResource(id = R.color.game_news_blue_700),
             ),
             start = start,

@@ -46,7 +46,7 @@ internal fun Quantifier(
             .padding(bottom = 8.dp),
         elevation = 4.dp,
         shape = setRoundedCornersShape(),
-        color = colorResource(id = R.color.white),
+        color = colorResource(id = R.color.game_news_white_color),
     ) {
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,

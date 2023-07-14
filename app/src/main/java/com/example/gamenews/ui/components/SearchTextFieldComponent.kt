@@ -52,7 +52,7 @@ fun SearchTextFieldComponent(
             )
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
-            backgroundColor = colorResource(id = R.color.white),
+            backgroundColor = colorResource(id = R.color.game_news_white_color),
             focusedBorderColor = colorResource(id = R.color.game_news_splash_activity_main_color),
             unfocusedBorderColor = colorResource(id = R.color.game_news_quantifier_icon_disabled_color),
             focusedLabelColor = colorResource(id = R.color.game_news_splash_activity_main_color),

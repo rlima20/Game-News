@@ -13,8 +13,7 @@
     <color name="game_news_error_color">#E5BE635C</color>
     <color name="game_news_splash_activity_main_color">#003c51</color>
     <color name="game_news_try_again_button_color">#E9E9E9</color>
-    <color name="black">#FF000000</color>
     <color name="game_news_advanced_search_background_color">#E0E0E0</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#00FFFFFF</color>
+    <color name="game_news_white_color">#FFFFFFFF</color>
+    <color name="game_news_transparent_color">#00FFFFFF</color>
 </resources>
