@@ -30,14 +30,15 @@ import com.example.gamenews.R
 
 @Composable
 fun AdvancedSearchComponent(
-    onExitButtonClick: () -> Boolean,
+    onAdvancedSearchIconClicked: () -> Unit,
     onSubmitButtonClicked: (Int, String) -> Unit,
+    advancedSearchIconClickedValue: Boolean,
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val quantifierState = remember { mutableStateOf(9) }
     val advancedSearchBarText = remember { mutableStateOf("") }
 
-    if (onExitButtonClick()) {
+    if (advancedSearchIconClickedValue) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,7 +70,7 @@ fun AdvancedSearchComponent(
                     IconButton(
                         modifier = Modifier.size(32.dp),
                         onClick = {
-                            onExitButtonClick()
+                            onAdvancedSearchIconClicked()
                             quantifierState.value = 9
                             advancedSearchBarText.value = ""
                         },
@@ -146,7 +147,8 @@ private fun setItemSize(screenWidth: Int): Dp = ((screenWidth - 16) / 2).dp
 @Composable
 fun AdvancedSearchComponentPreview() {
     AdvancedSearchComponent(
-        onExitButtonClick = { false },
         onSubmitButtonClicked = { _, _ -> },
+        advancedSearchIconClickedValue = false,
+        onAdvancedSearchIconClicked = {},
     )
 }

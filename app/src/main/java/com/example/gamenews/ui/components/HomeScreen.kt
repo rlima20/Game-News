@@ -78,20 +78,21 @@ private fun ValidateRequestStatus(
     localContext: Context,
     onSearchTextChanged: (searchText: String) -> Unit,
     onAdvancedSearchIconClicked: () -> Unit,
-    advancedSearchIconClickedValue: Boolean
+    advancedSearchIconClickedValue: Boolean,
 ) {
     when (requestStatus) {
         States.SUCCESS -> {
             if (listOfGameNewsUiState?.isNotEmpty() == true) {
                 Column {
                     AdvancedSearchComponent(
-                        onExitButtonClick = { !advancedSearchIconClickedValue },
                         onSubmitButtonClicked = { itemsPerPage, query ->
                             gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
                                 itemsPerPage = itemsPerPage,
                                 query = query,
                             )
                         },
+                        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
+                        advancedSearchIconClickedValue = !advancedSearchIconClickedValue,
                     )
                     HomeScreenComponent(
                         searchedText = searchedText,

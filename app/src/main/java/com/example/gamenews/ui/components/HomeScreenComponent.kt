@@ -35,7 +35,7 @@ fun HomeScreenComponent(
             }
         },
         onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
-        advancedSearchIconClickedValue = advancedSearchIconClickedValue
+        advancedSearchIconClickedValue = advancedSearchIconClickedValue,
     )
 
     NewsSection(
