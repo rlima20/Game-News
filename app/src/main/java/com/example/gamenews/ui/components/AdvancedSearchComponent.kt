@@ -12,8 +12,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
@@ -33,10 +31,10 @@ fun AdvancedSearchComponent(
     onAdvancedSearchIconClicked: () -> Unit,
     onSubmitButtonClicked: (Int, String) -> Unit,
     advancedSearchIconClickedValue: Boolean,
+    advancedSearchState: Pair<Int, String>,
+    onAdvancedSearchState: (Pair<Int, String>) -> Unit = {},
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
-    val quantifierState = remember { mutableStateOf(9) }
-    val advancedSearchBarText = remember { mutableStateOf("") }
 
     if (advancedSearchIconClickedValue) {
         Surface(
@@ -71,8 +69,7 @@ fun AdvancedSearchComponent(
                         modifier = Modifier.size(32.dp),
                         onClick = {
                             onAdvancedSearchIconClicked()
-                            quantifierState.value = 9
-                            advancedSearchBarText.value = ""
+                            onAdvancedSearchState(Pair(9, ""))
                         },
                     ) {
                         Text(
@@ -88,8 +85,10 @@ fun AdvancedSearchComponent(
                 }
 
                 SearchTextFieldComponent(
-                    text = advancedSearchBarText.value,
-                    onValueChange = { typedText -> advancedSearchBarText.value = typedText },
+                    text = advancedSearchState.second,
+                    onValueChange = { typedText ->
+                        onAdvancedSearchState(Pair(advancedSearchState.first, typedText))
+                    },
                 )
 
                 Column {
@@ -111,16 +110,19 @@ fun AdvancedSearchComponent(
                             width = setItemSize(
                                 screenWidth = screenWidth,
                             ),
-                            quantifier = quantifierState.value,
-                            onQuantifierChange = { quantifierState.value = it },
+                            quantifier = advancedSearchState.first,
+                            onQuantifierChange = {
+                                onAdvancedSearchState(Pair(it, advancedSearchState.second))
+                            },
                         )
 
                         SubmitButtonComponent(
                             onClick = {
                                 onSubmitButtonClicked(
-                                    quantifierState.value,
-                                    advancedSearchBarText.value,
+                                    advancedSearchState.first,
+                                    advancedSearchState.second,
                                 )
+                                onAdvancedSearchIconClicked()
                             },
                             width = setItemSize(
                                 screenWidth = screenWidth,
@@ -150,5 +152,9 @@ fun AdvancedSearchComponentPreview() {
         onSubmitButtonClicked = { _, _ -> },
         advancedSearchIconClickedValue = false,
         onAdvancedSearchIconClicked = {},
+        advancedSearchState = Pair(1, ""),
+        onAdvancedSearchState = {
+            Pair(1, "")
+        },
     )
 }

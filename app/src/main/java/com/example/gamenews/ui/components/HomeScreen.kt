@@ -80,6 +80,9 @@ private fun ValidateRequestStatus(
     onAdvancedSearchIconClicked: () -> Unit,
     advancedSearchIconClickedValue: Boolean,
 ) {
+    val quantifierState = remember { mutableStateOf(9) }
+    val advancedSearchBarText = remember { mutableStateOf("") }
+
     when (requestStatus) {
         States.SUCCESS -> {
             if (listOfGameNewsUiState?.isNotEmpty() == true) {
@@ -93,6 +96,14 @@ private fun ValidateRequestStatus(
                         },
                         onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
                         advancedSearchIconClickedValue = !advancedSearchIconClickedValue,
+                        onAdvancedSearchState = {
+                            quantifierState.value = it.first
+                            advancedSearchBarText.value = it.second
+                        },
+                        advancedSearchState = Pair(
+                            quantifierState.value,
+                            advancedSearchBarText.value,
+                        ),
                     )
                     HomeScreenComponent(
                         searchedText = searchedText,
