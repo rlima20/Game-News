@@ -28,10 +28,10 @@ import com.example.gamenews.R
 
 @Composable
 fun AdvancedSearchComponent(
-    onAdvancedSearchIconClicked: () -> Unit,
-    onSubmitButtonClicked: (Int, String) -> Unit,
     advancedSearchIconClickedValue: Boolean,
     advancedSearchState: Pair<Int, String>,
+    onAdvancedSearchIconClicked: () -> Unit,
+    onSubmitButtonClicked: (Int, String) -> Unit,
     onAdvancedSearchState: (Pair<Int, String>) -> Unit = {},
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
@@ -58,7 +58,7 @@ fun AdvancedSearchComponent(
                                 end = 16.dp,
                                 top = 8.dp,
                             ),
-                        text = "Advanced search",
+                        text = "Advanced search", // todo - string resource
                         color = colorResource(id = R.color.game_news_splash_activity_main_color),
                         fontSize = dimensionResource(id = R.dimen.game_news_advanced_search_title_size).value.sp,
                         fontStyle = FontStyle.Normal,
@@ -69,7 +69,7 @@ fun AdvancedSearchComponent(
                         modifier = Modifier.size(32.dp),
                         onClick = {
                             onAdvancedSearchIconClicked()
-                            onAdvancedSearchState(Pair(9, ""))
+                            onAdvancedSearchState(Pair(9, "")) // todo - default values
                         },
                     ) {
                         Text(
@@ -98,7 +98,7 @@ fun AdvancedSearchComponent(
                             top = 8.dp,
                             end = 16.dp,
                         ),
-                        text = "Items per page: ",
+                        text = "Items per page: ", // todo
                         fontSize = dimensionResource(id = R.dimen.game_news_description_size).value.sp,
                         overflow = TextOverflow.Ellipsis,
                     )
@@ -107,13 +107,13 @@ fun AdvancedSearchComponent(
                         horizontalArrangement = Arrangement.SpaceBetween,
                     ) {
                         Quantifier(
-                            width = setItemSize(
-                                screenWidth = screenWidth,
-                            ),
                             quantifier = advancedSearchState.first,
                             onQuantifierChange = {
                                 onAdvancedSearchState(Pair(it, advancedSearchState.second))
                             },
+                            width = setItemSize(
+                                screenWidth = screenWidth,
+                            ),
                         )
 
                         SubmitButtonComponent(

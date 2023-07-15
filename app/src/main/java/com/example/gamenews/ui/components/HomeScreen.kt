@@ -1,6 +1,5 @@
 package com.example.gamenews.ui.components
 
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNews
+import com.example.gamenews.ui.RequestStatusProps
 import com.example.gamenews.viewmodel.GameNewsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +31,8 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
     val requestState by gameNewsViewModel.requestStatus.collectAsState()
     val shouldSearchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
+    val quantifier by gameNewsViewModel.quantifier.collectAsState()
+    val advancedSearchBarText by gameNewsViewModel.advancedSearchBarText.collectAsState()
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
     var advancedSearchIconClicked by remember { mutableStateOf(true) }
@@ -39,20 +41,30 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
         Column {
             if (shouldSearchFromAPI) {
                 ValidateRequestStatus(
-                    requestStatus = requestState,
-                    listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
-                        gameNewsUiStateFiltered,
-                        gameNewsUiState,
+                    RequestStatusProps(
+                        requestStatus = requestState,
+                        listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
+                            gameNewsUiStateFiltered,
+                            gameNewsUiState,
+                        ),
+                        searchedText = searchedText,
+                        gameNewsViewModel = gameNewsViewModel,
+                        localContext = localContext,
+                        onSearchTextChanged = { searchedText = it },
+                        onAdvancedSearchIconClicked = {
+                            advancedSearchIconClicked =
+                                !advancedSearchIconClicked
+                        },
+                        advancedSearchIconClickedValue = advancedSearchIconClicked,
+                        quantifierState = quantifier,
+                        advancedSearchBarText = advancedSearchBarText,
+                        onSaveAdvancedSearchStates = { quantifierState, advancedSearchBarText ->
+                            gameNewsViewModel.updateAdvancedSearchStates(
+                                quantifierState,
+                                advancedSearchBarText,
+                            )
+                        },
                     ),
-                    searchedText = searchedText,
-                    gameNewsViewModel = gameNewsViewModel,
-                    localContext = localContext,
-                    onSearchTextChanged = { searchedText = it },
-                    onAdvancedSearchIconClicked = {
-                        advancedSearchIconClicked =
-                            !advancedSearchIconClicked
-                    },
-                    advancedSearchIconClickedValue = advancedSearchIconClicked,
                 )
             } else {
                 HomeScreenComponent(
@@ -61,7 +73,7 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
                     onSearchTextChanged = { searchedText = it },
-                    onAdvancedSearchIconClicked = { advancedSearchIconClicked },
+                    onAdvancedSearchIconClicked = { advancedSearchIconClicked }, // todo fix this
                     advancedSearchIconClickedValue = false,
                 )
             }
@@ -71,55 +83,62 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
 
 @Composable
 private fun ValidateRequestStatus(
-    requestStatus: States,
-    listOfGameNewsUiState: List<GameNewsState>?,
-    searchedText: String,
-    gameNewsViewModel: GameNewsViewModel,
-    localContext: Context,
-    onSearchTextChanged: (searchText: String) -> Unit,
-    onAdvancedSearchIconClicked: () -> Unit,
-    advancedSearchIconClickedValue: Boolean,
+    props: RequestStatusProps,
 ) {
-    val quantifierState = remember { mutableStateOf(9) }
-    val advancedSearchBarText = remember { mutableStateOf("") }
-
-    when (requestStatus) {
+    with(props) {
+        RequestStatusProps(
+            requestStatus = requestStatus,
+            listOfGameNewsUiState = listOfGameNewsUiState,
+            searchedText = searchedText,
+            gameNewsViewModel = gameNewsViewModel,
+            localContext = localContext,
+            onSearchTextChanged = onSearchTextChanged,
+            onAdvancedSearchIconClicked = onAdvancedSearchIconClicked,
+            advancedSearchIconClickedValue = advancedSearchIconClickedValue,
+            quantifierState = quantifierState,
+            advancedSearchBarText = advancedSearchBarText,
+            onSaveAdvancedSearchStates = onSaveAdvancedSearchStates,
+        )
+    }
+    when (props.requestStatus) {
         States.SUCCESS -> {
-            if (listOfGameNewsUiState?.isNotEmpty() == true) {
+            if (props.listOfGameNewsUiState?.isNotEmpty() == true) {
                 Column {
                     AdvancedSearchComponent(
                         onSubmitButtonClicked = { itemsPerPage, query ->
-                            gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
+                            props.gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
                                 itemsPerPage = itemsPerPage,
                                 query = query,
                             )
                         },
-                        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
-                        advancedSearchIconClickedValue = !advancedSearchIconClickedValue,
+                        onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
+                        advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
                         onAdvancedSearchState = {
-                            quantifierState.value = it.first
-                            advancedSearchBarText.value = it.second
+                            props.onSaveAdvancedSearchStates(
+                                it.first,
+                                it.second,
+                            )
                         },
                         advancedSearchState = Pair(
-                            quantifierState.value,
-                            advancedSearchBarText.value,
+                            props.quantifierState,
+                            props.advancedSearchBarText,
                         ),
                     )
                     HomeScreenComponent(
-                        searchedText = searchedText,
-                        onSearchTextChanged = onSearchTextChanged,
-                        listOfGameNewsState = listOfGameNewsUiState,
-                        gameNewsViewModel = gameNewsViewModel,
-                        localContext = localContext,
-                        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
-                        advancedSearchIconClickedValue = advancedSearchIconClickedValue,
+                        searchedText = props.searchedText,
+                        onSearchTextChanged = props.onSearchTextChanged,
+                        listOfGameNewsState = props.listOfGameNewsUiState,
+                        gameNewsViewModel = props.gameNewsViewModel,
+                        localContext = props.localContext,
+                        onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
+                        advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
                     )
                 }
             } else {
                 ErrorStateComponent(
                     onButtonClicked = {
                         CoroutineScope(Dispatchers.Main + Job()).launch {
-                            gameNewsViewModel.fetchData()
+                            props.gameNewsViewModel.fetchData()
                         }
                     },
                 )
@@ -142,7 +161,7 @@ private fun ValidateRequestStatus(
             ErrorStateComponent(
                 onButtonClicked = {
                     CoroutineScope(Dispatchers.Main + Job()).launch {
-                        gameNewsViewModel.fetchData()
+                        props.gameNewsViewModel.fetchData()
                     }
                 },
             )

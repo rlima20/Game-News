@@ -1,5 +1,6 @@
 package com.example.gamenews.ui.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -26,10 +27,9 @@ import com.example.gamenews.R
 
 @Composable
 internal fun Quantifier(
-    modifier: Modifier = Modifier,
+    width: Dp,
     quantifier: Int,
     onQuantifierChange: (Int) -> Unit,
-    width: Dp,
 ) {
     val isLeftIconEnabled = quantifier > 1
     val isRightIconEnabled = quantifier < 9
@@ -58,7 +58,7 @@ internal fun Quantifier(
                 Icon(
                     modifier = Modifier.size(18.dp),
                     imageVector = Icons.Default.KeyboardArrowLeft,
-                    contentDescription = "Decrease",
+                    contentDescription = "Decrease", // todo
                     tint = SetIconButtonColor(isLeftIconEnabled),
                 )
             }
@@ -77,7 +77,7 @@ internal fun Quantifier(
                 Icon(
                     modifier = Modifier.size(18.dp),
                     imageVector = Icons.Default.KeyboardArrowRight,
-                    contentDescription = "Increase",
+                    contentDescription = "Increase", // todo
                     tint = SetIconButtonColor(isRightIconEnabled),
                 )
             }
@@ -85,7 +85,7 @@ internal fun Quantifier(
     }
 }
 
-fun setRoundedCornersShape(): RoundedCornerShape =
+private fun setRoundedCornersShape(): RoundedCornerShape =
     RoundedCornerShape(
         topStart = 25.dp,
         topEnd = 25.dp,
@@ -93,6 +93,7 @@ fun setRoundedCornersShape(): RoundedCornerShape =
         bottomEnd = 25.dp,
     )
 
+@SuppressLint("ComposableNaming")
 @Composable
 private fun SetIconButtonColor(condition: Boolean): Color =
     if (condition) {
@@ -105,9 +106,7 @@ private fun SetIconButtonColor(condition: Boolean): Color =
 @Composable
 private fun QuantifierPreview() {
     Quantifier(
-        Modifier,
-        9,
-        {},
         48.dp,
-    )
+        9,
+    ) {}
 }

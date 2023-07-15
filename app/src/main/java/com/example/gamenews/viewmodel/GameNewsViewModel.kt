@@ -38,6 +38,12 @@ class GameNewsViewModel(
     private val _imageDialog = MutableStateFlow(false)
     val imageDialog: StateFlow<Boolean> = _imageDialog.asStateFlow()
 
+    private val _quantifier = MutableStateFlow(9)
+    val quantifier: StateFlow<Int> = _quantifier.asStateFlow()
+
+    private val _advancedSearchBarText = MutableStateFlow("")
+    val advancedSearchBarText: StateFlow<String> = _advancedSearchBarText.asStateFlow()
+
     init {
         viewModelScope.launch {
             fetchData()
@@ -51,6 +57,14 @@ class GameNewsViewModel(
 
     private fun updateRequestErrorState() {
         _requestStatus.value = States.ERROR
+    }
+
+    fun updateAdvancedSearchStates(
+        quantifier: Int,
+        advancedSearchBarText: String,
+    ) {
+        _advancedSearchBarText.value = advancedSearchBarText
+        _quantifier.value = quantifier
     }
 
     fun filterListOfGameNews(

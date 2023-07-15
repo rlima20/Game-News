@@ -51,7 +51,7 @@ internal fun SubmitButtonComponent(
             ),
         ) {
             Text(
-                text = "Submit",
+                text = "Submit", // todo
                 fontSize = 12.dp.value.sp,
                 overflow = TextOverflow.Ellipsis,
                 color = colorResource(id = R.color.game_news_white_color),
