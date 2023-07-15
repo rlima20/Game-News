@@ -28,13 +28,13 @@ import java.util.Locale
 @Composable
 internal fun TextSection(
     searchedWord: String,
-    gameNewsState: GameNewsState
+    gameNewsState: GameNewsState,
 ) {
     Column(
         modifier = Modifier
             .testTag("TEXT_SECTION_TEST_TAG")
             .padding(start = 16.dp, end = 16.dp, top = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+        verticalArrangement = Arrangement.spacedBy(2.dp),
     ) {
         Text(
             modifier = Modifier.testTag("TEXT_SECTION_TITLE_TEST_TAG"),
@@ -42,15 +42,15 @@ internal fun TextSection(
                 text = gameNewsState.title,
                 spanStyles = getSpanStyles(
                     mainText = gameNewsState.title.lowercase(Locale.ROOT),
-                    searchedWord = searchedWord.lowercase(Locale.ROOT)
-                )
+                    searchedWord = searchedWord.lowercase(Locale.ROOT),
+                ),
             ),
             color = colorResource(id = R.color.game_news_title_color),
             fontSize = dimensionResource(id = R.dimen.game_news_title_size).value.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 2
+            maxLines = 2,
         )
 
         Text(
@@ -60,13 +60,13 @@ internal fun TextSection(
             fontSize = dimensionResource(id = R.dimen.game_news_date_size).value.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Bold,
-            maxLines = 1
+            maxLines = 1,
         )
     }
 
     Column(
         modifier = Modifier.padding(start = 16.dp, bottom = 16.dp, end = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Text(
             modifier = Modifier.testTag("TEXT_SECTION_DESCRIPTION_TEST_TAG"),
@@ -74,13 +74,13 @@ internal fun TextSection(
                 text = gameNewsState.description,
                 spanStyles = getSpanStyles(
                     mainText = gameNewsState.description.lowercase(Locale.ROOT),
-                    searchedWord = searchedWord.lowercase(Locale.ROOT)
-                )
+                    searchedWord = searchedWord.lowercase(Locale.ROOT),
+                ),
             ),
             fontSize = dimensionResource(id = R.dimen.game_news_description_size).value.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
             overflow = TextOverflow.Ellipsis,
-            maxLines = 3
+            maxLines = 3,
         )
         Text(
             modifier = Modifier
@@ -93,7 +93,7 @@ internal fun TextSection(
                 ),
             text = gameNewsState.link,
             textDecoration = TextDecoration.Underline,
-            color = colorResource(id = R.color.game_news_blue_700)
+            color = colorResource(id = R.color.game_news_blue_700),
         )
     }
 }

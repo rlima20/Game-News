@@ -18,7 +18,7 @@ import java.util.Locale
 
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
-    private val gameNewsUseCase: GameNewsUseCase
+    private val gameNewsUseCase: GameNewsUseCase,
 ) : ViewModel() {
 
     /* Feature flags */
@@ -62,7 +62,7 @@ class GameNewsViewModel(
 
         uiState.value?.forEach {
             if (it.title.toLowerCase(Locale.ROOT)
-                .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
+                    .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
                 it.description.toLowerCase(Locale.ROOT)
                     .contains(textWithoutSpaces.toLowerCase(Locale.ROOT))
             ) {
@@ -70,6 +70,15 @@ class GameNewsViewModel(
             }
         }
         _uiStateFiltered.value = listFiltered
+    }
+
+    fun getListOfGameNewsByQueryAndItemsPerPage(
+        query: String,
+        itemsPerPage: Int,
+    ) { /*: List<GameNewsState>? {
+        return uiState.value?.filter {
+            it.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))
+        }?.take(itemsPerPage)*/
     }
 
     fun clearFilteredListOfGameNews() {
@@ -87,7 +96,7 @@ class GameNewsViewModel(
             gameNewsUseCase.invoke().collect { result ->
                 result.either(
                     onSuccess = { updateGameNewsState(toMap(it)) },
-                    onFailure = { updateRequestErrorState() }
+                    onFailure = { updateRequestErrorState() },
                 )
             }
         }
@@ -95,7 +104,7 @@ class GameNewsViewModel(
 
     fun getAsyncImage(
         context: Context,
-        imageUrl: String
+        imageUrl: String,
     ): ImageRequest {
         return ImageRequest.Builder(context)
             .data(imageUrl)

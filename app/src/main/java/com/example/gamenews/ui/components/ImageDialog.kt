@@ -23,7 +23,7 @@ import com.example.gamenews.R
 @Composable
 fun ImageDialog(
     painter: Painter,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     AlertDialog(
         properties = DialogProperties(),
@@ -32,13 +32,13 @@ fun ImageDialog(
             .height(height = 220.dp),
         text = {
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
                     painter = painter,
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.FillWidth
+                    contentScale = ContentScale.FillWidth,
                 )
             }
         },
@@ -47,12 +47,12 @@ fun ImageDialog(
         onDismissRequest = { },
         dismissButton = {
             IconButton(onClick = { onClick() }) { Text(text = "x") }
-        }
+        },
     )
 }
 
 @Composable
 @Preview
 fun ImageDialogPreview() {
-    ImageDialog(painter = painterResource(id = R.drawable.connection))
+    ImageDialog(painter = painterResource(id = R.drawable.logo))
 }

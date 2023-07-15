@@ -40,17 +40,17 @@ internal fun ImageSection(
                         .height(dimensionResource(id = R.dimen.game_news_image_height)),
                     painter = painter,
                     contentDescription = null,
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
                 TextButton(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(colorResource(id = R.color.transparent))
+                        .background(colorResource(id = R.color.game_news_transparent_color))
                         .height(dimensionResource(id = R.dimen.game_news_image_height)),
                     onClick = {
                         onClick(true)
                         showImageDialogState = onClick(true)
-                    }
+                    },
                 ) {
                     if (showImageDialogState) {
                         ImageDialog(
@@ -58,24 +58,26 @@ internal fun ImageSection(
                             onClick = {
                                 onClick(false)
                                 showImageDialogState = onClick(false)
-                            }
+                            },
                         )
                     }
                 }
             }
         }
+
         States.LOADING -> {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(dimensionResource(id = R.dimen.game_news_image_height)),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.onSurface,
                 )
             }
         }
+
         else -> {}
     }
 }

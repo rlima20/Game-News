@@ -24,13 +24,13 @@ internal fun NewsItem(
     gameNewsState: GameNewsState,
     imageRequest: ImageRequest,
     imageDialogFlag: Boolean,
-    onClick: (value: Boolean) -> Boolean = { false }
+    onClick: (value: Boolean) -> Boolean = { false },
 ) {
     var imageRequestState by remember { mutableStateOf(States.LOADING) }
     val painter = imageRequest.getAsyncImagePainter(
         onStateChanged = {
             imageRequestState = it
-        }
+        },
     )
 
     Surface(
@@ -39,17 +39,17 @@ internal fun NewsItem(
             .padding(bottom = 8.dp),
         shape = RoundedCornerShape(15.dp),
         elevation = 4.dp,
-        color = MaterialTheme.colors.background
+        color = MaterialTheme.colors.background,
     ) {
         Column {
             ImageSection(
                 imageRequestState = imageRequestState,
                 painter = painter,
-                imageDialogFlag = imageDialogFlag
+                imageDialogFlag = imageDialogFlag,
             ) { onClick(it) }
             TextSection(
                 searchedWord = searchedText,
-                gameNewsState = gameNewsState
+                gameNewsState = gameNewsState,
             )
         }
     }

@@ -27,13 +27,13 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
-
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
     val requestState by gameNewsViewModel.requestStatus.collectAsState()
     val shouldSearchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
+    var advancedSearchIconClicked by remember { mutableStateOf(true) }
 
     Row {
         Column {
@@ -42,12 +42,17 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     requestStatus = requestState,
                     listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
                         gameNewsUiStateFiltered,
-                        gameNewsUiState
+                        gameNewsUiState,
                     ),
                     searchedText = searchedText,
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
-                    onSearchTextChanged = { searchedText = it }
+                    onSearchTextChanged = { searchedText = it },
+                    onAdvancedSearchIconClicked = {
+                        advancedSearchIconClicked =
+                            !advancedSearchIconClicked
+                    },
+                    advancedSearchIconClickedValue = advancedSearchIconClicked,
                 )
             } else {
                 HomeScreenComponent(
@@ -56,6 +61,8 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
                     gameNewsViewModel = gameNewsViewModel,
                     localContext = localContext,
                     onSearchTextChanged = { searchedText = it },
+                    onAdvancedSearchIconClicked = { advancedSearchIconClicked },
+                    advancedSearchIconClickedValue = false,
                 )
             }
         }
@@ -70,45 +77,74 @@ private fun ValidateRequestStatus(
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
     onSearchTextChanged: (searchText: String) -> Unit,
+    onAdvancedSearchIconClicked: () -> Unit,
+    advancedSearchIconClickedValue: Boolean,
 ) {
+    val quantifierState = remember { mutableStateOf(9) }
+    val advancedSearchBarText = remember { mutableStateOf("") }
+
     when (requestStatus) {
         States.SUCCESS -> {
             if (listOfGameNewsUiState?.isNotEmpty() == true) {
-                HomeScreenComponent(
-                    searchedText = searchedText,
-                    onSearchTextChanged = onSearchTextChanged,
-                    listOfGameNewsState = listOfGameNewsUiState,
-                    gameNewsViewModel = gameNewsViewModel,
-                    localContext = localContext
-                )
+                Column {
+                    AdvancedSearchComponent(
+                        onSubmitButtonClicked = { itemsPerPage, query ->
+                            gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
+                                itemsPerPage = itemsPerPage,
+                                query = query,
+                            )
+                        },
+                        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
+                        advancedSearchIconClickedValue = !advancedSearchIconClickedValue,
+                        onAdvancedSearchState = {
+                            quantifierState.value = it.first
+                            advancedSearchBarText.value = it.second
+                        },
+                        advancedSearchState = Pair(
+                            quantifierState.value,
+                            advancedSearchBarText.value,
+                        ),
+                    )
+                    HomeScreenComponent(
+                        searchedText = searchedText,
+                        onSearchTextChanged = onSearchTextChanged,
+                        listOfGameNewsState = listOfGameNewsUiState,
+                        gameNewsViewModel = gameNewsViewModel,
+                        localContext = localContext,
+                        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
+                        advancedSearchIconClickedValue = advancedSearchIconClickedValue,
+                    )
+                }
             } else {
                 ErrorStateComponent(
                     onButtonClicked = {
                         CoroutineScope(Dispatchers.Main + Job()).launch {
                             gameNewsViewModel.fetchData()
                         }
-                    }
+                    },
                 )
             }
         }
+
         States.LOADING -> {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.onSurface,
                 )
             }
         }
+
         States.ERROR -> {
             ErrorStateComponent(
                 onButtonClicked = {
                     CoroutineScope(Dispatchers.Main + Job()).launch {
                         gameNewsViewModel.fetchData()
                     }
-                }
+                },
             )
         }
     }
@@ -117,6 +153,9 @@ private fun ValidateRequestStatus(
 @Composable
 private fun getListOfGameNewsFilteredOrNot(
     filteredGameNewsUiState: List<GameNewsState>?,
-    gameNewsUiState: List<GameNewsState>?
-) = if (filteredGameNewsUiState?.isNotEmpty() == true) filteredGameNewsUiState else
+    gameNewsUiState: List<GameNewsState>?,
+) = if (filteredGameNewsUiState?.isNotEmpty() == true) {
+    filteredGameNewsUiState
+} else {
     gameNewsUiState
+}

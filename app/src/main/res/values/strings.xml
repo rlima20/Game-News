@@ -8,6 +8,7 @@
     <string name="game_news_error">Error!</string>
     <string name="gameNews_empty_list">It seems the list you are trying to search is empty.</string>
     <string name="game_news_something_went_wrong">Something went wrong. Please try again later</string>
+    <string name="game_news_exit_text">x</string>
 
     <!-- End of home screen strings -->
 

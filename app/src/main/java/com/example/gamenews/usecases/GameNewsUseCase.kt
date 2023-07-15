@@ -1,7 +1,7 @@
 package com.example.gamenews.usecases
 
-import com.example.gamenews.provider.remote.Either
 import com.example.gamenews.model.GameNewsDTO
+import com.example.gamenews.provider.remote.Either
 import kotlinx.coroutines.flow.Flow
 
 interface GameNewsUseCase {
