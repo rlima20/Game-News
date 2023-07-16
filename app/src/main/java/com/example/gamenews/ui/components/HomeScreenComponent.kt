@@ -53,5 +53,6 @@ fun HomeScreenComponent(
                 context = localContext,
             )
         },
+        enabled = advancedSearchIconClickedValue
     )
 }

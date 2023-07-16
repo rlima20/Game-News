@@ -35,7 +35,7 @@ fun AdvancedSearchComponent(
     onAdvancedSearchState: (Pair<Int, String>) -> Unit = {},
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
-    val defautValue = Pair(9, "")
+    val defaultValue = Pair(9, "")
 
     if (advancedSearchIconClickedValue) {
         Surface(
@@ -70,7 +70,7 @@ fun AdvancedSearchComponent(
                         modifier = Modifier.size(32.dp),
                         onClick = {
                             onAdvancedSearchIconClicked()
-                            onAdvancedSearchState(defautValue)
+                            onAdvancedSearchState(defaultValue)
                         },
                     ) {
                         Text(

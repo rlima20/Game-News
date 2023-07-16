@@ -18,6 +18,7 @@ internal fun NewsSection(
     imageDialog: Boolean,
     onImageRequested: (imageUrl: String) -> ImageRequest,
     onClick: (bool: Boolean) -> Boolean = { false },
+    enabled: Boolean = true,
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
