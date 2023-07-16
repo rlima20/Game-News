@@ -9,7 +9,10 @@
     <string name="gameNews_empty_list">It seems the list you are trying to search is empty.</string>
     <string name="game_news_something_went_wrong">Something went wrong. Please try again later</string>
     <string name="game_news_exit_text">x</string>
+    <string name="game_news_advanced_search_title">Advanced search</string>
+    <string name="game_news_items_per_page">"Items per page: "</string>
+    <string name="game_news_advanced_search_submit_text">Submit</string>
+    <string name="game_news_no_result_for_the_search">No result for the search</string>
 
     <!-- End of home screen strings -->
-
 </resources>

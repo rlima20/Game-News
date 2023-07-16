@@ -14,6 +14,7 @@ data class RequestStatusProps(
     val localContext: Context,
     val listOfGameNewsUiState: List<GameNewsState>?,
     val gameNewsViewModel: GameNewsViewModel,
+    val shouldUseApi: Boolean,
     val onSearchTextChanged: (searchText: String) -> Unit,
     val onAdvancedSearchIconClicked: () -> Unit,
     val onSaveAdvancedSearchStates: (quantifierState: Int, advancedSearchBarText: String) -> Unit,

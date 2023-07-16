@@ -11,6 +11,7 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -51,7 +52,7 @@ internal fun SubmitButtonComponent(
             ),
         ) {
             Text(
-                text = "Submit", // todo
+                text = stringResource(R.string.game_news_advanced_search_submit_text),
                 fontSize = 12.dp.value.sp,
                 overflow = TextOverflow.Ellipsis,
                 color = colorResource(id = R.color.game_news_white_color),

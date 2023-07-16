@@ -22,7 +22,7 @@ class GameNewsViewModel(
 ) : ViewModel() {
 
     /* Feature flags */
-    private val _shouldSearchFromAPI = MutableStateFlow(true)
+    private val _shouldSearchFromAPI = MutableStateFlow(false)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
 
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)

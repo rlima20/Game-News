@@ -35,6 +35,7 @@ fun AdvancedSearchComponent(
     onAdvancedSearchState: (Pair<Int, String>) -> Unit = {},
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
+    val defautValue = Pair(9, "")
 
     if (advancedSearchIconClickedValue) {
         Surface(
@@ -58,7 +59,7 @@ fun AdvancedSearchComponent(
                                 end = 16.dp,
                                 top = 8.dp,
                             ),
-                        text = "Advanced search", // todo - string resource
+                        text = stringResource(R.string.game_news_advanced_search_title),
                         color = colorResource(id = R.color.game_news_splash_activity_main_color),
                         fontSize = dimensionResource(id = R.dimen.game_news_advanced_search_title_size).value.sp,
                         fontStyle = FontStyle.Normal,
@@ -69,7 +70,7 @@ fun AdvancedSearchComponent(
                         modifier = Modifier.size(32.dp),
                         onClick = {
                             onAdvancedSearchIconClicked()
-                            onAdvancedSearchState(Pair(9, "")) // todo - default values
+                            onAdvancedSearchState(defautValue)
                         },
                     ) {
                         Text(
@@ -98,7 +99,7 @@ fun AdvancedSearchComponent(
                             top = 8.dp,
                             end = 16.dp,
                         ),
-                        text = "Items per page: ", // todo
+                        text = stringResource(R.string.game_news_items_per_page),
                         fontSize = dimensionResource(id = R.dimen.game_news_description_size).value.sp,
                         overflow = TextOverflow.Ellipsis,
                     )

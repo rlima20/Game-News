@@ -37,69 +37,40 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val localContext = LocalContext.current
     var advancedSearchIconClicked by remember { mutableStateOf(true) }
 
+    val props = RequestStatusProps(
+        requestStatus = requestState,
+        listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
+            gameNewsUiStateFiltered,
+            gameNewsUiState,
+        ),
+        searchedText = searchedText,
+        gameNewsViewModel = gameNewsViewModel,
+        localContext = localContext,
+        onSearchTextChanged = { searchedText = it },
+        onAdvancedSearchIconClicked = {
+            advancedSearchIconClicked =
+                !advancedSearchIconClicked
+        },
+        advancedSearchIconClickedValue = advancedSearchIconClicked,
+        quantifierState = quantifier,
+        advancedSearchBarText = advancedSearchBarText,
+        onSaveAdvancedSearchStates = { quantifierState, advancedSearchBarText ->
+            gameNewsViewModel.updateAdvancedSearchStates(
+                quantifierState,
+                advancedSearchBarText,
+            )
+        },
+        shouldUseApi = shouldSearchFromAPI,
+    )
     Row {
         Column {
-            if (shouldSearchFromAPI) {
-                ValidateRequestStatus(
-                    RequestStatusProps(
-                        requestStatus = requestState,
-                        listOfGameNewsUiState = getListOfGameNewsFilteredOrNot(
-                            gameNewsUiStateFiltered,
-                            gameNewsUiState,
-                        ),
-                        searchedText = searchedText,
-                        gameNewsViewModel = gameNewsViewModel,
-                        localContext = localContext,
-                        onSearchTextChanged = { searchedText = it },
-                        onAdvancedSearchIconClicked = {
-                            advancedSearchIconClicked =
-                                !advancedSearchIconClicked
-                        },
-                        advancedSearchIconClickedValue = advancedSearchIconClicked,
-                        quantifierState = quantifier,
-                        advancedSearchBarText = advancedSearchBarText,
-                        onSaveAdvancedSearchStates = { quantifierState, advancedSearchBarText ->
-                            gameNewsViewModel.updateAdvancedSearchStates(
-                                quantifierState,
-                                advancedSearchBarText,
-                            )
-                        },
-                    ),
-                )
-            } else {
-                HomeScreenComponent(
-                    searchedText = searchedText,
-                    listOfGameNewsState = listOfNews,
-                    gameNewsViewModel = gameNewsViewModel,
-                    localContext = localContext,
-                    onSearchTextChanged = { searchedText = it },
-                    onAdvancedSearchIconClicked = { advancedSearchIconClicked }, // todo fix this
-                    advancedSearchIconClickedValue = false,
-                )
-            }
+            ValidateRequestStatus(props = props)
         }
     }
 }
 
 @Composable
-private fun ValidateRequestStatus(
-    props: RequestStatusProps,
-) {
-    with(props) {
-        RequestStatusProps(
-            requestStatus = requestStatus,
-            listOfGameNewsUiState = listOfGameNewsUiState,
-            searchedText = searchedText,
-            gameNewsViewModel = gameNewsViewModel,
-            localContext = localContext,
-            onSearchTextChanged = onSearchTextChanged,
-            onAdvancedSearchIconClicked = onAdvancedSearchIconClicked,
-            advancedSearchIconClickedValue = advancedSearchIconClickedValue,
-            quantifierState = quantifierState,
-            advancedSearchBarText = advancedSearchBarText,
-            onSaveAdvancedSearchStates = onSaveAdvancedSearchStates,
-        )
-    }
+private fun ValidateRequestStatus(props: RequestStatusProps) {
     when (props.requestStatus) {
         States.SUCCESS -> {
             if (props.listOfGameNewsUiState?.isNotEmpty() == true) {
@@ -127,7 +98,11 @@ private fun ValidateRequestStatus(
                     HomeScreenComponent(
                         searchedText = props.searchedText,
                         onSearchTextChanged = props.onSearchTextChanged,
-                        listOfGameNewsState = props.listOfGameNewsUiState,
+                        listOfGameNewsState = if (props.shouldUseApi) {
+                            props.listOfGameNewsUiState
+                        } else {
+                            listOfNews
+                        },
                         gameNewsViewModel = props.gameNewsViewModel,
                         localContext = props.localContext,
                         onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
