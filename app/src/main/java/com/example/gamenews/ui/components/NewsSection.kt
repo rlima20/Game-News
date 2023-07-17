@@ -18,7 +18,7 @@ internal fun NewsSection(
     imageDialog: Boolean,
     onImageRequested: (imageUrl: String) -> ImageRequest,
     onClick: (bool: Boolean) -> Boolean = { false },
-    enabled: Boolean = true,
+    disabledColor: Boolean = false,
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -32,6 +32,7 @@ internal fun NewsSection(
                 gameNewsState = gameNewsState,
                 imageDialogFlag = imageDialog,
                 imageRequest = onImageRequested(gameNewsState.image),
+                disabledColor = disabledColor,
             ) { onClick(it) }
         }
     }

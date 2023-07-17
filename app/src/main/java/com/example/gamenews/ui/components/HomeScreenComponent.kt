@@ -19,6 +19,7 @@ fun HomeScreenComponent(
     localContext: Context,
     onAdvancedSearchIconClicked: () -> Unit,
     advancedSearchIconClickedValue: Boolean,
+    disabledColor: Boolean = false,
 ) {
     val noResult = stringResource(id = R.string.game_news_no_result_for_the_search)
 
@@ -53,6 +54,6 @@ fun HomeScreenComponent(
                 context = localContext,
             )
         },
-        enabled = advancedSearchIconClickedValue
+        disabledColor = disabledColor,
     )
 }

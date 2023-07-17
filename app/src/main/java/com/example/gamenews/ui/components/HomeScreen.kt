@@ -1,5 +1,6 @@
 package com.example.gamenews.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import com.example.gamenews.R
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNews
@@ -36,6 +39,9 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
     var advancedSearchIconClicked by remember { mutableStateOf(true) }
+
+    // todo - Essa var vai para o viewmodel depois ou para a props
+    val disabledColor = true
 
     val props = RequestStatusProps(
         requestStatus = requestState,
@@ -61,9 +67,18 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
             )
         },
         shouldUseApi = shouldSearchFromAPI,
+        disabledColor = disabledColor,
     )
     Row {
-        Column {
+        if (disabledColor) {
+            Column(
+                Modifier.background(
+                    colorResource(id = R.color.disabled),
+                ),
+            ) {
+                ValidateRequestStatus(props = props)
+            }
+        } else {
             ValidateRequestStatus(props = props)
         }
     }
@@ -107,6 +122,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                         localContext = props.localContext,
                         onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
                         advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
+                        disabledColor = props.disabledColor,
                     )
                 }
             } else {

@@ -29,6 +29,7 @@ import java.util.Locale
 internal fun TextSection(
     searchedWord: String,
     gameNewsState: GameNewsState,
+    disabledColor: Boolean,
 ) {
     Column(
         modifier = Modifier
@@ -77,6 +78,13 @@ internal fun TextSection(
                     searchedWord = searchedWord.lowercase(Locale.ROOT),
                 ),
             ),
+            color = if (disabledColor) {
+                colorResource(id = R.color.game_news_title_color)
+            } else {
+                colorResource(
+                    id = R.color.game_news_description_color,
+                )
+            },
             fontSize = dimensionResource(id = R.dimen.game_news_description_size).value.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
             overflow = TextOverflow.Ellipsis,
@@ -93,7 +101,15 @@ internal fun TextSection(
                 ),
             text = gameNewsState.link,
             textDecoration = TextDecoration.Underline,
-            color = colorResource(id = R.color.game_news_blue_700),
+            color = if (disabledColor) {
+                colorResource(
+                    id = R.color.game_news_title_color,
+                )
+            } else {
+                colorResource(
+                    id = R.color.game_news_blue_700,
+                )
+            },
         )
     }
 }
