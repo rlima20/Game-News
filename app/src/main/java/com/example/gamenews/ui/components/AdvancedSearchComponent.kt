@@ -20,11 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
+import com.example.gamenews.ui.RequestStatusProps
 
 @Composable
 fun AdvancedSearchComponent(
@@ -146,7 +146,7 @@ private fun setRoundedShapeOnBottom() = RoundedCornerShape(
 
 private fun setItemSize(screenWidth: Int): Dp = ((screenWidth - 16) / 2).dp
 
-@Preview
+/*@Preview
 @Composable
 fun AdvancedSearchComponentPreview() {
     AdvancedSearchComponent(
@@ -158,4 +158,4 @@ fun AdvancedSearchComponentPreview() {
             Pair(1, "")
         },
     )
-}
+}*/

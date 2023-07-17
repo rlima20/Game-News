@@ -20,16 +20,16 @@ import java.util.Locale
 class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
 ) : ViewModel() {
-
-    // todo - revisar e comentar variáveis
     /* Feature flags */
-    private val _shouldSearchFromAPI = MutableStateFlow(false)
+    private val _shouldSearchFromAPI = MutableStateFlow(true)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
 
-    private val _shouldActivateAdvancedSearch = MutableStateFlow(false)
+    private val _shouldActivateAdvancedSearch = MutableStateFlow(true)
     val shouldActivateAdvancedSearch: StateFlow<Boolean> =
         _shouldActivateAdvancedSearch.asStateFlow()
+    /* End of Feature flags */
 
+    // The value of these variables should not be changed
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val uiState: StateFlow<List<GameNewsState>?> = _uiState.asStateFlow()
 

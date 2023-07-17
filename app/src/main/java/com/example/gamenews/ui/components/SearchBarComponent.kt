@@ -134,7 +134,7 @@ fun Preview() {
         {},
         { },
         false,
-        false
+        false,
     )
     Icon(
         imageVector = ImageVector.vectorResource(id = R.drawable.game_news_advanced_search_icon),

@@ -20,7 +20,6 @@ import androidx.compose.ui.res.colorResource
 import com.example.gamenews.R
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
-import com.example.gamenews.provider.local.listOfNews
 import com.example.gamenews.ui.RequestStatusProps
 import com.example.gamenews.viewmodel.GameNewsViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -30,6 +29,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
+    // ViewModel state variables
     val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
     val requestState by gameNewsViewModel.requestStatus.collectAsState()
@@ -38,6 +38,8 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val advancedSearchBarText by gameNewsViewModel.advancedSearchBarText.collectAsState()
     val isScreenEnabled by gameNewsViewModel.isScreenEnabled.collectAsState()
     val shouldActivateAdvancedSearch by gameNewsViewModel.shouldActivateAdvancedSearch.collectAsState()
+
+    // Local state variables
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
     var advancedSearchIconClicked by remember { mutableStateOf(true) }
@@ -70,18 +72,21 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
         isScreenEnabled = isScreenEnabled,
         shouldActivateAdvancedSearch = shouldActivateAdvancedSearch,
     )
-    Row {
-        if (isScreenEnabled) {
-            Column(
-                Modifier.background(
-                    colorResource(id = R.color.disabled),
-                ),
-            ) {
-                ValidateRequestStatus(props = props)
-            }
-        } else {
+    Row { SetHomeScreenColor(props = props) }
+}
+
+@Composable
+fun SetHomeScreenColor(props: RequestStatusProps) {
+    if (props.isScreenEnabled) {
+        Column(
+            Modifier.background(
+                colorResource(id = R.color.disabled),
+            ),
+        ) {
             ValidateRequestStatus(props = props)
         }
+    } else {
+        ValidateRequestStatus(props = props)
     }
 }
 
@@ -113,22 +118,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                             ),
                         )
                     }
-                    // todo - eu posso passar um props para o Home Component
-                    HomeScreenComponent(
-                        searchedText = props.searchedText,
-                        onSearchTextChanged = props.onSearchTextChanged,
-                        listOfGameNewsState = if (props.shouldUseApi) {
-                            props.listOfGameNewsUiState
-                        } else {
-                            listOfNews
-                        },
-                        gameNewsViewModel = props.gameNewsViewModel,
-                        localContext = props.localContext,
-                        onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
-                        advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
-                        isScreenEnabled = props.isScreenEnabled,
-                        shoudActivateAdvancedSearch = props.shouldActivateAdvancedSearch,
-                    )
+                    HomeScreenComponent(props)
                 }
             } else {
                 ErrorStateComponent(
