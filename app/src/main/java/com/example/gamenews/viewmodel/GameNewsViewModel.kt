@@ -21,9 +21,14 @@ class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
 ) : ViewModel() {
 
+    // todo - revisar e comentar variáveis
     /* Feature flags */
     private val _shouldSearchFromAPI = MutableStateFlow(false)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
+
+    private val _shouldActivateAdvancedSearch = MutableStateFlow(false)
+    val shouldActivateAdvancedSearch: StateFlow<Boolean> =
+        _shouldActivateAdvancedSearch.asStateFlow()
 
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val uiState: StateFlow<List<GameNewsState>?> = _uiState.asStateFlow()

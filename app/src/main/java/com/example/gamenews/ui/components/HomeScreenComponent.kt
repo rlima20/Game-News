@@ -18,6 +18,7 @@ fun HomeScreenComponent(
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
     isScreenEnabled: Boolean = false,
+    shoudActivateAdvancedSearch: Boolean,
     advancedSearchIconClickedValue: Boolean,
     onAdvancedSearchIconClicked: () -> Unit,
 ) {
@@ -41,6 +42,8 @@ fun HomeScreenComponent(
         },
         onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
         advancedSearchIconClickedValue = advancedSearchIconClickedValue,
+        shoudActivateAdvancedSearch = shoudActivateAdvancedSearch,
+
     )
 
     NewsSection(

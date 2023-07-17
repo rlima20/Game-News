@@ -37,6 +37,7 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val quantifier by gameNewsViewModel.quantifier.collectAsState()
     val advancedSearchBarText by gameNewsViewModel.advancedSearchBarText.collectAsState()
     val isScreenEnabled by gameNewsViewModel.isScreenEnabled.collectAsState()
+    val shouldActivateAdvancedSearch by gameNewsViewModel.shouldActivateAdvancedSearch.collectAsState()
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
     var advancedSearchIconClicked by remember { mutableStateOf(true) }
@@ -67,6 +68,7 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
         },
         shouldUseApi = shouldSearchFromAPI,
         isScreenEnabled = isScreenEnabled,
+        shouldActivateAdvancedSearch = shouldActivateAdvancedSearch,
     )
     Row {
         if (isScreenEnabled) {
@@ -89,26 +91,29 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
         States.SUCCESS -> {
             if (props.listOfGameNewsUiState?.isNotEmpty() == true) {
                 Column {
-                    AdvancedSearchComponent(
-                        onSubmitButtonClicked = { itemsPerPage, query ->
-                            props.gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
-                                itemsPerPage = itemsPerPage,
-                                query = query,
-                            )
-                        },
-                        onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
-                        advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
-                        onAdvancedSearchState = {
-                            props.onSaveAdvancedSearchStates(
-                                it.first,
-                                it.second,
-                            )
-                        },
-                        advancedSearchState = Pair(
-                            props.quantifierState,
-                            props.advancedSearchBarText,
-                        ),
-                    )
+                    if (props.shouldActivateAdvancedSearch) {
+                        AdvancedSearchComponent(
+                            onSubmitButtonClicked = { itemsPerPage, query ->
+                                props.gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
+                                    itemsPerPage = itemsPerPage,
+                                    query = query,
+                                )
+                            },
+                            onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
+                            advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
+                            onAdvancedSearchState = {
+                                props.onSaveAdvancedSearchStates(
+                                    it.first,
+                                    it.second,
+                                )
+                            },
+                            advancedSearchState = Pair(
+                                props.quantifierState,
+                                props.advancedSearchBarText,
+                            ),
+                        )
+                    }
+                    // todo - eu posso passar um props para o Home Component
                     HomeScreenComponent(
                         searchedText = props.searchedText,
                         onSearchTextChanged = props.onSearchTextChanged,
@@ -122,6 +127,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                         onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
                         advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
                         isScreenEnabled = props.isScreenEnabled,
+                        shoudActivateAdvancedSearch = props.shouldActivateAdvancedSearch,
                     )
                 }
             } else {
