@@ -29,7 +29,7 @@ internal fun ImageSection(
     imageRequestState: States,
     painter: Painter,
     imageDialogFlag: Boolean = false,
-    disabledColor: Boolean = false,
+    isScreenEnabled: Boolean = false,
     onClick: (value: Boolean) -> Boolean = { false },
 ) {
     var showImageDialogState by remember { mutableStateOf(imageDialogFlag) }
@@ -44,6 +44,7 @@ internal fun ImageSection(
                     painter = painter,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
+                    alpha = if (isScreenEnabled) 0.2f else 1f,
                 )
                 TextButton(
                     modifier = Modifier
@@ -54,6 +55,7 @@ internal fun ImageSection(
                         onClick(true)
                         showImageDialogState = onClick(true)
                     },
+                    enabled = !isScreenEnabled,
                 ) {
                     if (showImageDialogState) {
                         ImageDialog(

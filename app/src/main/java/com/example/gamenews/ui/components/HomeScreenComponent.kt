@@ -17,9 +17,9 @@ fun HomeScreenComponent(
     listOfGameNewsState: List<GameNewsState>,
     gameNewsViewModel: GameNewsViewModel,
     localContext: Context,
-    onAdvancedSearchIconClicked: () -> Unit,
+    isScreenEnabled: Boolean = false,
     advancedSearchIconClickedValue: Boolean,
-    disabledColor: Boolean = false,
+    onAdvancedSearchIconClicked: () -> Unit,
 ) {
     val noResult = stringResource(id = R.string.game_news_no_result_for_the_search)
 
@@ -54,6 +54,6 @@ fun HomeScreenComponent(
                 context = localContext,
             )
         },
-        disabledColor = disabledColor,
+        isScreenEnabled = isScreenEnabled,
     )
 }

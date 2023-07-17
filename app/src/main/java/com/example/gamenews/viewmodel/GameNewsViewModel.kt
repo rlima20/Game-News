@@ -44,6 +44,9 @@ class GameNewsViewModel(
     private val _advancedSearchBarText = MutableStateFlow("")
     val advancedSearchBarText: StateFlow<String> = _advancedSearchBarText.asStateFlow()
 
+    private val _isScreenEnabled = MutableStateFlow(false)
+    val isScreenEnabled: StateFlow<Boolean> = _isScreenEnabled.asStateFlow()
+
     init {
         viewModelScope.launch {
             fetchData()
@@ -57,6 +60,10 @@ class GameNewsViewModel(
 
     private fun updateRequestErrorState() {
         _requestStatus.value = States.ERROR
+    }
+
+    fun setScreenEnabled(enabled: Boolean) {
+        _isScreenEnabled.value = enabled
     }
 
     fun updateAdvancedSearchStates(

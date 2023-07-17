@@ -36,12 +36,10 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     val shouldSearchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
     val quantifier by gameNewsViewModel.quantifier.collectAsState()
     val advancedSearchBarText by gameNewsViewModel.advancedSearchBarText.collectAsState()
+    val isScreenEnabled by gameNewsViewModel.isScreenEnabled.collectAsState()
     var searchedText by remember { mutableStateOf("") }
     val localContext = LocalContext.current
     var advancedSearchIconClicked by remember { mutableStateOf(true) }
-
-    // todo - Essa var vai para o viewmodel depois ou para a props
-    val disabledColor = true
 
     val props = RequestStatusProps(
         requestStatus = requestState,
@@ -56,6 +54,7 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
         onAdvancedSearchIconClicked = {
             advancedSearchIconClicked =
                 !advancedSearchIconClicked
+            gameNewsViewModel.setScreenEnabled(!advancedSearchIconClicked)
         },
         advancedSearchIconClickedValue = advancedSearchIconClicked,
         quantifierState = quantifier,
@@ -67,10 +66,10 @@ internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
             )
         },
         shouldUseApi = shouldSearchFromAPI,
-        disabledColor = disabledColor,
+        isScreenEnabled = isScreenEnabled,
     )
     Row {
-        if (disabledColor) {
+        if (isScreenEnabled) {
             Column(
                 Modifier.background(
                     colorResource(id = R.color.disabled),
@@ -122,7 +121,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                         localContext = props.localContext,
                         onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
                         advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
-                        disabledColor = props.disabledColor,
+                        isScreenEnabled = props.isScreenEnabled,
                     )
                 }
             } else {

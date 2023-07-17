@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- todo - revisar as cores -->
     <color name="game_news_blue_200">#496F7D</color>
     <color name="game_news_blue_500">#8AB1BF</color>
     <color name="game_news_blue_700">#003c51</color>
@@ -18,4 +19,5 @@
     <color name="game_news_white_color">#FFFFFFFF</color>
     <color name="game_news_transparent_color">#00FFFFFF</color>
     <color name="disabled">#656565</color>
+    <color name="disabled2">#000000</color>
 </resources>

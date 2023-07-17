@@ -29,7 +29,7 @@ import java.util.Locale
 internal fun TextSection(
     searchedWord: String,
     gameNewsState: GameNewsState,
-    disabledColor: Boolean,
+    isScreenEnabled: Boolean,
 ) {
     Column(
         modifier = Modifier
@@ -78,7 +78,7 @@ internal fun TextSection(
                     searchedWord = searchedWord.lowercase(Locale.ROOT),
                 ),
             ),
-            color = if (disabledColor) {
+            color = if (isScreenEnabled) {
                 colorResource(id = R.color.game_news_title_color)
             } else {
                 colorResource(
@@ -94,14 +94,14 @@ internal fun TextSection(
             modifier = Modifier
                 .testTag("TEXT_SECTION_LINK_TEST_TAG")
                 .clickable(
-                    enabled = true,
+                    enabled = !isScreenEnabled,
                     onClickLabel = gameNewsState.link,
                     role = Role.Button,
                     onClick = {},
                 ),
             text = gameNewsState.link,
             textDecoration = TextDecoration.Underline,
-            color = if (disabledColor) {
+            color = if (isScreenEnabled) {
                 colorResource(
                     id = R.color.game_news_title_color,
                 )

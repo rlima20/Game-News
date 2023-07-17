@@ -27,7 +27,7 @@ internal fun NewsItem(
     gameNewsState: GameNewsState,
     imageRequest: ImageRequest,
     imageDialogFlag: Boolean,
-    disabledColor: Boolean = false,
+    isScreenEnabled: Boolean = false,
     onClick: (value: Boolean) -> Boolean = { false },
 ) {
     var imageRequestState by remember { mutableStateOf(States.LOADING) }
@@ -47,10 +47,10 @@ internal fun NewsItem(
     ) {
         Column(
             modifier = Modifier.background(
-                if (disabledColor) {
+                if (isScreenEnabled) {
                     colorResource(id = R.color.disabled)
                 } else {
-                    colorResource(id = R.color.game_news_white_color)
+                    colorResource(id = R.color.game_news_transparent_color)
                 },
             ),
         ) {
@@ -58,12 +58,12 @@ internal fun NewsItem(
                 imageRequestState = imageRequestState,
                 painter = painter,
                 imageDialogFlag = imageDialogFlag,
-                disabledColor = disabledColor,
+                isScreenEnabled = isScreenEnabled,
             ) { onClick(it) }
             TextSection(
                 searchedWord = searchedText,
                 gameNewsState = gameNewsState,
-                disabledColor = disabledColor,
+                isScreenEnabled = isScreenEnabled,
             )
         }
     }
