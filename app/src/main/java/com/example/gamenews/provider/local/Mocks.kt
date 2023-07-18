@@ -84,3 +84,27 @@ val listOfNewsDTO: List<GameNewsDTO> = mutableListOf(
         link = "https://gamerant.com/god-of-war-ragnarok-thor-funny-strut-training-kill-video-clip/",
     ),
 )
+
+val listOfNewsByQueryDTO: MutableList<GameNewsDTO>? = mutableListOf(
+    GameNewsDTO(
+        title = "Mario Kart 8 Deluxe Fans Point Out Missing Feature From One of DLC Wave 5’s Tracks",
+        date = "Thu, 13 Jul 2023 01:09:40 GMT",
+        description = "Wave 5 of the Mario Kart 8 Deluxe Booster Course Pass is available, but some fans are noticing a strange omission from one track.",
+        image = "https://static0.gamerantimages.com/wordpress/wp-content/uploads/2023/07/mario-kart-8-deluxe-sunset-wilds-missing-feature.jpg",
+        link = "https://gamerant.com/mario-kart-8-sunset-wilds-missing-feature-sunset/",
+    ),
+    GameNewsDTO(
+        title = "Mario + Rabbids Sparks Of Hope Is Only $20 At Amazon During Prime Day",
+        date = "Wed, 12 Jul 2023 14:44:00 -0700",
+        description = "If you haven't picked up Mario + Rabbids: Sparks of Hope, now's the time to do it. Amazon is selling the excellent Nintendo Switch exclusive for only $20 as part of its Prime Day 2023 sale. Though Sparks of Hope has seen many regular discounts since launching last October, the $20 price is the best yet.",
+        image = "https://www.gamespot.com/a/uploads/screen_medium/1702/17023653/4070430-sparksofhope.jpg",
+        link = "https://www.gamespot.com/articles/mario-rabbids-sparks-of-hope-is-only-20-at-amazon-during-prime-day/1100-6509631/?ftag=CAD-01-10abi2f",
+    ),
+    GameNewsDTO(
+        title = "Mario Golf: Super Rush Is 50% Off For Prime Day",
+        date = "Tue, 11 Jul 2023 10:18:00 -0700",
+        description = "Mario Golf: Super Rush is on sale for $30 at Amazon as part of the retailer's Prime Day 2023 sale. Both the digital and physical versions of the arcade golf game are eligible for this deal. You don't have to be a Prime member to be eligible for this discount. Needless to say, this is the lowest price ever for Super Rush.",
+        image = "https://www.gamespot.com/a/uploads/screen_medium/1595/15950357/4164126-3849883-superrush.jpeg",
+        link = "https://www.gamespot.com/articles/mario-golf-super-rush-is-50-off-for-prime-day/1100-6493365/?ftag=CAD-01-10abi2f",
+    ),
+)

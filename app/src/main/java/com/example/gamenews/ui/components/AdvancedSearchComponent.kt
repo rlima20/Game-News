@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gamenews.R
-import com.example.gamenews.ui.RequestStatusProps
 
 @Composable
 fun AdvancedSearchComponent(
@@ -33,6 +32,7 @@ fun AdvancedSearchComponent(
     onAdvancedSearchIconClicked: () -> Unit,
     onSubmitButtonClicked: (Int, String) -> Unit,
     onAdvancedSearchState: (Pair<Int, String>) -> Unit = {},
+    onExitButtonCLicked: () -> Unit = {},
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val defaultValue = Pair(9, "")
@@ -69,6 +69,7 @@ fun AdvancedSearchComponent(
                     IconButton(
                         modifier = Modifier.size(32.dp),
                         onClick = {
+                            onExitButtonCLicked()
                             onAdvancedSearchIconClicked()
                             onAdvancedSearchState(defaultValue)
                         },

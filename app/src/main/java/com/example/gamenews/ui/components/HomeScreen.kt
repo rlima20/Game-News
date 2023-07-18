@@ -99,12 +99,17 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                     if (props.shouldActivateAdvancedSearch) {
                         AdvancedSearchComponent(
                             onSubmitButtonClicked = { itemsPerPage, query ->
-                                props.gameNewsViewModel.getListOfGameNewsByQueryAndItemsPerPage(
-                                    itemsPerPage = itemsPerPage,
+                                props.gameNewsViewModel.fetchDataByQueryLocal(
+                                    quantifier = itemsPerPage,
                                     query = query,
                                 )
                             },
-                            onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
+                            onAdvancedSearchIconClicked = {
+                                props.onAdvancedSearchIconClicked()
+                            },
+                            onExitButtonCLicked = {
+                                props.gameNewsViewModel.fetchData()
+                            },
                             advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
                             onAdvancedSearchState = {
                                 props.onSaveAdvancedSearchStates(
