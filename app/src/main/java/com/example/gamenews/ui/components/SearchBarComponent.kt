@@ -42,6 +42,7 @@ internal fun SearchBarComponent(
     onSearched: () -> Unit = {},
     onAdvancedSearchIconClicked: () -> Unit,
     advancedSearchIconClickedValue: Boolean,
+    shoudActivateAdvancedSearch: Boolean,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -103,16 +104,18 @@ internal fun SearchBarComponent(
                             )
                         }
                     } else {
-                        IconButton(
-                            onClick = { onAdvancedSearchIconClicked() },
-                        ) {
-                            Image(
-                                modifier = Modifier
-                                    .size(48.dp)
-                                    .padding(end = 16.dp),
-                                painter = painterResource(R.drawable.game_news_advanced_search_icon),
-                                contentDescription = null,
-                            )
+                        if (shoudActivateAdvancedSearch) {
+                            IconButton(
+                                onClick = { onAdvancedSearchIconClicked() },
+                            ) {
+                                Image(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .padding(end = 16.dp),
+                                    painter = painterResource(R.drawable.game_news_advanced_search_icon),
+                                    contentDescription = null,
+                                )
+                            }
                         }
                     }
                 }
@@ -130,6 +133,7 @@ fun Preview() {
         {},
         {},
         { },
+        false,
         false,
     )
     Icon(

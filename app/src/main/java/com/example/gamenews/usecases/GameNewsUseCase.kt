@@ -5,5 +5,14 @@ import com.example.gamenews.provider.remote.Either
 import kotlinx.coroutines.flow.Flow
 
 interface GameNewsUseCase {
-    operator fun invoke(): Flow<Either<List<GameNewsDTO>?, Throwable>>
+    fun invokeGameNews(): Flow<Either<List<GameNewsDTO>?, Throwable>>
+    fun invokeGameNewsByQuery(
+        query: String,
+        quantifier: Int,
+    ): Flow<Either<List<GameNewsDTO>?, Throwable>>
+
+    fun invokeGameNewsByQueryLocal(
+        query: String,
+        quantifier: Int,
+    ): Flow<Either<List<GameNewsDTO>?, Throwable>>
 }

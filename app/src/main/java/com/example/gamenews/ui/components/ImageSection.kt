@@ -19,6 +19,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.gamenews.R
 import com.example.gamenews.model.States
 
@@ -27,6 +29,7 @@ internal fun ImageSection(
     imageRequestState: States,
     painter: Painter,
     imageDialogFlag: Boolean = false,
+    isScreenEnabled: Boolean = false,
     onClick: (value: Boolean) -> Boolean = { false },
 ) {
     var showImageDialogState by remember { mutableStateOf(imageDialogFlag) }
@@ -41,6 +44,7 @@ internal fun ImageSection(
                     painter = painter,
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
+                    alpha = if (isScreenEnabled) 0.2f else 1f,
                 )
                 TextButton(
                     modifier = Modifier
@@ -51,6 +55,7 @@ internal fun ImageSection(
                         onClick(true)
                         showImageDialogState = onClick(true)
                     },
+                    enabled = !isScreenEnabled,
                 ) {
                     if (showImageDialogState) {
                         ImageDialog(
@@ -80,4 +85,15 @@ internal fun ImageSection(
 
         else -> {}
     }
+}
+
+@Preview
+@Composable
+private fun ImageSectionPreview() {
+    ImageSection(
+        imageRequestState = States.SUCCESS,
+        painter = painterResource(
+            id = R.drawable.logo,
+        ),
+    )
 }

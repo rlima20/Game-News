@@ -20,7 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,6 +32,7 @@ fun AdvancedSearchComponent(
     onAdvancedSearchIconClicked: () -> Unit,
     onSubmitButtonClicked: (Int, String) -> Unit,
     onAdvancedSearchState: (Pair<Int, String>) -> Unit = {},
+    onExitButtonCLicked: () -> Unit = {},
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     val defaultValue = Pair(9, "")
@@ -69,6 +69,7 @@ fun AdvancedSearchComponent(
                     IconButton(
                         modifier = Modifier.size(32.dp),
                         onClick = {
+                            onExitButtonCLicked()
                             onAdvancedSearchIconClicked()
                             onAdvancedSearchState(defaultValue)
                         },
@@ -146,7 +147,7 @@ private fun setRoundedShapeOnBottom() = RoundedCornerShape(
 
 private fun setItemSize(screenWidth: Int): Dp = ((screenWidth - 16) / 2).dp
 
-@Preview
+/*@Preview
 @Composable
 fun AdvancedSearchComponentPreview() {
     AdvancedSearchComponent(
@@ -158,4 +159,4 @@ fun AdvancedSearchComponentPreview() {
             Pair(1, "")
         },
     )
-}
+}*/

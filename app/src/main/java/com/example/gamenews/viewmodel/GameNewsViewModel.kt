@@ -9,6 +9,7 @@ import com.example.gamenews.extensions.removeSpaces
 import com.example.gamenews.mappers.toMap
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
+import com.example.gamenews.provider.local.listOfNewsByQueryDTO
 import com.example.gamenews.usecases.GameNewsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,11 +21,16 @@ import java.util.Locale
 class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
 ) : ViewModel() {
-
     /* Feature flags */
-    private val _shouldSearchFromAPI = MutableStateFlow(false)
+    private val _shouldSearchFromAPI = MutableStateFlow(true)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
 
+    private val _shouldActivateAdvancedSearch = MutableStateFlow(true)
+    val shouldActivateAdvancedSearch: StateFlow<Boolean> =
+        _shouldActivateAdvancedSearch.asStateFlow()
+    /* End of Feature flags */
+
+    // The value of these variables should not be changed
     private val _uiState = MutableStateFlow<MutableList<GameNewsState>?>(null)
     val uiState: StateFlow<List<GameNewsState>?> = _uiState.asStateFlow()
 
@@ -44,6 +50,9 @@ class GameNewsViewModel(
     private val _advancedSearchBarText = MutableStateFlow("")
     val advancedSearchBarText: StateFlow<String> = _advancedSearchBarText.asStateFlow()
 
+    private val _isScreenEnabled = MutableStateFlow(false)
+    val isScreenEnabled: StateFlow<Boolean> = _isScreenEnabled.asStateFlow()
+
     init {
         viewModelScope.launch {
             fetchData()
@@ -57,6 +66,10 @@ class GameNewsViewModel(
 
     private fun updateRequestErrorState() {
         _requestStatus.value = States.ERROR
+    }
+
+    fun setScreenEnabled(enabled: Boolean) {
+        _isScreenEnabled.value = enabled
     }
 
     fun updateAdvancedSearchStates(
@@ -86,13 +99,9 @@ class GameNewsViewModel(
         _uiStateFiltered.value = listFiltered
     }
 
-    fun getListOfGameNewsByQueryAndItemsPerPage(
-        query: String,
-        itemsPerPage: Int,
-    ) { /*: List<GameNewsState>? {
-        return uiState.value?.filter {
-            it.title.toLowerCase(Locale.ROOT).contains(query.toLowerCase(Locale.ROOT))
-        }?.take(itemsPerPage)*/
+    fun fetchDataByQueryLocal() {
+        _requestStatus.value = States.LOADING
+        updateGameNewsState(toMap(listOfNewsByQueryDTO))
     }
 
     fun clearFilteredListOfGameNews() {
@@ -107,7 +116,22 @@ class GameNewsViewModel(
     fun fetchData() {
         _requestStatus.value = States.LOADING
         viewModelScope.launch {
-            gameNewsUseCase.invoke().collect { result ->
+            gameNewsUseCase.invokeGameNews().collect { result ->
+                result.either(
+                    onSuccess = { updateGameNewsState(toMap(it)) },
+                    onFailure = { updateRequestErrorState() },
+                )
+            }
+        }
+    }
+
+    fun fetchDataByQuery(
+        query: String = "",
+        quantifier: Int = 1,
+    ) {
+        _requestStatus.value = States.LOADING
+        viewModelScope.launch {
+            gameNewsUseCase.invokeGameNewsByQuery(query, quantifier).collect { result ->
                 result.either(
                     onSuccess = { updateGameNewsState(toMap(it)) },
                     onFailure = { updateRequestErrorState() },

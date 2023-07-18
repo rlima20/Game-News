@@ -18,13 +18,14 @@ internal fun NewsSection(
     imageDialog: Boolean,
     onImageRequested: (imageUrl: String) -> ImageRequest,
     onClick: (bool: Boolean) -> Boolean = { false },
-    enabled: Boolean = true,
+    isScreenEnabled: Boolean = false,
 ) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .padding(16.dp)
             .fillMaxSize(),
+        userScrollEnabled = !isScreenEnabled,
     ) {
         items(listOfGameNewsState) { gameNewsState ->
             NewsItem(
@@ -32,6 +33,7 @@ internal fun NewsSection(
                 gameNewsState = gameNewsState,
                 imageDialogFlag = imageDialog,
                 imageRequest = onImageRequested(gameNewsState.image),
+                isScreenEnabled = isScreenEnabled,
             ) { onClick(it) }
         }
     }

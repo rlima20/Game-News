@@ -1,58 +1,58 @@
 package com.example.gamenews.ui.components
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.example.gamenews.R
-import com.example.gamenews.model.GameNewsState
-import com.example.gamenews.viewmodel.GameNewsViewModel
+import com.example.gamenews.provider.local.listOfNews
+import com.example.gamenews.ui.RequestStatusProps
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun HomeScreenComponent(
-    searchedText: String,
-    onSearchTextChanged: (searchText: String) -> Unit,
-    listOfGameNewsState: List<GameNewsState>,
-    gameNewsViewModel: GameNewsViewModel,
-    localContext: Context,
-    onAdvancedSearchIconClicked: () -> Unit,
-    advancedSearchIconClickedValue: Boolean,
-) {
+fun HomeScreenComponent(props: RequestStatusProps) {
     val noResult = stringResource(id = R.string.game_news_no_result_for_the_search)
 
     SearchBarComponent(
-        text = searchedText,
-        onValueChange = { typedText -> onSearchTextChanged(typedText) },
-        onCloseIconClicked = { gameNewsViewModel.clearFilteredListOfGameNews() },
+        text = props.searchedText,
+        onValueChange = { typedText -> props.onSearchTextChanged(typedText) },
+        onCloseIconClicked = { props.gameNewsViewModel.clearFilteredListOfGameNews() },
         onSearched = {
-            gameNewsViewModel.filterListOfGameNews(searchedText)
+            props.gameNewsViewModel.filterListOfGameNews(props.searchedText)
 
-            if (gameNewsViewModel.uiStateFiltered.value?.isEmpty() == true) {
+            if (props.gameNewsViewModel.uiStateFiltered.value?.isEmpty() == true) {
                 Toast.makeText(
-                    localContext,
+                    props.localContext,
                     noResult,
                     Toast
                         .LENGTH_SHORT,
                 ).show()
             }
         },
-        onAdvancedSearchIconClicked = { onAdvancedSearchIconClicked() },
-        advancedSearchIconClickedValue = advancedSearchIconClickedValue,
+        onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
+        advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
+        shoudActivateAdvancedSearch = props.shouldActivateAdvancedSearch,
     )
 
-    NewsSection(
-        searchedText = searchedText,
-        listOfGameNewsState = listOfGameNewsState,
-        imageDialog = gameNewsViewModel.imageDialog.value,
-        onClick = { gameNewsViewModel.setImageDialog(it) },
-        onImageRequested = { imageUrl ->
-            gameNewsViewModel.getAsyncImage(
-                imageUrl = imageUrl,
-                context = localContext,
-            )
-        },
-        enabled = advancedSearchIconClickedValue
-    )
+    (
+        if (props.shouldUseApi) {
+            props.listOfGameNewsUiState
+        } else {
+            listOfNews
+        }
+        )?.let {
+        NewsSection(
+            searchedText = props.searchedText,
+            listOfGameNewsState = it,
+            imageDialog = props.gameNewsViewModel.imageDialog.value,
+            onClick = { props.gameNewsViewModel.setImageDialog(it) },
+            onImageRequested = { imageUrl ->
+                props.gameNewsViewModel.getAsyncImage(
+                    imageUrl = imageUrl,
+                    context = props.localContext,
+                )
+            },
+            isScreenEnabled = props.isScreenEnabled,
+        )
+    }
 }
