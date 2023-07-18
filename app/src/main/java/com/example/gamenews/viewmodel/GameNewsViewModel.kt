@@ -11,11 +11,11 @@ import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNewsByQueryDTO
 import com.example.gamenews.usecases.GameNewsUseCase
+import java.util.Locale
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.util.Locale
 
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
@@ -99,7 +99,10 @@ class GameNewsViewModel(
         _uiStateFiltered.value = listFiltered
     }
 
-    fun fetchDataByQueryLocal() {
+    fun fetchDataByQueryLocal(
+        query: String = "",
+        quantifier: Int = 1,
+    ) {
         _requestStatus.value = States.LOADING
         updateGameNewsState(toMap(listOfNewsByQueryDTO))
     }
