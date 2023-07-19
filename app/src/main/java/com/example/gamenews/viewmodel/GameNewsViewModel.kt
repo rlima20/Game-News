@@ -11,18 +11,18 @@ import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNewsByQueryDTO
 import com.example.gamenews.usecases.GameNewsUseCase
-import java.util.Locale
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
 ) : ViewModel() {
     /* Feature flags */
-    private val _shouldSearchFromAPI = MutableStateFlow(true)
+    private val _shouldSearchFromAPI = MutableStateFlow(false)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
 
     private val _shouldActivateAdvancedSearch = MutableStateFlow(true)

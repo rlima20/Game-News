@@ -4,5 +4,7 @@ val appModules = listOf(
     gameNewsViewModelDI,
     networkDI,
     repositoryDI,
-    gameNewsUseCaseModuleDI
+    gameNewsUseCaseModuleDI,
+    firebaseAnalyticsDI,
+    analyticsDI,
 )
