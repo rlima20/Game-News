@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "253623012427",
+    "project_id": "last-project-49abc",
+    "storage_bucket": "last-project-49abc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253623012427:android:162a24a76a61d8119191ce",
+        "android_client_info": {
+          "package_name": "com.example.gamenews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253623012427-v1ne96rga7ltveq9tl30fetj6f39v12l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamenews",
+            "certificate_hash": "4b96b9b6bb94e39c86001aa7ecb699d08e8a8288"
+          }
+        },
+        {
+          "client_id": "253623012427-2d10g6qehbq9gj21v210e1otgh9iveo2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnZzvAdY1WraOH_OxsF4UdDNpqTK9BwFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253623012427-2d10g6qehbq9gj21v210e1otgh9iveo2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
