@@ -20,7 +20,6 @@ import androidx.compose.ui.res.colorResource
 import com.example.gamenews.R
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
-import com.example.gamenews.provider.local.listOfNews
 import com.example.gamenews.ui.RequestStatusProps
 import com.example.gamenews.viewmodel.GameNewsViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -31,7 +30,7 @@ import kotlinx.coroutines.launch
 @Composable
 internal fun HomeScreen(gameNewsViewModel: GameNewsViewModel) {
     // ViewModel state variables
-    val gameNewsUiState = listOfNews // by gameNewsViewModel.uiState.collectAsState()
+    val gameNewsUiState by gameNewsViewModel.uiState.collectAsState()
     val gameNewsUiStateFiltered by gameNewsViewModel.uiStateFiltered.collectAsState()
     val requestState by gameNewsViewModel.requestStatus.collectAsState()
     val shouldSearchFromAPI by gameNewsViewModel.shouldSearchFromAPI.collectAsState()
@@ -93,9 +92,7 @@ fun SetHomeScreenColor(props: RequestStatusProps) {
 
 @Composable
 private fun ValidateRequestStatus(props: RequestStatusProps) {
-    HomeScreenComponent(props)
-
-/*    when (props.requestStatus) {
+    when (props.requestStatus) {
         States.SUCCESS -> {
             if (props.listOfGameNewsUiState?.isNotEmpty() == true) {
                 Column {
@@ -111,7 +108,11 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                                 props.onAdvancedSearchIconClicked()
                             },
                             onExitButtonCLicked = {
-                                props.gameNewsViewModel.fetchData()
+                                if (props.gameNewsViewModel.shouldSearchFromAPI.value) {
+                                    props.gameNewsViewModel.fetchData()
+                                } else {
+                                    props.gameNewsViewModel.fetchLocalData()
+                                }
                             },
                             advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
                             onAdvancedSearchState = {
@@ -129,15 +130,13 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                     HomeScreenComponent(props)
                 }
             } else {
-                HomeScreenComponent(props)
-
-*//*                ErrorStateComponent(
+                ErrorStateComponent(
                     onButtonClicked = {
                         CoroutineScope(Dispatchers.Main + Job()).launch {
                             props.gameNewsViewModel.fetchData()
                         }
                     },
-                )*//*
+                )
             }
         }
 
@@ -162,7 +161,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                 },
             )
         }
-    }*/
+    }
 }
 
 @Composable

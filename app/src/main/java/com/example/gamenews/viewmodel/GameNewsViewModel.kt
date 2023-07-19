@@ -10,6 +10,7 @@ import com.example.gamenews.mappers.toMap
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
 import com.example.gamenews.provider.local.listOfNewsByQueryDTO
+import com.example.gamenews.provider.local.mutableListOfNews
 import com.example.gamenews.usecases.GameNewsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -55,7 +56,11 @@ class GameNewsViewModel(
 
     init {
         viewModelScope.launch {
-            fetchData()
+            if (shouldSearchFromAPI.value) {
+                fetchData()
+            } else {
+                fetchLocalData()
+            }
         }
     }
 
@@ -66,6 +71,11 @@ class GameNewsViewModel(
 
     private fun updateRequestErrorState() {
         _requestStatus.value = States.ERROR
+    }
+
+    fun fetchLocalData() {
+        _requestStatus.value = States.LOADING
+        updateGameNewsState(mutableListOfNews)
     }
 
     fun setScreenEnabled(enabled: Boolean) {
