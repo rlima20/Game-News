@@ -10,9 +10,11 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import com.example.gamenews.Analytics
 import com.example.gamenews.R
 import com.example.gamenews.ui.components.HomeScreen
 import com.example.gamenews.viewmodel.GameNewsViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -34,6 +36,7 @@ class HomeFragment : Fragment() {
                 HomeScreen(gameNewsViewModel)
             }
         }
+        // throw RuntimeException("Test Crash") // Force a crash
         return binding.rootView
     }
 }

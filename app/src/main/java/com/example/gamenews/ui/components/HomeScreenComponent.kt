@@ -35,10 +35,11 @@ fun HomeScreenComponent(props: RequestStatusProps) {
     )
 
     (
+        // Isso é temporário, até que a API esteja funcionando
         if (props.shouldUseApi) {
             props.listOfGameNewsUiState
         } else {
-            listOfNews
+            props.listOfGameNewsUiState
         }
         )?.let {
         NewsSection(
@@ -54,5 +55,6 @@ fun HomeScreenComponent(props: RequestStatusProps) {
             },
             isScreenEnabled = props.isScreenEnabled,
         )
+        props.gameNewsViewModel.trackScreenViewed()
     }
 }

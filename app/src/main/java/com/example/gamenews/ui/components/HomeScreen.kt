@@ -108,7 +108,11 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                                 props.onAdvancedSearchIconClicked()
                             },
                             onExitButtonCLicked = {
-                                props.gameNewsViewModel.fetchData()
+                                if (props.gameNewsViewModel.shouldSearchFromAPI.value) {
+                                    props.gameNewsViewModel.fetchData()
+                                } else {
+                                    props.gameNewsViewModel.fetchLocalData()
+                                }
                             },
                             advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
                             onAdvancedSearchState = {
@@ -122,6 +126,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                                 props.advancedSearchBarText,
                             ),
                         )
+                        props.gameNewsViewModel.trackAdvancedSearchViewed()
                     }
                     HomeScreenComponent(props)
                 }

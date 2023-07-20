@@ -5,5 +5,5 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val gameNewsViewModelDI = module {
-    viewModel { GameNewsViewModel(get()) }
+    viewModel { GameNewsViewModel(get(), get()) }
 }
