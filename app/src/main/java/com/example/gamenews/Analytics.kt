@@ -18,21 +18,13 @@ class Analytics(private val firebaseAnalytics: FirebaseAnalytics) {
     }
 
     // todo: add more events
-    fun track() {
+    fun trackAdvancedSearchViewed() {
         firebaseAnalytics.logEvent(
-            FirebaseAnalytics.Event.SELECT_CONTENT,
+            FirebaseAnalytics.Event.VIEW_ITEM,
             Bundle().apply {
                 putString(
-                    FirebaseAnalytics.Param.ITEM_ID,
-                    "id",
-                )
-                putString(
                     FirebaseAnalytics.Param.ITEM_NAME,
-                    "name",
-                )
-                putString(
-                    FirebaseAnalytics.Param.CONTENT_TYPE,
-                    "image",
+                    "advanced_search",
                 )
             },
         )

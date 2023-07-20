@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
+import com.example.gamenews.Analytics
 import com.example.gamenews.extensions.removeSpaces
 import com.example.gamenews.mappers.toMap
 import com.example.gamenews.model.GameNewsState
@@ -21,7 +22,9 @@ import java.util.Locale
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
+    private val analytics: Analytics,
 ) : ViewModel() {
+
     /* Feature flags */
     private val _shouldSearchFromAPI = MutableStateFlow(false)
     val shouldSearchFromAPI: StateFlow<Boolean> = _shouldSearchFromAPI.asStateFlow()
@@ -71,6 +74,14 @@ class GameNewsViewModel(
 
     private fun updateRequestErrorState() {
         _requestStatus.value = States.ERROR
+    }
+
+    fun trackScreenViewed() {
+        analytics.trackScreenView("HomeFragment")
+    }
+
+    fun trackAdvancedSearchViewed() {
+        analytics.trackAdvancedSearchViewed()
     }
 
     fun fetchLocalData() {

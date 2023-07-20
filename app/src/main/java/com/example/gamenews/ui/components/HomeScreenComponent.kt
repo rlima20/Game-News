@@ -54,5 +54,6 @@ fun HomeScreenComponent(props: RequestStatusProps) {
             },
             isScreenEnabled = props.isScreenEnabled,
         )
+        props.gameNewsViewModel.trackScreenViewed()
     }
 }

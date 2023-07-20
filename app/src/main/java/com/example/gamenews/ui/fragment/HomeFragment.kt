@@ -20,7 +20,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
 
     private val gameNewsViewModel: GameNewsViewModel by viewModel()
-    private val analytics: Analytics by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +34,6 @@ class HomeFragment : Fragment() {
                 color = MaterialTheme.colors.background,
             ) {
                 HomeScreen(gameNewsViewModel)
-                analytics.trackScreenView("HomeFragment")
             }
         }
         // throw RuntimeException("Test Crash") // Force a crash

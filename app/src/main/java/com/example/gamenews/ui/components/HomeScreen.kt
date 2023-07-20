@@ -126,6 +126,7 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                                 props.advancedSearchBarText,
                             ),
                         )
+                        props.gameNewsViewModel.trackAdvancedSearchViewed()
                     }
                     HomeScreenComponent(props)
                 }
