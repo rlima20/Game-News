@@ -84,6 +84,7 @@ fun SetHomeScreenColor(props: RequestStatusProps) {
             ),
         ) {
             ValidateRequestStatus(props = props)
+            props.gameNewsViewModel.trackAdvancedSearchViewed()
         }
     } else {
         ValidateRequestStatus(props = props)
@@ -126,7 +127,6 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                                 props.advancedSearchBarText,
                             ),
                         )
-                        props.gameNewsViewModel.trackAdvancedSearchViewed()
                     }
                     HomeScreenComponent(props)
                 }
