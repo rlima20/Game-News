@@ -92,8 +92,7 @@ fun SetHomeScreenColor(props: RequestStatusProps) {
                 origin = HOME_SCREEN_COMPONENT,
                 screenName = HOME_SCREEN,
                 screenClass = null,
-            )            LaunchedEffect(key1 = "") {
-
+            )
         }
     } else {
         ValidateRequestStatus(props = props)
