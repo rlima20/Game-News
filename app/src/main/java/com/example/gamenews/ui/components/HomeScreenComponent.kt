@@ -62,6 +62,12 @@ fun HomeScreenComponent(props: RequestStatusProps) {
                     origin = null,
                     screenClass = null,
                 )
+                props.gameNewsViewModel.trackItemViewedSegment(
+                    itemName = NEWS_SECTION,
+                    screenName = HOME_SCREEN,
+                    origin = null,
+                    screenClass = null,
+                )
             },
         )
     }

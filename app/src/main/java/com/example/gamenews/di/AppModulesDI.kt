@@ -7,4 +7,5 @@ val appModules = listOf(
     gameNewsUseCaseModuleDI,
     firebaseAnalyticsDI,
     analyticsDI,
+    segmentDI,
 )

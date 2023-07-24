@@ -24,6 +24,7 @@ import java.util.Locale
 class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
     private val analytics: Analytics,
+    private val segment: com.segment.analytics.kotlin.core.Analytics
 ) : ViewModel() {
 
     /* Feature flags */
@@ -93,6 +94,23 @@ class GameNewsViewModel(
         Log.i("GameNewsViewModel", "trackItemViewed: $itemName")
     }
 
+    fun trackItemViewedSegment(
+        itemName: String,
+        origin: String?,
+        screenName: String?,
+        screenClass: String?,
+    ) {
+        segment.track(
+            "Item Viewed",
+            mapOf(
+                "item_name" to itemName,
+                "origin" to origin,
+                "screen_name" to screenName,
+                "screen_class" to screenClass,
+            )
+        )
+    }
+
     fun setScreenEnabled(enabled: Boolean) {
         _isScreenEnabled.value = enabled
     }
@@ -114,7 +132,7 @@ class GameNewsViewModel(
 
         uiState.value?.forEach {
             if (it.title.toLowerCase(Locale.ROOT)
-                    .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
+                .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
                 it.description.toLowerCase(Locale.ROOT)
                     .contains(textWithoutSpaces.toLowerCase(Locale.ROOT))
             ) {
