@@ -1,11 +1,12 @@
 package com.example.gamenews.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.gamenews.Analytics
+import com.example.gamenews.analytics.Analytics
 import com.example.gamenews.extensions.removeSpaces
 import com.example.gamenews.mappers.toMap
 import com.example.gamenews.model.GameNewsState
@@ -58,13 +59,7 @@ class GameNewsViewModel(
     val isScreenEnabled: StateFlow<Boolean> = _isScreenEnabled.asStateFlow()
 
     init {
-        viewModelScope.launch {
-            if (shouldSearchFromAPI.value) {
-                fetchData()
-            } else {
-                fetchLocalData()
-            }
-        }
+        fetchData()
     }
 
     private fun updateGameNewsState(it: MutableList<GameNewsState>?) {
@@ -76,17 +71,26 @@ class GameNewsViewModel(
         _requestStatus.value = States.ERROR
     }
 
-    fun trackScreenViewed() {
-        analytics.trackScreenView("HomeFragment")
+    fun trackScreenViewed(screenName: String, origin: String) {
+        analytics.trackScreenViewed(
+            screenName = screenName,
+            origin = origin,
+        )
     }
 
-    fun trackAdvancedSearchViewed() {
-        analytics.trackAdvancedSearchViewed()
-    }
-
-    fun fetchLocalData() {
-        _requestStatus.value = States.LOADING
-        updateGameNewsState(mutableListOfNews)
+    fun trackItemViewed(
+        itemName: String,
+        origin: String?,
+        screenName: String?,
+        screenClass: String?,
+    ) {
+        analytics.trackItemViewed(
+            itemName = itemName,
+            origin = origin ?: "",
+            screenName = screenName ?: "",
+            screenClass = screenClass ?: "",
+        )
+        Log.i("GameNewsViewModel", "trackItemViewed: $itemName")
     }
 
     fun setScreenEnabled(enabled: Boolean) {
@@ -120,14 +124,6 @@ class GameNewsViewModel(
         _uiStateFiltered.value = listFiltered
     }
 
-    fun fetchDataByQueryLocal(
-        query: String = "",
-        quantifier: Int = 1,
-    ) {
-        _requestStatus.value = States.LOADING
-        updateGameNewsState(toMap(listOfNewsByQueryDTO))
-    }
-
     fun clearFilteredListOfGameNews() {
         _uiStateFiltered.value?.clear()
     }
@@ -139,8 +135,28 @@ class GameNewsViewModel(
 
     fun fetchData() {
         _requestStatus.value = States.LOADING
+
+        if (shouldSearchFromAPI.value) {
+            viewModelScope.launch {
+                gameNewsUseCase.invokeGetAllGameNews().collect { result ->
+                    result.either(
+                        onSuccess = { updateGameNewsState(toMap(it)) },
+                        onFailure = { updateRequestErrorState() },
+                    )
+                }
+            }
+        } else {
+            updateGameNewsState(mutableListOfNews)
+        }
+    }
+
+    fun getAllGameNewsByQuery(
+        query: String = "",
+        quantifier: Int = 1,
+    ) {
+        _requestStatus.value = States.LOADING
         viewModelScope.launch {
-            gameNewsUseCase.invokeGameNews().collect { result ->
+            gameNewsUseCase.invokeGetAllGameNewsByQuery(query, quantifier).collect { result ->
                 result.either(
                     onSuccess = { updateGameNewsState(toMap(it)) },
                     onFailure = { updateRequestErrorState() },
@@ -149,19 +165,12 @@ class GameNewsViewModel(
         }
     }
 
-    fun fetchDataByQuery(
+    fun getAllGameNewsByQueryLocal(
         query: String = "",
         quantifier: Int = 1,
     ) {
         _requestStatus.value = States.LOADING
-        viewModelScope.launch {
-            gameNewsUseCase.invokeGameNewsByQuery(query, quantifier).collect { result ->
-                result.either(
-                    onSuccess = { updateGameNewsState(toMap(it)) },
-                    onFailure = { updateRequestErrorState() },
-                )
-            }
-        }
+        updateGameNewsState(toMap(listOfNewsByQueryDTO))
     }
 
     fun getAsyncImage(

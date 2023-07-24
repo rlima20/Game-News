@@ -1,5 +1,6 @@
 package com.example.gamenews.extensions
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
@@ -10,7 +11,10 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.gamenews.R
+import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.States
+import kotlinx.coroutines.flow.FlowCollector
+import retrofit2.Response
 
 /**
  * Get async image painter.
@@ -56,4 +60,31 @@ fun getSpanStyles(
             end = start + searchedWord.length,
         ),
     )
+}
+
+suspend fun FlowCollector<List<GameNewsDTO>?>.validateRequest(
+    request:
+    Response<List<GameNewsDTO>>?,
+) {
+    with(request) {
+        Log.i("REQUEST", "Status code = ${this?.code()}")
+
+        with(this) {
+            val code = this?.code()
+            if (code == 404 ||
+                code == 403 ||
+                code == 501 ||
+                code == 500 ||
+                code == 502
+            ) {
+                emit(null)
+            } else if (this?.isSuccessful == true) {
+                this.body()?.let { emit(it) }
+            } else {
+                emit(
+                    emptyList(),
+                )
+            }
+        }
+    }
 }
