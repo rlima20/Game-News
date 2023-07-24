@@ -17,6 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import com.example.gamenews.ADVANCED_SEARCH_COMPONENT
+import com.example.gamenews.HOME_SCREEN
+import com.example.gamenews.HOME_SCREEN_COMPONENT
 import com.example.gamenews.R
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.model.States
@@ -84,7 +87,13 @@ fun SetHomeScreenColor(props: RequestStatusProps) {
             ),
         ) {
             ValidateRequestStatus(props = props)
-            props.gameNewsViewModel.trackAdvancedSearchViewed()
+            props.gameNewsViewModel.trackItemViewed(
+                itemName = ADVANCED_SEARCH_COMPONENT,
+                origin = HOME_SCREEN_COMPONENT,
+                screenName = HOME_SCREEN,
+                screenClass = null,
+            )            LaunchedEffect(key1 = "") {
+
         }
     } else {
         ValidateRequestStatus(props = props)
@@ -99,21 +108,14 @@ private fun ValidateRequestStatus(props: RequestStatusProps) {
                 Column {
                     if (props.shouldActivateAdvancedSearch) {
                         AdvancedSearchComponent(
-                            onSubmitButtonClicked = { itemsPerPage, query ->
-                                props.gameNewsViewModel.fetchDataByQueryLocal(
-                                    quantifier = itemsPerPage,
-                                    query = query,
-                                )
+                            onSubmitButtonClicked = { _, _ ->
+                                props.gameNewsViewModel.getAllGameNewsByQueryLocal()
                             },
                             onAdvancedSearchIconClicked = {
                                 props.onAdvancedSearchIconClicked()
                             },
                             onExitButtonCLicked = {
-                                if (props.gameNewsViewModel.shouldSearchFromAPI.value) {
-                                    props.gameNewsViewModel.fetchData()
-                                } else {
-                                    props.gameNewsViewModel.fetchLocalData()
-                                }
+                                props.gameNewsViewModel.fetchData()
                             },
                             advancedSearchIconClickedValue = !props.advancedSearchIconClickedValue,
                             onAdvancedSearchState = {

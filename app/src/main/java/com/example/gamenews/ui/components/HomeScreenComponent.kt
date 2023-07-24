@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import com.example.gamenews.HOME_SCREEN
+import com.example.gamenews.NEWS_SECTION
 import com.example.gamenews.R
-import com.example.gamenews.provider.local.listOfNews
 import com.example.gamenews.ui.RequestStatusProps
 
 @SuppressLint("StateFlowValueCalledInComposition")
@@ -54,7 +55,14 @@ fun HomeScreenComponent(props: RequestStatusProps) {
                 )
             },
             isScreenEnabled = props.isScreenEnabled,
+            onNewsSectionViewed = {
+                props.gameNewsViewModel.trackItemViewed(
+                    itemName = NEWS_SECTION,
+                    screenName = HOME_SCREEN,
+                    origin = null,
+                    screenClass = null,
+                )
+            },
         )
-        props.gameNewsViewModel.trackScreenViewed()
     }
 }

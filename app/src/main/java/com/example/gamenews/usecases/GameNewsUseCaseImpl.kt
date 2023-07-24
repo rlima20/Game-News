@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 class GameNewsUseCaseImpl(
     private val gameNewsRepository: GameNewsRepository,
 ) : GameNewsUseCase {
-    override fun invokeGameNews(): Flow<Either<List<GameNewsDTO>?, Throwable>> = flow {
+    override fun invokeGetAllGameNews(): Flow<Either<List<GameNewsDTO>?, Throwable>> = flow {
         try {
             val flowListOfGameNews = gameNewsRepository.getAllGameNews()
             flowListOfGameNews.collect { listOfGameNewsDTO ->
@@ -22,7 +22,7 @@ class GameNewsUseCaseImpl(
         }
     }
 
-    override fun invokeGameNewsByQuery(
+    override fun invokeGetAllGameNewsByQuery(
         query: String,
         quantifier: Int,
     ): Flow<Either<List<GameNewsDTO>?, Throwable>> = flow {
@@ -38,7 +38,7 @@ class GameNewsUseCaseImpl(
         }
     }
 
-    override fun invokeGameNewsByQueryLocal(
+    override fun invokeGetAllGameNewsByQueryLocal(
         query: String,
         quantifier: Int,
     ): Flow<Either<List<GameNewsDTO>?, Throwable>> = flow {

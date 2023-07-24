@@ -1,14 +1,12 @@
 package com.example.gamenews.repository
 
-import android.util.Log
+import com.example.gamenews.extensions.validateRequest
 import com.example.gamenews.model.GameNewsDTO
 import com.example.gamenews.model.GameNewsState
 import com.example.gamenews.provider.local.listOfNews
 import com.example.gamenews.provider.remote.GameNewsService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 
 class GameNewsRepositoryImpl(
     private val gameNewsService: GameNewsService,
@@ -29,31 +27,4 @@ class GameNewsRepositoryImpl(
         flow {
             emit(gameNewsService.getAllGameNewsByQueryLocal())
         }
-
-    private suspend fun FlowCollector<List<GameNewsDTO>?>.validateRequest(
-        request:
-        Response<List<GameNewsDTO>>?,
-    ) {
-        with(request) {
-            Log.i("REQUEST", "Status code = ${this?.code()}")
-
-            with(this) {
-                val code = this?.code()
-                if (code == 404 ||
-                    code == 403 ||
-                    code == 501 ||
-                    code == 500 ||
-                    code == 502
-                ) {
-                    emit(null)
-                } else if (this?.isSuccessful == true) {
-                    this.body()?.let { emit(it) }
-                } else {
-                    emit(
-                        emptyList(),
-                    )
-                }
-            }
-        }
-    }
 }
