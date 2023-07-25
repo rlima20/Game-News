@@ -48,7 +48,7 @@ internal fun NewsItem(
         Column(
             modifier = Modifier.background(
                 if (isScreenEnabled) {
-                    colorResource(id = R.color.disabled)
+                    colorResource(id = R.color.game_news_disabled_brackground_color)
                 } else {
                     colorResource(id = R.color.game_news_transparent_color)
                 },

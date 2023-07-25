@@ -32,7 +32,7 @@ fun HomeScreenComponent(props: RequestStatusProps) {
         },
         onAdvancedSearchIconClicked = { props.onAdvancedSearchIconClicked() },
         advancedSearchIconClickedValue = props.advancedSearchIconClickedValue,
-        shoudActivateAdvancedSearch = props.shouldActivateAdvancedSearch,
+        shouldActivateAdvancedSearch = props.shouldActivateAdvancedSearch,
     )
 
     (

@@ -107,7 +107,7 @@ internal fun TextSection(
                 )
             } else {
                 colorResource(
-                    id = R.color.game_news_blue_700,
+                    id = R.color.game_news_link_color,
                 )
             },
         )

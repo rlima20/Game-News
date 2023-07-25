@@ -83,7 +83,7 @@ fun SetHomeScreenColor(props: RequestStatusProps) {
     if (props.isScreenEnabled) {
         Column(
             Modifier.background(
-                colorResource(id = R.color.disabled),
+                colorResource(id = R.color.game_news_disabled_brackground_color),
             ),
         ) {
             ValidateRequestStatus(props = props)

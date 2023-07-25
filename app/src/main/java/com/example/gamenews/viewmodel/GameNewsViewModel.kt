@@ -1,12 +1,12 @@
 package com.example.gamenews.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import coil.request.ImageRequest
 import coil.size.Size
-import com.example.gamenews.analytics.Analytics
+import com.example.gamenews.analytics.FirebaseAnalytics
+import com.example.gamenews.analytics.SegmentAnalytics
 import com.example.gamenews.extensions.removeSpaces
 import com.example.gamenews.mappers.toMap
 import com.example.gamenews.model.GameNewsState
@@ -23,8 +23,8 @@ import java.util.Locale
 @Suppress("DEPRECATION")
 class GameNewsViewModel(
     private val gameNewsUseCase: GameNewsUseCase,
-    private val analytics: Analytics,
-    private val segment: com.segment.analytics.kotlin.core.Analytics
+    private val analytics: FirebaseAnalytics,
+    private val segment: SegmentAnalytics,
 ) : ViewModel() {
 
     /* Feature flags */
@@ -72,13 +72,6 @@ class GameNewsViewModel(
         _requestStatus.value = States.ERROR
     }
 
-    fun trackScreenViewed(screenName: String, origin: String) {
-        analytics.trackScreenViewed(
-            screenName = screenName,
-            origin = origin,
-        )
-    }
-
     fun trackItemViewed(
         itemName: String,
         origin: String?,
@@ -87,11 +80,10 @@ class GameNewsViewModel(
     ) {
         analytics.trackItemViewed(
             itemName = itemName,
-            origin = origin ?: "",
-            screenName = screenName ?: "",
-            screenClass = screenClass ?: "",
+            origin = origin ?: "null",
+            screenName = screenName ?: "null",
+            screenClass = screenClass ?: "null",
         )
-        Log.i("GameNewsViewModel", "trackItemViewed: $itemName")
     }
 
     fun trackItemViewedSegment(
@@ -100,14 +92,25 @@ class GameNewsViewModel(
         screenName: String?,
         screenClass: String?,
     ) {
-        segment.track(
-            "Item Viewed",
-            mapOf(
-                "item_name" to itemName,
-                "origin" to origin,
-                "screen_name" to screenName,
-                "screen_class" to screenClass,
-            )
+        segment.trackItemViewedSegment(
+            itemName = itemName,
+            origin = origin ?: "null",
+            screenName = screenName ?: "null",
+            screenClass = screenClass ?: "null",
+        )
+    }
+
+    fun trackScreenViewed(screenName: String, origin: String) {
+        analytics.trackScreenViewed(
+            screenName = screenName,
+            origin = origin,
+        )
+    }
+
+    fun trackScreenViewedSegment(screenName: String, origin: String) {
+        segment.trackScreenViewedSegment(
+            screenName = screenName,
+            origin = origin,
         )
     }
 
@@ -132,7 +135,7 @@ class GameNewsViewModel(
 
         uiState.value?.forEach {
             if (it.title.toLowerCase(Locale.ROOT)
-                .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
+                    .contains(textWithoutSpaces.toLowerCase(Locale.ROOT)) ||
                 it.description.toLowerCase(Locale.ROOT)
                     .contains(textWithoutSpaces.toLowerCase(Locale.ROOT))
             ) {

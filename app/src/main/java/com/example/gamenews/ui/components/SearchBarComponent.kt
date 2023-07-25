@@ -16,8 +16,6 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -42,11 +40,10 @@ internal fun SearchBarComponent(
     onSearched: () -> Unit = {},
     onAdvancedSearchIconClicked: () -> Unit,
     advancedSearchIconClickedValue: Boolean,
-    shoudActivateAdvancedSearch: Boolean,
+    shouldActivateAdvancedSearch: Boolean,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
-    val isVisible = remember { mutableStateOf(true) }
 
     if (advancedSearchIconClickedValue) {
         OutlinedTextField(
@@ -104,7 +101,7 @@ internal fun SearchBarComponent(
                             )
                         }
                     } else {
-                        if (shoudActivateAdvancedSearch) {
+                        if (shouldActivateAdvancedSearch) {
                             IconButton(
                                 onClick = { onAdvancedSearchIconClicked() },
                             ) {

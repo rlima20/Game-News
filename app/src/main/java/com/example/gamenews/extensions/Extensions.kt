@@ -54,7 +54,7 @@ fun getSpanStyles(
         AnnotatedString.Range(
             SpanStyle(
                 color = colorResource(id = R.color.game_news_white_color),
-                background = colorResource(id = R.color.game_news_blue_700),
+                background = colorResource(id = R.color.game_news_link_color),
             ),
             start = start,
             end = start + searchedWord.length,

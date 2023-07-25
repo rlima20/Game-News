@@ -13,6 +13,8 @@
     <string name="game_news_items_per_page">"Items per page: "</string>
     <string name="game_news_advanced_search_submit_text">Submit</string>
     <string name="game_news_no_result_for_the_search">No result for the search</string>
+    <string name="game_news_quantifier_increase">Increase</string>
+    <string name="game_news_quantifier_decrease">Decrease</string>
 
     <!-- End of home screen strings -->
 </resources>
